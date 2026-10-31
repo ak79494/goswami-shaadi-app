@@ -1,0 +1,2811 @@
+/* =========================================================
+   GOSWAMISHAADI — PREMIUM MARRIAGE BIODATA
+   Editorial / luxury matrimonial brochure style
+   ========================================================= */
+
+   .bio-page {
+    min-height: 100vh;
+    padding: 18px 16px 45px;
+    background:
+      radial-gradient(circle at 8% 0%, rgba(174, 39, 73, .10), transparent 25%),
+      radial-gradient(circle at 92% 8%, rgba(218, 170, 77, .08), transparent 24%),
+      #f5f1f2;
+    color: #272a36;
+  }
+  
+  .bio-wrap { width: min(1180px, 100%); margin: auto; }
+  
+  .bio-toolbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .bio-brand { text-align: center; }
+  .bio-brand strong { display:block; font-size:20px; letter-spacing:-.6px; color:#25283a; }
+  .bio-brand strong span { color:#b20f43; }
+  .bio-brand small { color:#96939a; font-size:9px; text-transform:uppercase; letter-spacing:1.4px; }
+  
+  .bio-back,
+  .bio-download-top,
+  .bio-bottom-download button {
+    border: 0;
+    cursor: pointer;
+    font-weight: 800;
+    font-family: inherit;
+    transition: .2s ease;
+  }
+  
+  .bio-back {
+    justify-self:start;
+    padding:9px 14px;
+    border-radius:10px;
+    color:#76203c;
+    background:#fff;
+    border:1px solid #e8dce0;
+  }
+  
+  .bio-download-top {
+    justify-self:end;
+    padding:10px 16px;
+    border-radius:10px;
+    color:#fff;
+    background:linear-gradient(135deg,#9e2349,#68152f);
+    box-shadow:0 7px 18px rgba(104,21,47,.20);
+  }
+  
+  .bio-back:hover,.bio-download-top:hover,.bio-bottom-download button:hover {
+    transform:translateY(-2px);
+  }
+  
+  .bio-paper {
+    overflow:hidden;
+    border:1px solid #eadde1;
+    border-radius:22px;
+    background:#fff;
+    box-shadow:0 28px 65px rgba(52,28,37,.12);
+  }
+  
+  .bio-cover {
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    min-height:82px;
+    padding:15px 30px;
+    box-sizing:border-box;
+    background:
+      radial-gradient(circle at 75% 0%, rgba(176,35,70,.06), transparent 30%),
+      linear-gradient(135deg,#fff,#fff7f8);
+    border-bottom:1px solid #eadde1;
+  }
+  
+  .bio-cover-brand strong {
+    display:block;
+    font-size:30px;
+    letter-spacing:-1px;
+    color:#25283b;
+  }
+  .bio-cover-brand strong span { color:#bd1649; }
+  .bio-cover-brand small { color:#8f8b91; font-size:11px; letter-spacing:.4px; }
+  
+  .bio-cover-quote {
+    text-align:center;
+    color:#70213a;
+    font-family:Georgia,serif;
+    font-size:16px;
+    line-height:1.3;
+  }
+  .bio-cover-quote span { display:block; margin-top:3px; color:#bd1649; font-size:11px; }
+  .bio-leaf { color:#b88a3b; font-size:52px; opacity:.55; transform:rotate(-15deg); }
+  
+  .bio-main {
+    display:grid;
+    grid-template-columns:285px 1fr;
+    gap:0;
+  }
+  
+  .bio-sidebar {
+    position:relative;
+    padding:25px 24px 30px;
+    background:
+      linear-gradient(180deg,#fff7f8 0%,#fff 54%,#fbf3f5 100%);
+    border-right:1px solid #eee1e5;
+  }
+  
+  .bio-photo-frame {
+    position:relative;
+    padding:6px;
+    border:1px solid #ead1d8;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 13px 30px rgba(93,30,49,.11);
+  }
+  
+  .bio-photo-frame img,
+  .bio-photo-empty {
+    width:100%;
+    height:325px;
+    display:block;
+    object-fit:cover;
+    border-radius:13px;
+  }
+  
+  .bio-photo-empty {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f4e1e7;
+    color:#8a2345;
+    font-size:75px;
+    font-weight:800;
+  }
+  
+  .bio-photo-frame > span {
+    position:absolute;
+    left:15px;
+    bottom:14px;
+    padding:5px 9px;
+    border-radius:7px;
+    color:#fff;
+    background:rgba(38,25,31,.76);
+    font-size:9px;
+    font-weight:700;
+  }
+  
+  .bio-sidebar h1 {
+    margin:18px 0 2px;
+    color:#64172f;
+    font-size:27px;
+    letter-spacing:-.7px;
+  }
+  .bio-sidebar h3 {
+    margin:0;
+    color:#4b4d58;
+    font-size:13px;
+    font-weight:600;
+  }
+  .bio-motto {
+    margin:14px 0 17px;
+    color:#74717a;
+    font-family:Georgia,serif;
+    font-size:11px;
+    line-height:1.6;
+    text-align:center;
+  }
+  
+  .bio-side-details {
+    padding:15px 13px;
+    border-radius:16px;
+    background:linear-gradient(145deg,#fff0f3,#fff8f9);
+    border:1px solid #efd9df;
+  }
+  
+  .bio-side-details .bio-field {
+    border-bottom:1px solid rgba(188,41,76,.10);
+  }
+  .bio-side-details .bio-field:last-child { border-bottom:0; }
+  
+  .bio-side-quote {
+    margin-top:22px;
+    color:#74223d;
+    font-family:Georgia,serif;
+    font-size:17px;
+    line-height:1.3;
+    text-align:center;
+  }
+  
+  .bio-content {
+    padding:20px 22px 25px;
+    min-width:0;
+  }
+  
+  .bio-about {
+    margin-bottom:15px;
+    padding:17px 19px;
+    border:1px solid #eadfe2;
+    border-radius:16px;
+    background:linear-gradient(135deg,#fff,#fff8f9);
+    box-shadow:0 7px 20px rgba(58,32,42,.045);
+  }
+  
+  .bio-title-row {
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .bio-title-row h2 {
+    margin:0;
+    color:#64172f;
+    font-family:Georgia,serif;
+    font-size:20px;
+  }
+  .bio-round-icon,
+  .bio-section-icon {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 34px;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    color:#fff;
+    background:linear-gradient(145deg,#a91d49,#69162f);
+    font-size:15px;
+    box-shadow:0 5px 12px rgba(105,22,47,.18);
+  }
+  
+  .bio-about > p {
+    margin:11px 0 15px;
+    color:#5e606b;
+    font-size:12.5px;
+    line-height:1.7;
+  }
+  
+  .bio-about-highlights {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid #eee3e6;
+    padding-top:12px;
+  }
+  .bio-about-highlights > div {
+    display:grid;
+    grid-template-columns:32px 1fr;
+    grid-template-rows:auto auto;
+    column-gap:7px;
+    padding:0 10px;
+    border-right:1px solid #eee3e6;
+  }
+  .bio-about-highlights > div:last-child { border-right:0; }
+  .bio-about-highlights b {
+    grid-row:1/3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:29px;
+    height:29px;
+    border-radius:9px;
+    background:#fff0f3;
+    color:#ae2149;
+  }
+  .bio-about-highlights strong { font-size:10px; color:#343640; overflow-wrap:anywhere; }
+  .bio-about-highlights small { font-size:8px; color:#a09ca2; }
+  
+  .bio-section {
+    margin-bottom:14px;
+    padding:17px 18px;
+    border:1px solid #ebe2e4;
+    border-radius:16px;
+    background:#fff;
+    box-shadow:0 6px 18px rgba(52,29,38,.045);
+  }
+  
+  .bio-section-head {
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:14px;
+  }
+  .bio-section-badge {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:27px;
+    height:27px;
+    border-radius:8px;
+    background:#fff0f3;
+    color:#ae2149;
+    font-size:9px;
+    font-weight:900;
+  }
+  .bio-section-head h2 {
+    margin:0;
+    color:#6c1935;
+    font-family:Georgia,serif;
+    font-size:17px;
+  }
+  .bio-section-head p {
+    margin:2px 0 0;
+    color:#aaa5aa;
+    font-size:8.5px;
+  }
+  
+  .bio-fields {
+    display:grid;
+    gap:7px 9px;
+  }
+  .bio-fields.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .bio-fields.one { grid-template-columns:1fr; }
+  
+  .bio-field {
+    display:flex;
+    align-items:center;
+    gap:9px;
+    min-width:0;
+    padding:8px 9px;
+    border-bottom:1px solid #eee8ea;
+    box-sizing:border-box;
+  }
+  .bio-fields.two .bio-field:nth-child(odd) {
+    border-right:1px solid #eee8ea;
+    padding-right:14px;
+  }
+  .bio-fields.two .bio-field:nth-child(even) { padding-left:14px; }
+  
+  .bio-field-icon {
+    flex:0 0 27px;
+    width:27px;
+    height:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    color:#b02049;
+    background:#fff2f4;
+    font-size:11px;
+  }
+  .bio-field-text { min-width:0; }
+  .bio-field-text span {
+    display:block;
+    margin-bottom:2px;
+    color:#9b989f;
+    font-size:7.5px;
+    text-transform:uppercase;
+    letter-spacing:.55px;
+  }
+  .bio-field-text strong {
+    display:block;
+    color:#343640;
+    font-size:10.5px;
+    overflow-wrap:anywhere;
+    line-height:1.3;
+  }
+  
+  .bio-two-sections {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .bio-two-sections .bio-section { margin-bottom:0; }
+  .bio-two-sections .bio-fields.two { grid-template-columns:1fr; }
+  .bio-two-sections .bio-fields.two .bio-field:nth-child(odd) {
+    border-right:0;
+    padding-right:9px;
+  }
+  .bio-two-sections .bio-fields.two .bio-field:nth-child(even) { padding-left:9px; }
+  
+  .bio-expectation {
+    min-height:120px;
+    padding:15px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#fff5f7,#fff);
+    border:1px solid #f0dfe3;
+    color:#62646e;
+    font-size:11px;
+    line-height:1.75;
+  }
+  
+  .bio-footer {
+    display:grid;
+    grid-template-columns:1fr 1.4fr 1fr;
+    align-items:center;
+    gap:15px;
+    padding:23px 30px;
+    background:
+      linear-gradient(110deg,#68162f,#8e1d40 60%,#69152f);
+    color:#fff;
+  }
+  
+  .bio-footer-message {
+    font-family:Georgia,serif;
+    font-size:15px;
+    line-height:1.35;
+  }
+  .bio-values {
+    display:flex;
+    justify-content:center;
+    gap:27px;
+  }
+  .bio-values span {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    font-size:19px;
+  }
+  .bio-values small { font-family:inherit; font-size:8px; color:#f7dfe5; }
+  
+  .bio-footer-brand { text-align:right; }
+  .bio-footer-brand strong { display:block; font-size:17px; }
+  .bio-footer-brand strong span { color:#ffcad7; }
+  .bio-footer-brand small { color:#eac8d0; font-size:8px; }
+  
+  .bio-bottom-download { display:flex; justify-content:center; margin-top:15px; }
+  .bio-bottom-download button {
+    padding:13px 23px;
+    border-radius:12px;
+    color:#fff;
+    background:linear-gradient(135deg,#b1234c,#701632);
+    box-shadow:0 10px 24px rgba(112,22,50,.20);
+  }
+  
+  .bio-loading,.bio-error {
+    width:min(500px,calc(100% - 30px));
+    margin:90px auto;
+    padding:40px;
+    text-align:center;
+    border-radius:20px;
+    background:#fff;
+    box-shadow:0 20px 50px rgba(50,25,35,.10);
+  }
+  .bio-loader {
+    width:36px;height:36px;margin:0 auto 15px;
+    border:3px solid #eedee3;border-top-color:#8d2040;border-radius:50%;
+    animation:bioSpin .8s linear infinite;
+  }
+  @keyframes bioSpin { to{transform:rotate(360deg)} }
+  .bio-loading h3,.bio-error h2 { margin:0 0 7px; color:#3a3b45; }
+  .bio-loading p,.bio-error p { margin:0; color:#92919a; font-size:12px; }
+  .bio-error button {
+    margin-top:18px;padding:10px 15px;border:0;border-radius:9px;
+    background:#8d2040;color:#fff;font-weight:700;cursor:pointer;
+  }
+  
+  @media (max-width: 900px) {
+    .bio-main { grid-template-columns:230px 1fr; }
+    .bio-sidebar { padding:20px 16px; }
+    .bio-photo-frame img,.bio-photo-empty { height:285px; }
+    .bio-content { padding:16px; }
+    .bio-about-highlights { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .bio-about-highlights > div:nth-child(2) { border-right:0; }
+    .bio-about-highlights > div:nth-child(-n+2) { padding-bottom:9px; border-bottom:1px solid #eee3e6; }
+  }
+  
+  @media (max-width: 700px) {
+    .bio-page { padding:8px 7px 30px; }
+    .bio-toolbar { grid-template-columns:auto 1fr; }
+    .bio-brand { text-align:right; }
+    .bio-download-top { grid-column:1/-1; justify-self:stretch; }
+    .bio-main { grid-template-columns:1fr; }
+    .bio-sidebar {
+      border-right:0;
+      border-bottom:1px solid #eee1e5;
+      padding:18px 16px 22px;
+    }
+    .bio-photo-frame { width:min(270px,100%); margin:auto; }
+    .bio-photo-frame img,.bio-photo-empty { height:330px; }
+    .bio-sidebar h1,.bio-sidebar h3 { text-align:center; }
+    .bio-content { padding:12px; }
+    .bio-about { padding:14px; }
+    .bio-about-highlights { grid-template-columns:1fr 1fr; }
+    .bio-fields.two { grid-template-columns:1fr; }
+    .bio-fields.two .bio-field:nth-child(odd),
+    .bio-fields.two .bio-field:nth-child(even) {
+      border-right:0;
+      padding-left:9px;
+      padding-right:9px;
+    }
+    .bio-two-sections { grid-template-columns:1fr; }
+    .bio-footer { grid-template-columns:1fr; text-align:center; padding:20px 16px; }
+    .bio-footer-brand { text-align:center; }
+    .bio-footer-message { text-align:center; }
+    .bio-values { gap:20px; }
+  }
+  
+  @media (max-width: 430px) {
+    .bio-cover { padding:14px 15px; min-height:72px; }
+    .bio-cover-brand strong { font-size:23px; }
+    .bio-cover-brand small { font-size:8px; }
+    .bio-cover-quote { font-size:11px; }
+    .bio-leaf { display:none; }
+    .bio-sidebar { padding:15px 12px 20px; }
+    .bio-photo-frame img,.bio-photo-empty { height:300px; }
+    .bio-section { padding:14px 12px; }
+    .bio-section-head h2 { font-size:15px; }
+    .bio-field-text strong { font-size:10px; }
+    .bio-about-highlights > div { padding:0 5px; }
+  }
+  
+  
+  /* PDF capture helper:
+     Keep the same premium desktop composition while html2canvas
+     captures .bio-paper. */
+  @media print {
+    .bio-toolbar,
+    .bio-bottom-download {
+      display: none !important;
+    }
+  
+    .bio-page {
+      padding: 0 !important;
+      background: #fff !important;
+    }
+  
+    .bio-paper {
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+  }
+  
+  
+  /* =========================================================
+     EXTRA LUXURY / BOLD VISUAL LAYER
+     ========================================================= */
+  
+  .bio-page {
+    background:
+      radial-gradient(circle at 0% 8%, rgba(153, 22, 62, .15), transparent 27%),
+      radial-gradient(circle at 100% 18%, rgba(191, 145, 55, .13), transparent 24%),
+      linear-gradient(135deg, #f8f2f4 0%, #fdf9fa 48%, #f5eef0 100%);
+  }
+  
+  .bio-paper {
+    border: 1px solid #dcc2ca;
+    box-shadow:
+      0 30px 75px rgba(76, 23, 40, .16),
+      0 4px 18px rgba(111, 24, 52, .06);
+  }
+  
+  .bio-cover {
+    min-height: 105px;
+    padding: 20px 34px;
+    background:
+      radial-gradient(circle at 75% 30%, rgba(181, 131, 43, .13), transparent 22%),
+      linear-gradient(120deg, #fff8fa, #fff, #fff5f7);
+    border-bottom: 2px solid #cda5b0;
+  }
+  
+  .bio-cover:after {
+    content: "";
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7b1737, #c69b4d, #7b1737);
+  }
+  
+  .bio-cover-brand strong {
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+  }
+  
+  .bio-cover-brand strong span {
+    color: #b30f45;
+    text-shadow: 0 1px 0 #fff;
+  }
+  
+  .bio-cover-brand small {
+    font-weight: 700;
+    letter-spacing: 1.8px;
+  }
+  
+  .bio-cover-quote {
+    font-size: 18px;
+    font-weight: 700;
+    color: #741b39;
+    text-shadow: 0 1px 0 #fff;
+  }
+  
+  .bio-leaf {
+    color: #b98b3c;
+    text-shadow: 0 4px 12px rgba(185,139,60,.18);
+  }
+  
+  .bio-main {
+    grid-template-columns: 310px 1fr;
+  }
+  
+  .bio-sidebar {
+    padding: 29px 25px 34px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(187, 34, 74, .10), transparent 30%),
+      linear-gradient(180deg, #fff4f6 0%, #fff 48%, #faeef2 100%);
+    border-right: 2px solid #ead6dc;
+  }
+  
+  .bio-photo-frame {
+    padding: 7px;
+    border: 2px solid #cda2af;
+    border-radius: 20px;
+    box-shadow:
+      0 15px 35px rgba(95, 26, 46, .16),
+      0 0 0 5px rgba(255,255,255,.85);
+  }
+  
+  .bio-photo-frame img,
+  .bio-photo-empty {
+    height: 345px;
+    border-radius: 14px;
+  }
+  
+  .bio-photo-frame > span {
+    left: 16px;
+    bottom: 15px;
+    padding: 6px 10px;
+    font-size: 9px;
+    letter-spacing: .3px;
+  }
+  
+  .bio-sidebar h1 {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+  
+  .bio-sidebar h3 {
+    color: #851f42;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  
+  .bio-motto {
+    color: #71616a;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .bio-side-details {
+    border: 1px solid #e4c3cd;
+    background:
+      linear-gradient(145deg, #fff0f4, #fff9fa);
+    box-shadow: inset 0 1px 0 #fff, 0 8px 20px rgba(100, 24, 45, .05);
+  }
+  
+  .bio-side-details .bio-field {
+    padding: 10px 4px;
+  }
+  
+  .bio-side-quote {
+    font-size: 18px;
+    font-weight: 700;
+    color: #711a38;
+  }
+  
+  .bio-content {
+    padding: 23px 25px 29px;
+  }
+  
+  .bio-about,
+  .bio-section {
+    border: 1px solid #e5d4d9;
+    box-shadow:
+      0 9px 25px rgba(67, 31, 42, .06),
+      inset 0 1px 0 #fff;
+  }
+  
+  .bio-about {
+    padding: 20px 21px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(190, 145, 55, .08), transparent 25%),
+      linear-gradient(135deg,#fff,#fff7f9);
+  }
+  
+  .bio-title-row h2 {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -.3px;
+  }
+  
+  .bio-round-icon,
+  .bio-section-icon {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+    background:
+      linear-gradient(145deg, #bd2454, #721631 70%, #591125);
+    box-shadow:
+      0 7px 16px rgba(101, 20, 48, .22),
+      inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  
+  .bio-about > p {
+    font-size: 13px;
+    font-weight: 500;
+    color: #565761;
+  }
+  
+  .bio-about-highlights {
+    border-top: 2px solid #eee0e4;
+    padding-top: 14px;
+  }
+  
+  .bio-about-highlights > div {
+    padding: 0 13px;
+  }
+  
+  .bio-about-highlights b {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(145deg,#fff0f4,#f9e0e7);
+    color: #a91443;
+    box-shadow: 0 4px 10px rgba(130, 24, 55, .08);
+  }
+  
+  .bio-about-highlights strong {
+    font-size: 10.5px;
+    font-weight: 900;
+  }
+  
+  .bio-section {
+    padding: 19px 20px;
+    border-radius: 17px;
+  }
+  
+  .bio-section-head {
+    margin-bottom: 15px;
+  }
+  
+  .bio-section-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: linear-gradient(145deg,#fff0f4,#f9dfe6);
+    color: #a51241;
+    font-weight: 900;
+    box-shadow: 0 4px 10px rgba(120,25,53,.08);
+  }
+  
+  .bio-section-head h2 {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -.2px;
+  }
+  
+  .bio-section-head p {
+    font-size: 9px;
+    font-weight: 600;
+  }
+  
+  .bio-field {
+    padding: 9px 10px;
+  }
+  
+  .bio-field-icon {
+    width: 29px;
+    height: 29px;
+    flex-basis: 29px;
+    background: linear-gradient(145deg,#fff2f5,#fce3e9);
+    color: #aa1745;
+    box-shadow: 0 3px 8px rgba(120, 25, 53, .07);
+  }
+  
+  .bio-field-text span {
+    font-size: 7.5px;
+    font-weight: 700;
+    letter-spacing: .8px;
+  }
+  
+  .bio-field-text strong {
+    font-size: 11px;
+    font-weight: 850;
+    color: #292b36;
+  }
+  
+  .bio-expectation {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(194,151,67,.08), transparent 30%),
+      linear-gradient(145deg,#fff4f7,#fff);
+    border: 1px solid #e6cfd6;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .bio-footer {
+    min-height: 92px;
+    padding: 25px 32px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(215,169,78,.13), transparent 30%),
+      linear-gradient(110deg,#5d102a,#801a3b 52%,#5c1029);
+    border-top: 3px solid #c59a4d;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  
+  .bio-footer-message {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  
+  .bio-values span {
+    font-size: 21px;
+    font-weight: 700;
+  }
+  
+  .bio-footer-brand strong {
+    font-size: 19px;
+    font-weight: 900;
+  }
+  
+  .bio-bottom-download button {
+    padding: 14px 28px;
+    border: 1px solid #d7a955;
+    background:
+      linear-gradient(135deg,#b82955,#7b1533 65%,#651028);
+    font-size: 13px;
+    letter-spacing: .2px;
+    box-shadow:
+      0 12px 28px rgba(100, 18, 48, .22),
+      inset 0 1px 0 rgba(255,255,255,.22);
+  }
+  
+  @media (max-width: 700px) {
+    .bio-cover {
+      min-height: 86px;
+      padding: 16px 18px;
+    }
+  
+    .bio-cover:after {
+      left: 18px;
+      right: 18px;
+    }
+  
+    .bio-cover-brand strong {
+      font-size: 26px;
+    }
+  
+    .bio-main {
+      grid-template-columns: 1fr;
+    }
+  
+    .bio-sidebar {
+      padding: 20px 15px 24px;
+    }
+  
+    .bio-content {
+      padding: 13px;
+    }
+  }
+  
+
+/* =========================================================
+   PREMIUM BIODATA SHARE MENU
+   ========================================================= */
+.bio-top-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bio-share-wrap {
+  position: relative;
+}
+
+.bio-share-top {
+  border: 1px solid #ead2d9;
+  background: #fff;
+  color: #7d1f3d;
+  padding: 11px 15px;
+  border-radius: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: .2s ease;
+}
+
+.bio-share-top:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(100,24,47,.12);
+}
+
+.bio-share-top span {
+  font-size: 13px;
+}
+
+.bio-share-menu {
+  position: absolute;
+  top: calc(100% + 9px);
+  right: 0;
+  width: 285px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #eadde2;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(53,31,39,.18);
+  z-index: 9999;
+}
+
+.bio-share-menu button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 11px;
+  border-radius: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  font-family: inherit;
+}
+
+.bio-share-menu button:hover {
+  background: #fff5f7;
+}
+
+.bio-share-menu button > b {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  background: #f9e9ee;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+
+.bio-share-menu button span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bio-share-menu strong {
+  color: #292b35;
+  font-size: 13px;
+}
+
+.bio-share-menu small {
+  color: #9698a2;
+  font-size: 10px;
+}
+
+@media (max-width: 760px) {
+  .bio-top-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .bio-share-top,
+  .bio-download-top {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 7px;
+    font-size: 10px;
+  }
+
+  .bio-share-menu {
+    left: 0;
+    right: auto;
+    width: min(285px, calc(100vw - 32px));
+  }
+}
+.whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #25D366;
+}
+
+.whatsapp-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Reference-style marriage biodata layout */
+.bio-reference-page{min-height:100vh;padding:18px;background:#f7f7f8;color:#30313a;font-family:Arial,Helvetica,sans-serif}
+.bio-reference-wrap{width:min(1180px,100%);margin:auto}.bio-reference-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.bio-reference-toolbar>div:nth-child(2){text-align:center}.bio-reference-toolbar strong{font-size:23px;color:#c51e4d}.bio-reference-toolbar strong span{color:#17243e}.bio-reference-toolbar small{display:block;color:#8b8e96;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-top:2px}.bio-ref-back,.bio-ref-share,.bio-ref-download{border:1px solid #eadfe3;background:#fff;border-radius:9px;padding:10px 14px;color:#b21b47;font-weight:700;cursor:pointer}.bio-ref-actions{display:flex;align-items:center;gap:9px!important}.bio-ref-download{background:#c71f4d;color:#fff;border-color:#c71f4d}.bio-reference-paper{background:#fff;border:1px solid #e7e1e4;box-shadow:0 10px 30px rgba(39,35,40,.09);overflow:hidden}.bio-ref-profile-head{display:grid;grid-template-columns:250px 1.25fr 1fr;gap:24px;padding:18px;border-bottom:1px solid #eadfe4;align-items:stretch}.bio-ref-photo{height:250px;border-radius:8px;overflow:hidden;background:#eee}.bio-ref-photo img{width:100%;height:100%;object-fit:cover}.bio-ref-photo>div{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px;font-weight:800;color:#bd1b49;background:#f7e8ed}.bio-ref-identity{padding:4px 0}.bio-ref-identity h1{margin:0 0 4px;font-size:27px;color:#18243f}.bio-verified{display:inline-flex;width:19px;height:19px;border-radius:50%;align-items:center;justify-content:center;background:#1678db;color:#fff;font-size:12px;vertical-align:middle}.bio-ref-id{display:flex;align-items:center;gap:8px;color:#b91d49;font-size:13px}.bio-ref-id span{color:#c9a7b1}.bio-ref-quote{font-family:Georgia,serif;font-size:13px;line-height:1.45;margin:13px 0;color:#555b68;font-style:italic;max-width:480px}.bio-ref-facts{display:grid;grid-template-columns:1fr 1fr;gap:9px 20px;margin-top:13px}.bio-ref-facts span{display:flex;gap:10px;align-items:center;color:#6b6f79;font-size:13px}.bio-ref-facts span:first-letter{color:#b51c49}.bio-ref-facts b{font-weight:500;color:#4b4e58}.bio-ref-values{border-left:1px solid #e5dce0;padding:12px 20px;background:linear-gradient(145deg,#fff7fa,#fff);text-align:center;display:flex;flex-direction:column;justify-content:center}.bio-ref-values>p{margin:0;color:#bd1850;font-size:28px}.bio-ref-values em{font-family:Georgia,serif;line-height:1.5;color:#50515a;font-size:13px}.bio-ref-value-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:18px;border-top:1px solid #eadfe3;padding-top:14px}.bio-ref-value-grid span{display:flex;flex-direction:column;gap:5px;color:#c21e4d;font-size:22px;border-right:1px solid #eadfe3}.bio-ref-value-grid span:last-child{border-right:0}.bio-ref-value-grid b{font-size:10px;color:#50525c;font-weight:500}.bio-ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.bio-ref-card{border:1px solid #e8e2e4;border-radius:8px;overflow:hidden;background:#fff}.bio-ref-card h2{margin:0;padding:10px 13px;background:linear-gradient(90deg,#fff0f5,#fff8fa);border-bottom:1px solid #ecdde2;color:#bd1d4b;font-size:17px;display:flex;align-items:center;gap:9px}.bio-ref-card h2 span{color:#7a1835}.bio-ref-card h2 small{font-size:10px;color:#a46a79;font-weight:500}.bio-ref-fields{display:grid;grid-template-columns:1fr 1fr;padding:5px 13px}.bio-ref-fields.one{grid-template-columns:1fr}.bio-ref-fields>div{display:grid;grid-template-columns:145px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #eee9ea;min-width:0}.bio-ref-fields>div:nth-last-child(-n+2){border-bottom:0}.bio-ref-fields.one>div:last-child{border-bottom:0}.bio-ref-fields span{color:#646872;font-size:12px}.bio-ref-fields b{font-weight:500;color:#3f424b;font-size:12px;overflow-wrap:anywhere}.bio-ref-fields>div:nth-child(odd):not(.bio-ref-wide){padding-right:15px;border-right:1px solid #eee9ea}.bio-ref-fields>div:nth-child(even):not(.bio-ref-wide){padding-left:15px}.bio-ref-fields.one>div{padding-left:0!important;padding-right:0!important;border-right:0!important}.bio-ref-wide{grid-column:1/-1}.bio-ref-footer{margin:0 12px 12px;padding:18px;text-align:center;background:linear-gradient(90deg,#fff1f5,#ffe8ef,#fff1f5);color:#c21e4d;font-family:Georgia,serif;font-size:18px}.bio-ref-bottom{display:flex;justify-content:center;margin:14px 0}.bio-ref-bottom button{border:0;border-radius:10px;padding:12px 20px;background:#c71f4d;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(199,31,77,.18)}
+@media(max-width:900px){.bio-ref-profile-head{grid-template-columns:190px 1fr}.bio-ref-values{grid-column:1/-1;border-left:0;border-top:1px solid #eadfe3}.bio-ref-grid{grid-template-columns:1fr}.bio-ref-photo{height:210px}.bio-ref-fields{grid-template-columns:1fr}.bio-ref-fields>div:nth-child(odd):not(.bio-ref-wide){padding-right:0;border-right:0}.bio-ref-fields>div:nth-child(even):not(.bio-ref-wide){padding-left:0}.bio-ref-fields>div:nth-last-child(-n+2){border-bottom:1px solid #eee9ea}.bio-ref-fields>div:last-child{border-bottom:0}}
+@media(max-width:600px){.bio-reference-page{padding:9px}.bio-reference-toolbar{align-items:flex-start;flex-wrap:wrap}.bio-reference-toolbar>div:nth-child(2){order:3;width:100%}.bio-ref-actions{margin-left:auto}.bio-ref-share{display:none}.bio-ref-profile-head{grid-template-columns:1fr;padding:10px;gap:12px}.bio-ref-photo{height:300px}.bio-ref-identity h1{font-size:23px}.bio-ref-facts{grid-template-columns:1fr}.bio-ref-values{padding:14px}.bio-ref-grid{padding:8px}.bio-ref-fields>div{grid-template-columns:125px 1fr}.bio-ref-card h2{font-size:15px}.bio-ref-fields span,.bio-ref-fields b{font-size:11px}.bio-ref-footer{font-size:15px;margin:0 8px 8px}.bio-ref-back,.bio-ref-download{padding:9px 11px;font-size:12px}}
+
+/* =========================================================
+   FINAL REFERENCE MATCH — USER PROVIDED BIODATA DESIGN
+   ========================================================= */
+.bio-reference-page{background:#f6f6f7;padding:8px 18px 22px;color:#34363f}
+.bio-reference-wrap{width:min(1000px,100%)}
+.bio-reference-paper{border:1px solid #e5e1e3;border-radius:10px;box-shadow:0 3px 12px rgba(35,30,35,.08)}
+.bio-ref-profile-head{grid-template-columns:250px 1.28fr 1fr;gap:24px;padding:10px 12px 14px}
+.bio-ref-photo{height:250px;border-radius:7px}
+.bio-ref-identity{padding:7px 0 0}
+.bio-ref-identity h1{font-size:26px;font-weight:800;color:#18243f;margin:0 0 4px}
+.bio-ref-id{font-size:13px;font-weight:700;color:#b91d49}
+.bio-ref-id b{font-weight:800}
+.bio-ref-quote{font-size:13px;line-height:1.4;margin:12px 0 12px;color:#50535d}
+.bio-ref-facts{grid-template-columns:1fr;gap:8px;margin-top:8px}
+.bio-ref-facts span{gap:10px;font-size:13px;color:#555963;line-height:1.25}
+.bio-ref-facts span b{font-size:13px;font-weight:800;color:#454852}
+.bio-ref-facts span:first-letter{color:#ad1946}
+.bio-ref-values{border-left:1px solid #ddd8db;padding:10px 18px;background:linear-gradient(145deg,#fff7fa,#fff)}
+.bio-ref-values>p{font-size:29px;font-weight:700;margin:0 0 2px;color:#c2184e}
+.bio-ref-values em{font-size:13px;line-height:1.5;color:#454750}
+.bio-ref-value-grid{margin-top:16px;padding-top:12px;border-top:1px solid #ddd7da}
+.bio-ref-value-grid span{font-size:24px;font-weight:700;color:#c51d50}
+.bio-ref-value-grid b{font-size:11px;font-weight:500;color:#4d5058}
+.bio-ref-grid{grid-template-columns:1fr 1fr;gap:12px;padding:10px}
+.bio-ref-card{border:1px solid #e6e1e3;border-radius:8px}
+.bio-ref-card h2{padding:9px 13px;background:linear-gradient(90deg,#fff0f5,#fff8fa);border-bottom:1px solid #eadce1;color:#c31d4d;font-size:17px;font-weight:900;gap:9px}
+.bio-ref-card h2 span{color:#7a1835;font-weight:900}
+.bio-ref-card h2 small{font-size:10px;font-weight:500;color:#a46a79}
+.bio-ref-fields{padding:3px 13px;grid-template-columns:1fr 1fr}
+.bio-ref-fields>div{padding:7px 0;grid-template-columns:145px 1fr;gap:7px;border-bottom:1px solid #e9e5e6}
+.bio-ref-fields>div:nth-child(odd):not(.bio-ref-wide){padding-right:14px;border-right:1px solid #e6e2e3}
+.bio-ref-fields>div:nth-child(even):not(.bio-ref-wide){padding-left:14px}
+.bio-ref-fields span{font-size:12px;color:#5f636c;position:relative;padding-right:12px}
+.bio-ref-fields span::after{content:":";position:absolute;right:0;top:0;color:#555861;font-weight:600}
+.bio-ref-fields b{font-size:12px;font-weight:500;color:#3d4048;line-height:1.35}
+.bio-ref-fields.one{grid-template-columns:1fr}
+.bio-ref-fields.one>div{grid-template-columns:145px 1fr;padding-left:0!important;padding-right:0!important;border-right:0!important}
+.bio-ref-fields.one>div:last-child{border-bottom:0}
+.bio-ref-wide{grid-column:1/-1}
+.bio-ref-footer{margin:0 10px 10px;padding:14px;background:#fff0f4;color:#c31d4d;font-size:17px;border-radius:0}
+.bio-ref-bottom{margin:12px 0}
+
+@media(max-width:900px){
+  .bio-ref-profile-head{grid-template-columns:190px 1fr;gap:18px}
+  .bio-ref-values{grid-column:1/-1;border-left:0;border-top:1px solid #eadfe3}
+  .bio-ref-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .bio-reference-page{padding:6px}
+  .bio-ref-profile-head{grid-template-columns:1fr;padding:9px;gap:10px}
+  .bio-ref-photo{height:300px}
+  .bio-ref-facts{grid-template-columns:1fr}
+  .bio-ref-grid{grid-template-columns:1fr;padding:7px}
+}
+@media(max-width:600px){
+  .bio-ref-card h2{font-size:15px}
+  .bio-ref-fields>div,.bio-ref-fields.one>div{grid-template-columns:125px 1fr}
+  .bio-ref-fields span,.bio-ref-fields b{font-size:11px}
+}
+
+
+/* FINAL PERSONAL DETAILS / HOBBIES REFERENCE FIX */
+.bio-ref-facts{grid-template-columns:1fr 1fr;gap:9px 22px}
+.bio-ref-fact-wide{grid-column:1/-1}
+.bio-ref-fields.one>div{grid-template-columns:145px minmax(0,1fr)}
+.bio-ref-fields.one>div span{font-weight:500}
+.bio-ref-fields.one>div b{font-weight:800;color:#3b3e47}
+.bio-ref-hobbies-card{margin:0 10px 12px}
+.bio-ref-hobbies-card h2{font-size:17px}
+.bio-ref-hobbies-value{padding:11px 13px 14px;color:#3d4048;font-size:12px;font-weight:800;line-height:1.5}
+
+@media(max-width:700px){
+  .bio-ref-facts{grid-template-columns:1fr 1fr;gap:8px 14px}
+  .bio-ref-fields.one>div{grid-template-columns:125px minmax(0,1fr)}
+}
+@media(max-width:480px){
+  .bio-ref-facts{grid-template-columns:1fr}
+  .bio-ref-fact-wide{grid-column:auto}
+}
+/* =========================================================
+   BIODATA - FINAL LIGHTER TEXT + COMPACT CONTACT
+========================================================= */
+
+/* Values ko less-bold / professional rakho */
+.bio-ref-fields b {
+  font-weight: 500 !important;
+  color: #3f424b;
+  font-size: 12px;
+}
+
+/* Personal/Family/Partner values bhi same balanced weight */
+.bio-ref-fields strong {
+  font-weight: 500 !important;
+}
+
+/* Contact card ko content ke according compact rakho */
+.bio-ref-grid > .bio-ref-card:nth-child(3) {
+  align-self: start !important;
+  height: fit-content !important;
+}
+
+/* Contact ke andar unnecessary vertical space remove */
+.bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Contact fields thode compact */
+.bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields > div {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+/* Contact card ko Partner Preferences ki height ke barabar
+   stretch mat hone do */
+.bio-ref-grid {
+  align-items: start;
+}
+
+/* Interests & Hobbies bhi same balanced text weight */
+.bio-ref-card:last-child .bio-ref-fields b {
+  font-weight: 500 !important;
+}
+/* =========================================================
+   BIODATA FINAL TYPOGRAPHY FIX
+   Light / Premium / Reference-style
+========================================================= */
+
+/* ---------- TOP PROFILE FACTS ---------- */
+
+/* 28 Years / MALE / occupation / location / married */
+.bio-ref-hero *,
+.bio-ref-profile *,
+.bio-ref-facts *,
+.bio-ref-fact *,
+.bio-ref-info *,
+.bio-ref-summary * {
+  font-weight: 400 !important;
+}
+
+/* Important fact values — halka medium only */
+.bio-ref-hero strong,
+.bio-ref-profile strong,
+.bio-ref-facts strong,
+.bio-ref-fact strong,
+.bio-ref-info strong,
+.bio-ref-summary strong {
+  font-weight: 500 !important;
+}
+
+/* Name ko change mat karna */
+.bio-ref-hero-name,
+.bio-ref-profile-name {
+  font-weight: 700 !important;
+}
+
+
+/* ---------- PERSONAL / FAMILY / CONTACT / PARTNER ---------- */
+
+/* Field labels */
+.bio-ref-fields > div {
+  font-weight: 400 !important;
+}
+
+/* Field values */
+.bio-ref-fields b,
+.bio-ref-fields strong {
+  font-weight: 500 !important;
+  color: #343b46 !important;
+}
+
+
+/* ---------- INTERESTS & HOBBIES ---------- */
+
+.bio-ref-card:last-child .bio-ref-fields,
+.bio-ref-card:last-child .bio-ref-fields b,
+.bio-ref-card:last-child .bio-ref-fields strong {
+  font-weight: 500 !important;
+  color: #343b46 !important;
+}
+
+
+/* ---------- CONTACT CARD COMPACT ---------- */
+
+/* Contact card ko content ke hisaab se height do */
+.bio-ref-grid > .bio-ref-card:nth-child(3) {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+/* Contact fields ki extra vertical spacing hatao */
+.bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+/* Contact ki rows compact */
+.bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields > div {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  min-height: 0 !important;
+}
+
+
+/* ---------- CONTACT + PARTNER SAME ROW ---------- */
+
+.bio-ref-grid {
+  align-items: start !important;
+}
+
+
+/* ---------- INTERESTS CARD ---------- */
+
+.bio-ref-grid > .bio-ref-card:last-child {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+
+/* ---------- GENERAL PREMIUM FIELD LOOK ---------- */
+
+.bio-ref-fields > div {
+  line-height: 1.35 !important;
+}
+
+.bio-ref-fields b,
+.bio-ref-fields strong {
+  letter-spacing: 0 !important;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+  .bio-ref-fields b,
+  .bio-ref-fields strong {
+    font-weight: 500 !important;
+  }
+
+  .bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields > div {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+}
+
+/* =========================================================
+   INTERESTS & HOBBIES — MOVE UP
+========================================================= */
+
+/* Contact card ke neeche extra height/gap remove */
+.bio-ref-grid > .bio-ref-card:nth-child(3) {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Contact + Partner row ko content ke according rakho */
+.bio-ref-grid {
+  align-items: start !important;
+  row-gap: 10px !important;
+}
+
+/* Contact card ki unnecessary minimum height remove */
+.bio-ref-grid > .bio-ref-card:nth-child(3),
+.bio-ref-grid > .bio-ref-card:nth-child(4) {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* Interests card ko next row mein minimum gap ke saath lao */
+.bio-ref-grid > .bio-ref-card:last-child {
+  margin-top: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* Interests ke andar extra top/bottom space kam */
+.bio-ref-grid > .bio-ref-card:last-child .bio-ref-fields {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Agar grid rows ki wajah se empty space aa raha ho */
+.bio-ref-grid {
+  grid-auto-rows: max-content !important;
+}
+
+
+/* =========================================================
+   FINAL: INTERESTS & HOBBIES INSIDE THE SAME GRID
+   Position: next row, directly under Contact (left column)
+========================================================= */
+
+.bio-ref-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  column-gap: 12px !important;
+  row-gap: 10px !important;
+  align-items: start !important;
+  grid-auto-rows: max-content !important;
+}
+
+/* 5th card = Interests & Hobbies -> next row, left side */
+.bio-ref-grid > .bio-ref-hobbies-card {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+}
+
+/* Compact and clean hobbies content */
+.bio-ref-hobbies-card h2 {
+  margin: 0 !important;
+  padding: 10px 13px !important;
+}
+
+.bio-ref-hobbies-value {
+  padding: 11px 13px !important;
+  color: #3f424b !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.55 !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Keep Contact compact */
+.bio-ref-grid > .bio-ref-card:nth-child(3) {
+  align-self: start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Mobile: one column */
+@media (max-width: 900px) {
+  .bio-ref-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bio-ref-grid > .bio-ref-hobbies-card {
+    grid-column: 1 !important;
+  }
+}
+/* =========================================
+   BIODATA GRID - REMOVE EMPTY SPACE
+   Personal → Contact → Hobbies
+   Family → Partner Preferences
+   ========================================= */
+
+.bio-ref-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  column-gap: 12px !important;
+  row-gap: 10px !important;
+  align-items: start !important;
+  grid-auto-flow: row !important;
+}
+
+/* Personal Details - Left Top */
+.bio-ref-grid > .bio-ref-card:nth-child(1) {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+
+/* Family Details - Right Top */
+.bio-ref-grid > .bio-ref-card:nth-child(2) {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+
+/* Contact - Left directly below Personal */
+.bio-ref-grid > .bio-ref-card:nth-child(3) {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+/* Partner Preferences - Right directly below Family */
+.bio-ref-grid > .bio-ref-card:nth-child(4) {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+}
+
+/* Interests & Hobbies - Left directly below Contact */
+.bio-ref-grid > .bio-ref-hobbies-card {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+  margin: 0 !important;
+}
+
+/* Hobbies content */
+.bio-ref-hobbies-value {
+  padding: 10px 13px 12px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+  color: #3d4048 !important;
+}
+
+/* Contact fields compact */
+.bio-ref-grid > .bio-ref-card:nth-child(3) .bio-ref-fields > div {
+  padding: 7px 0 !important;
+}
+
+/* Partner fields compact */
+.bio-ref-grid > .bio-ref-card:nth-child(4) .bio-ref-fields > div {
+  padding: 7px 0 !important;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  .bio-ref-grid {
+    grid-template-columns: 1fr !important;
+    row-gap: 10px !important;
+  }
+
+  .bio-ref-grid > .bio-ref-card:nth-child(1),
+  .bio-ref-grid > .bio-ref-card:nth-child(2),
+  .bio-ref-grid > .bio-ref-card:nth-child(3),
+  .bio-ref-grid > .bio-ref-card:nth-child(4),
+  .bio-ref-grid > .bio-ref-hobbies-card {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+}
+
+
+/* =========================================================
+   HEADER FACT ICONS — CLEAN PROFESSIONAL SVG ICONS
+   Matches the reference biodata design
+   ========================================================= */
+
+.bio-ref-facts > span {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  min-width: 0 !important;
+}
+
+.bio-ref-fact-icon {
+  width: 19px !important;
+  height: 19px !important;
+  min-width: 19px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #6a6f7a !important;
+  font-style: normal !important;
+}
+
+.bio-ref-fact-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+}
+
+.bio-ref-facts b {
+  color: #454a55 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+
+/* Keep the icons subtle instead of emoji-style */
+.bio-ref-facts > span::first-letter {
+  color: inherit !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .bio-ref-fact-icon {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+  }
+
+  .bio-ref-fact-icon svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL PREMIUM SHARE EXPERIENCE
+   ========================================================= */
+.bio-share-wrap{position:relative}
+.bio-ref-share{height:40px;min-width:151px;justify-content:center;gap:8px;white-space:nowrap;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.bio-ref-share:hover,.bio-ref-share[aria-expanded="true"]{background:#fff7f9;border-color:#d9b7c2;box-shadow:0 7px 18px rgba(79,35,50,.10);transform:translateY(-1px)}
+.bio-share-trigger-icon{font-size:17px;line-height:1;font-weight:800}
+.bio-share-chevron{font-size:14px;line-height:1;margin-left:1px}
+.bio-share-menu{top:calc(100% + 10px);right:0;width:342px;padding:0;overflow:hidden;border:1px solid #e8dde1;border-radius:16px;background:#fff;box-shadow:0 22px 55px rgba(38,24,31,.20),0 3px 10px rgba(38,24,31,.06);animation:bioShareMenuIn .16s ease-out}
+.bio-share-menu-head{padding:17px 18px 14px;background:linear-gradient(180deg,#fffafb 0%,#fff 100%);border-bottom:1px solid #eee5e8}
+.bio-share-menu-title{color:#202b42;font-size:16px;font-weight:800;line-height:1.2}
+.bio-share-menu-subtitle{margin-top:4px;color:#8b919d;font-size:11px;line-height:1.35}
+.bio-share-item{width:100%;min-height:67px;padding:10px 14px;border:0;border-radius:0;background:#fff;display:flex;align-items:center;gap:12px;text-align:left;font-family:inherit;cursor:pointer;transition:background .16s ease}
+.bio-share-item:hover{background:#fff7f9}
+.bio-share-item:active{background:#fdf0f4}
+.bio-share-item-icon{width:39px;height:39px;min-width:39px;border-radius:11px;background:#f8edf1;color:#a91c48;display:inline-flex;align-items:center;justify-content:center}
+.bio-share-item-icon svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bio-share-item.whatsapp .bio-share-item-icon{background:#edf9f2;color:#18a45a}
+.bio-share-item-copy{min-width:0;display:flex;flex:1;flex-direction:column;gap:3px}
+.bio-share-item-copy strong{color:#293246;font-size:13px;font-weight:750;line-height:1.2}
+.bio-share-item-copy small{color:#9298a4;font-size:10.5px;font-weight:500;line-height:1.25}
+.bio-share-arrow{color:#b2b6be;font-size:22px;font-weight:300;line-height:1;margin-left:auto}
+.bio-share-divider{height:1px;background:#eee7e9;margin:0 14px}
+.bio-share-item.more .bio-share-item-icon{background:#f2f3f6;color:#4d5666}
+@keyframes bioShareMenuIn{from{opacity:0;transform:translateY(-5px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media (max-width:760px){
+  .bio-share-menu{width:min(342px,calc(100vw - 28px));right:0}
+}
+@media (max-width:600px){
+  .bio-share-menu{position:fixed;top:auto;right:14px;bottom:76px;width:min(350px,calc(100vw - 28px));z-index:10050}
+  .bio-share-menu-head{padding:15px 16px 13px}
+  .bio-share-item{min-height:64px;padding:9px 12px}
+}
+/* =========================================================
+   PREMIUM COMPACT SHARE BIODATA
+   ========================================================= */
+
+   .bio-share-wrap {
+    position: relative;
+  }
+  
+  
+  /* SHARE BUTTON */
+  
+  .bio-ref-share {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+  
+    min-width: 154px !important;
+    height: 40px !important;
+    padding: 0 14px !important;
+  
+    white-space: nowrap !important;
+  
+    cursor: pointer !important;
+  
+    transition:
+      background .18s ease,
+      border-color .18s ease,
+      box-shadow .18s ease,
+      transform .18s ease !important;
+  }
+  
+  .bio-ref-share:hover,
+  .bio-ref-share[aria-expanded="true"] {
+    background: #fff7f9 !important;
+    border-color: #d7b8c2 !important;
+    box-shadow: 0 6px 16px rgba(80, 35, 50, .08) !important;
+  }
+  
+  
+  /* =========================================================
+     COMPACT SHARE POPUP
+     ========================================================= */
+  
+  .bio-share-menu {
+    position: absolute !important;
+  
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+  
+    width: 300px !important;
+  
+    padding: 0 !important;
+  
+    overflow: hidden !important;
+  
+    border: 1px solid #e7dde1 !important;
+    border-radius: 13px !important;
+  
+    background: #fff !important;
+  
+    box-shadow:
+      0 18px 42px rgba(40, 25, 32, .16),
+      0 3px 9px rgba(40, 25, 32, .05) !important;
+  
+    z-index: 10050 !important;
+  
+    animation: bioShareCompactIn .15s ease-out !important;
+  }
+  
+  
+  /* HEADER */
+  
+  .bio-share-menu-head {
+    padding: 13px 16px 11px !important;
+  
+    background: #fffafb !important;
+  
+    border-bottom: 1px solid #eee6e9 !important;
+  }
+  
+  .bio-share-menu-title {
+    color: #253149 !important;
+  
+    font-size: 15px !important;
+    font-weight: 750 !important;
+  
+    line-height: 1.2 !important;
+  }
+  
+  .bio-share-menu-subtitle {
+    display: none !important;
+  }
+  
+  
+  /* =========================================================
+     SHARE ITEMS
+     ========================================================= */
+  
+  .bio-share-item {
+    width: 100% !important;
+  
+    min-height: 53px !important;
+  
+    padding: 7px 13px !important;
+  
+    display: flex !important;
+    align-items: center !important;
+  
+    gap: 11px !important;
+  
+    border: 0 !important;
+    border-radius: 0 !important;
+  
+    background: #fff !important;
+  
+    cursor: pointer !important;
+  
+    text-align: left !important;
+  
+    transition:
+      background .15s ease,
+      transform .12s ease !important;
+  }
+  
+  .bio-share-item:hover {
+    background: #fff7f9 !important;
+  }
+  
+  .bio-share-item:active {
+    transform: scale(.995) !important;
+  }
+  
+  
+  /* ICON */
+  
+  .bio-share-item-icon {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+  
+    border-radius: 9px !important;
+  
+    background: #f8edf1 !important;
+    color: #a91c48 !important;
+  
+    display: inline-flex !important;
+  
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .bio-share-item-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  
+    display: block !important;
+  
+    fill: none !important;
+    stroke: currentColor !important;
+  
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  
+  
+  /* WHATSAPP */
+  
+  .bio-share-item.whatsapp .bio-share-item-icon {
+    background: #edf9f2 !important;
+    color: #18a45a !important;
+  }
+  
+  
+  /* TEXT */
+  
+  .bio-share-item-copy {
+    min-width: 0 !important;
+  
+    flex: 1 !important;
+  
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  .bio-share-item-copy strong {
+    color: #293246 !important;
+  
+    font-size: 13px !important;
+    font-weight: 650 !important;
+  
+    line-height: 1.2 !important;
+  }
+  
+  
+  /* HIDE ALL SUBTEXT */
+  
+  .bio-share-item-copy small {
+    display: none !important;
+  }
+  
+  
+  /* ARROW */
+  
+  .bio-share-arrow {
+    margin-left: auto !important;
+  
+    color: #b5bac2 !important;
+  
+    font-size: 20px !important;
+    font-weight: 300 !important;
+  
+    line-height: 1 !important;
+  }
+  
+  
+  /* DIVIDER */
+  
+  .bio-share-divider {
+    height: 1px !important;
+  
+    margin: 0 13px !important;
+  
+    background: #eee7e9 !important;
+  }
+  
+  
+  /* MORE SHARE */
+  
+  .bio-share-item.more .bio-share-item-icon {
+    background: #f2f3f6 !important;
+    color: #4d5666 !important;
+  }
+  
+  
+  /* ANIMATION */
+  
+  @keyframes bioShareCompactIn {
+  
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(.99);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  
+  }
+  
+  
+  /* =========================================================
+     MOBILE - SHOW SHARE BIODATA
+     ========================================================= */
+  
+  @media (max-width: 700px) {
+  
+    .bio-ref-actions {
+      display: flex !important;
+  
+      align-items: center !important;
+      justify-content: space-between !important;
+  
+      width: 100% !important;
+  
+      gap: 10px !important;
+    }
+  
+  
+    /* SHARE BUTTON MUST BE VISIBLE ON MOBILE */
+  
+    .bio-share-wrap {
+      display: block !important;
+  
+      flex: 1 1 0 !important;
+  
+      min-width: 0 !important;
+    }
+  
+  
+    .bio-ref-share {
+      display: inline-flex !important;
+  
+      width: 100% !important;
+      min-width: 0 !important;
+  
+      height: 46px !important;
+  
+      padding: 0 10px !important;
+  
+      font-size: 14px !important;
+    }
+  
+  
+    .bio-ref-download {
+      flex: 1 1 0 !important;
+  
+      min-width: 0 !important;
+  
+      height: 46px !important;
+  
+      padding: 0 10px !important;
+  
+      font-size: 14px !important;
+  
+      white-space: nowrap !important;
+    }
+  
+  
+    /* MOBILE SHARE POPUP */
+  
+    .bio-share-menu {
+  
+      position: fixed !important;
+  
+      top: auto !important;
+      right: 12px !important;
+      bottom: 76px !important;
+      left: 12px !important;
+  
+      width: auto !important;
+  
+      max-width: none !important;
+  
+      border-radius: 15px !important;
+  
+      box-shadow:
+        0 18px 45px rgba(30, 22, 28, .18),
+        0 4px 12px rgba(30, 22, 28, .06) !important;
+    }
+  
+  
+    .bio-share-menu-head {
+      padding: 13px 15px 11px !important;
+    }
+  
+  
+    .bio-share-menu-title {
+      font-size: 15px !important;
+    }
+  
+  
+    .bio-share-item {
+      min-height: 54px !important;
+  
+      padding: 8px 13px !important;
+    }
+  
+  
+    .bio-share-item-icon {
+      width: 35px !important;
+      height: 35px !important;
+      min-width: 35px !important;
+    }
+  
+  }
+  
+  
+  /* SMALL MOBILE */
+  
+  @media (max-width: 430px) {
+  
+    .bio-ref-actions {
+      gap: 8px !important;
+    }
+  
+  
+    .bio-ref-share,
+    .bio-ref-download {
+      height: 44px !important;
+  
+      font-size: 13px !important;
+    }
+  
+  
+    .bio-share-menu {
+      left: 10px !important;
+      right: 10px !important;
+      bottom: 70px !important;
+    }
+  
+  }
+  /* =========================================================
+   FINAL PREMIUM SHARE MENU - COMPACT
+   ========================================================= */
+
+/* Desktop popup */
+.bio-share-menu {
+  width: 285px !important;
+  border-radius: 14px !important;
+}
+
+/* Header compact */
+.bio-share-menu-head {
+  padding: 12px 15px !important;
+}
+
+.bio-share-menu-title {
+  font-size: 14px !important;
+  font-weight: 750 !important;
+}
+
+
+/* Each option */
+.bio-share-item {
+  min-height: 48px !important;
+  height: 48px !important;
+
+  padding: 6px 12px !important;
+
+  gap: 8px !important;
+
+  display: flex !important;
+  align-items: center !important;
+}
+
+
+/* Icon smaller */
+.bio-share-item-icon {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+
+  flex: 0 0 32px !important;
+
+  border-radius: 8px !important;
+}
+
+
+/* SVG */
+.bio-share-item-icon svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+
+/* Text immediately after icon */
+.bio-share-item-copy {
+  flex: 1 1 auto !important;
+
+  min-width: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  text-align: left !important;
+}
+
+
+/* Option name */
+.bio-share-item-copy strong {
+  font-size: 12.5px !important;
+  font-weight: 650 !important;
+
+  white-space: nowrap !important;
+}
+
+
+/* Arrow */
+.bio-share-arrow {
+  margin-left: 5px !important;
+
+  font-size: 18px !important;
+}
+
+
+/* Divider */
+.bio-share-divider {
+  margin: 0 12px !important;
+}
+
+
+/* =========================================================
+   MOBILE - SMALL PREMIUM POPUP
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* Keep buttons side by side */
+  .bio-ref-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .bio-share-wrap {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .bio-ref-share,
+  .bio-ref-download {
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 13px !important;
+  }
+
+
+  /* IMPORTANT:
+     Don't make popup full screen */
+  .bio-share-menu {
+
+    position: absolute !important;
+
+    top: calc(100% + 7px) !important;
+
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+
+    width: 285px !important;
+    max-width: calc(100vw - 24px) !important;
+
+    border-radius: 14px !important;
+
+    overflow: hidden !important;
+
+    box-shadow:
+      0 14px 35px rgba(28, 25, 31, .17),
+      0 2px 8px rgba(28, 25, 31, .06) !important;
+
+    z-index: 10050 !important;
+  }
+
+
+  /* Header */
+  .bio-share-menu-head {
+    padding: 11px 13px !important;
+  }
+
+  .bio-share-menu-title {
+    font-size: 14px !important;
+  }
+
+
+  /* Options */
+  .bio-share-item {
+
+    min-height: 46px !important;
+    height: 46px !important;
+
+    padding: 6px 11px !important;
+
+    gap: 7px !important;
+  }
+
+
+  /* Smaller icon */
+  .bio-share-item-icon {
+
+    width: 31px !important;
+    height: 31px !important;
+    min-width: 31px !important;
+
+    flex: 0 0 31px !important;
+
+    border-radius: 8px !important;
+  }
+
+
+  .bio-share-item-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+
+  /* Text */
+  .bio-share-item-copy {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  .bio-share-item-copy strong {
+    font-size: 12.5px !important;
+    font-weight: 650 !important;
+  }
+
+
+  /* Arrow */
+  .bio-share-arrow {
+    margin-left: auto !important;
+    font-size: 17px !important;
+  }
+
+
+  .bio-share-divider {
+    margin: 0 11px !important;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .bio-share-menu {
+    width: 270px !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+
+  .bio-share-item {
+    gap: 6px !important;
+  }
+
+}
+/* =========================================================
+   FINAL FIX - ICON & TEXT CLOSE TOGETHER
+   ========================================================= */
+
+/* Share menu */
+.bio-share-menu {
+  width: 285px !important;
+}
+
+/* Every share row */
+.bio-share-item {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  gap: 8px !important;
+
+  padding: 6px 12px !important;
+}
+
+
+/* Icon should stay at left */
+.bio-share-item-icon {
+  flex: 0 0 32px !important;
+
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+
+  margin: 0 !important;
+}
+
+
+/* IMPORTANT:
+   Remove the huge empty flexible area */
+.bio-share-item-copy {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  text-align: left !important;
+}
+
+
+/* Text immediately after icon */
+.bio-share-item-copy strong {
+  display: block !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 13px !important;
+  font-weight: 650 !important;
+
+  white-space: nowrap !important;
+}
+
+
+/* Arrow goes to extreme right */
+.bio-share-arrow {
+  margin-left: auto !important;
+
+  flex: 0 0 auto !important;
+}
+
+
+/* Remove any hidden/old description space */
+.bio-share-item-copy small {
+  display: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .bio-share-menu {
+    width: 285px !important;
+
+    max-width: calc(100vw - 24px) !important;
+
+    position: absolute !important;
+
+    top: calc(100% + 7px) !important;
+
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+  }
+
+
+  .bio-share-item {
+    min-height: 46px !important;
+    height: 46px !important;
+
+    padding: 6px 11px !important;
+
+    gap: 7px !important;
+  }
+
+
+  .bio-share-item-icon {
+    width: 31px !important;
+    min-width: 31px !important;
+    height: 31px !important;
+
+    flex-basis: 31px !important;
+  }
+
+
+  .bio-share-item-copy {
+    flex: 0 0 auto !important;
+    width: auto !important;
+
+    justify-content: flex-start !important;
+  }
+
+
+  .bio-share-item-copy strong {
+    font-size: 12.5px !important;
+
+    white-space: nowrap !important;
+  }
+
+
+  .bio-share-arrow {
+    margin-left: auto !important;
+  }
+}
+
+
+/* Very small phones */
+@media (max-width: 380px) {
+
+  .bio-share-menu {
+    width: 270px !important;
+  }
+
+  .bio-share-item {
+    gap: 6px !important;
+  }
+}
+/* =========================================================
+   FINAL MOBILE SHARE MENU POSITION FIX
+   Desktop untouched
+   ========================================================= */
+
+   @media (max-width: 700px) {
+
+    /* Share button wrapper */
+    .bio-share-wrap {
+      position: relative !important;
+      overflow: visible !important;
+    }
+  
+    /*
+       Popup ko wrapper ke RIGHT se nahi,
+       LEFT se attach karo.
+       Isse popup screen ke bahar nahi jayega.
+    */
+    .bio-share-menu {
+      position: absolute !important;
+  
+      top: calc(100% + 8px) !important;
+  
+      left: 0 !important;
+      right: auto !important;
+      bottom: auto !important;
+  
+      width: 285px !important;
+      max-width: calc(100vw - 20px) !important;
+  
+      margin: 0 !important;
+  
+      transform: none !important;
+  
+      border-radius: 14px !important;
+  
+      overflow: hidden !important;
+  
+      z-index: 99999 !important;
+    }
+  
+  
+    /* Header */
+    .bio-share-menu-head {
+      padding: 11px 13px !important;
+    }
+  
+    .bio-share-menu-title {
+      font-size: 14px !important;
+    }
+  
+  
+    /* Each option */
+    .bio-share-item {
+      min-height: 46px !important;
+      height: 46px !important;
+  
+      padding: 6px 11px !important;
+  
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+  
+      gap: 7px !important;
+    }
+  
+  
+    /* Icon */
+    .bio-share-item-icon {
+      width: 31px !important;
+      height: 31px !important;
+      min-width: 31px !important;
+  
+      flex: 0 0 31px !important;
+  
+      margin: 0 !important;
+    }
+  
+  
+    /* Text */
+    .bio-share-item-copy {
+      flex: 0 0 auto !important;
+  
+      width: auto !important;
+      min-width: 0 !important;
+  
+      margin: 0 !important;
+      padding: 0 !important;
+  
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+  
+      text-align: left !important;
+    }
+  
+  
+    .bio-share-item-copy strong {
+      font-size: 12.5px !important;
+  
+      font-weight: 650 !important;
+  
+      white-space: nowrap !important;
+  
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  
+  
+    /* Arrow stays at right */
+    .bio-share-arrow {
+      margin-left: auto !important;
+  
+      flex: 0 0 auto !important;
+  
+      font-size: 17px !important;
+    }
+  
+  
+    /* Divider */
+    .bio-share-divider {
+      margin: 0 11px !important;
+    }
+  
+  }
+  
+  
+  /* Extra-small phones */
+  @media (max-width: 360px) {
+  
+    .bio-share-menu {
+      width: 270px !important;
+      max-width: calc(100vw - 20px) !important;
+    }
+  
+  }
+  /* =========================================================
+   SHARE MENU - FINAL MOBILE POSITION
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .bio-share-wrap {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .bio-share-menu {
+    position: absolute !important;
+
+    top: calc(100% + 7px) !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    width: 285px !important;
+    max-width: calc(100vw - 20px) !important;
+
+    margin: 0 !important;
+
+    border-radius: 14px !important;
+
+    z-index: 99999 !important;
+  }
+
+  .bio-share-menu-head {
+    padding: 10px 13px !important;
+  }
+
+  .bio-share-menu-title {
+    font-size: 14px !important;
+  }
+
+  .bio-share-item {
+    min-height: 45px !important;
+    height: 45px !important;
+
+    padding: 6px 11px !important;
+
+    gap: 7px !important;
+
+    justify-content: flex-start !important;
+  }
+
+  .bio-share-item-icon {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+
+    flex: 0 0 30px !important;
+  }
+
+  .bio-share-item-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .bio-share-item-copy {
+    flex: 0 0 auto !important;
+    width: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    justify-content: flex-start !important;
+  }
+
+  .bio-share-item-copy strong {
+    font-size: 12.5px !important;
+    white-space: nowrap !important;
+  }
+
+  .bio-share-arrow {
+    margin-left: auto !important;
+    font-size: 17px !important;
+  }
+
+  .bio-share-divider {
+    margin: 0 11px !important;
+  }
+}
+/* =========================================================
+   MOBILE - BOTTOM DOWNLOAD BUTTON CLEARANCE
+   ========================================================= */
+
+   @media (max-width: 700px) {
+
+    .bio-reference-page {
+      padding-bottom: 50px !important;
+    }
+  
+    .bio-reference-wrap {
+      padding-bottom: 25px !important;
+    }
+  
+    .bio-ref-footer {
+      margin-bottom: 18px !important;
+    }
+  }
+  @media (max-width: 700px) {
+
+    .bio-marriage-download-bottom {
+      display: flex !important;
+  
+      width: calc(100% - 32px) !important;
+      max-width: 360px !important;
+  
+      margin: 18px auto 95px !important;
+  
+      min-height: 48px !important;
+  
+      align-items: center !important;
+      justify-content: center !important;
+  
+      position: relative !important;
+      z-index: 2 !important;
+    }
+  }
+
+/* =========================================================
+   FINAL BIODATA SHARE + MOBILE DOWNLOAD POLISH
+   Added on top of the user's existing Biodata.css.
+   ========================================================= */
+
+/* ---------- SHARE MENU: PREMIUM + COMPACT ---------- */
+
+.bio-share-menu {
+  width: 300px !important;
+  max-width: calc(100vw - 24px) !important;
+  padding: 0 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+.bio-share-menu-head {
+  padding: 12px 14px 10px !important;
+}
+
+.bio-share-menu-title {
+  font-size: 14px !important;
+  font-weight: 750 !important;
+}
+
+.bio-share-menu-subtitle {
+  display: none !important;
+}
+
+.bio-share-item {
+  min-height: 48px !important;
+  height: 48px !important;
+  padding: 6px 12px !important;
+  gap: 8px !important;
+  justify-content: flex-start !important;
+}
+
+.bio-share-item-icon {
+  width: 31px !important;
+  height: 31px !important;
+  min-width: 31px !important;
+  flex: 0 0 31px !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+}
+
+.bio-share-item-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.bio-share-item-copy {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.bio-share-item-copy strong {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.bio-share-item-copy small {
+  display: none !important;
+}
+
+.bio-share-arrow {
+  margin-left: auto !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+}
+
+.bio-share-divider {
+  margin: 0 11px !important;
+}
+
+
+/* ---------- MOBILE SHARE BUTTON + POPUP ---------- */
+
+@media (max-width: 700px) {
+
+  .bio-ref-actions {
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .bio-share-wrap {
+    position: relative !important;
+    display: block !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .bio-ref-share,
+  .bio-ref-download {
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 13px !important;
+  }
+
+  .bio-ref-share {
+    display: inline-flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 10px !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    white-space: nowrap !important;
+  }
+
+  .bio-ref-download {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    padding: 0 10px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Small dropdown, attached directly below Share Biodata.
+     It never becomes a full-screen/fixed sheet. */
+  .bio-share-menu {
+    position: absolute !important;
+    top: calc(100% + 7px) !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    width: 300px !important;
+    max-width: calc(100vw - 18px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 14px !important;
+
+    box-shadow:
+      0 15px 38px rgba(28, 25, 31, .16),
+      0 2px 8px rgba(28, 25, 31, .06) !important;
+
+    z-index: 99999 !important;
+  }
+
+  .bio-share-menu-head {
+    padding: 11px 13px 10px !important;
+  }
+
+  .bio-share-menu-title {
+    font-size: 14px !important;
+  }
+
+  .bio-share-item {
+    min-height: 45px !important;
+    height: 45px !important;
+    padding: 6px 11px !important;
+    gap: 7px !important;
+  }
+
+  .bio-share-item-icon {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    flex-basis: 30px !important;
+  }
+
+  .bio-share-item-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .bio-share-item-copy {
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  .bio-share-item-copy strong {
+    font-size: 12.5px !important;
+  }
+
+  .bio-share-arrow {
+    margin-left: auto !important;
+    font-size: 17px !important;
+  }
+
+  .bio-share-divider {
+    margin: 0 11px !important;
+  }
+}
+
+
+/* ---------- VERY SMALL MOBILE ---------- */
+
+@media (max-width: 380px) {
+  .bio-share-menu {
+    width: 285px !important;
+    max-width: calc(100vw - 14px) !important;
+  }
+}
+
+
+/* ---------- BOTTOM PDF BUTTON: CLEAR FIXED NAV ---------- */
+
+/*
+   The mobile bottom navigation is fixed over the page.
+   Give the real .bio-ref-bottom enough bottom space so the
+   PDF button stays fully visible above that navigation.
+*/
+@media (max-width: 700px) {
+
+  .bio-reference-page {
+    padding-bottom: 00px !important;
+  }
+
+  .bio-reference-wrap {
+    padding-bottom: 0 !important;
+  }
+
+  .bio-ref-footer {
+    margin-bottom: 12px !important;
+  }
+
+  .bio-ref-bottom {
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    margin: 14px 0 95px !important;
+    padding: 0 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  .bio-ref-bottom button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: min(260px, 100%) !important;
+    min-height: 48px !important;
+    padding: 12px 18px !important;
+
+    border-radius: 11px !important;
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+}

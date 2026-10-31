@@ -1,0 +1,39 @@
+# Spring Boot
+**/target/
+*.class
+*.log
+
+# React / Node
+**/node_modules/
+**/dist/
+**/build/
+**/coverage/
+
+# IDE
+.idea/
+.settings/
+.metadata/
+.vscode/
+.project
+.classpath
+*.iml
+
+# Secrets
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+application-secrets.properties
+application-secrets.yml
+*.pem
+*.key
+*.p12
+*.jks
+
+# Runtime uploads
+**/uploads/
+
+# OS
+.DS_Store
+Thumbs.db

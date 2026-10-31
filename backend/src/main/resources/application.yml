@@ -1,0 +1,54 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/goswami_shaadi?useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ak79494@gmail.com
+    password: "jtdkkxndykwodgxo"  # 🔥 APP PASSWORD (NOT "Arun@9809")
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: true
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-this-development-secret-to-a-long-random-production-secret}
+    expiry-ms: ${JWT_EXPIRY_MS:86400000}
+
+  upload-dir: ${UPLOAD_DIR:uploads}
+
+logging:
+  level:
+    org.springframework.security: INFO
+    
+astro:
+  whatsapp:
+    graph-api-url: ${ASTRO_WHATSAPP_GRAPH_API_URL:}
+    access-token: ${ASTRO_WHATSAPP_ACCESS_TOKEN:}
