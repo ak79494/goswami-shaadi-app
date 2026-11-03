@@ -1,3 +1,4 @@
+import { File, Paths } from 'expo-file-system';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { Platform } from 'react-native';
@@ -160,6 +161,15 @@ function biodataHtml(profile: Profile, photo: string | null, preference: Prefere
 </div></body></html>`;
 }
 
+/** The printed PDF has a random file name, which is what families would see on WhatsApp. */
+function namedCopy(uri: string, profile: Profile): string {
+  const name = fullName(profile).replace(/[\\/:*?"<>|\s]+/g, '-');
+  const named = new File(Paths.cache, `${name || 'My'}-Biodata.pdf`);
+  if (named.exists) named.delete();
+  new File(uri).move(named);
+  return named.uri;
+}
+
 /**
  * Builds the member's own marriage biodata as a PDF and opens the share sheet, so it can be saved
  * to Files or sent on WhatsApp. On the web it opens the browser's print dialog instead.
@@ -178,7 +188,7 @@ export async function shareMyBiodata(profile: Profile, photos: Photo[]): Promise
   }
   const { uri } = await Print.printToFileAsync({ html, base64: false });
   if (!(await Sharing.isAvailableAsync())) throw new Error('Sharing is not available on this device');
-  await Sharing.shareAsync(uri, {
+  await Sharing.shareAsync(namedCopy(uri, profile), {
     mimeType: 'application/pdf',
     UTI: 'com.adobe.pdf',
     dialogTitle: `Biodata — ${fullName(profile)}`,

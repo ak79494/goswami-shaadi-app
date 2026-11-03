@@ -156,16 +156,16 @@ export default function Admin() {
                 Reported by {r.reporterName} ({r.reporterGoswamiId})
               </Text>
               {r.status === 'OPEN' ? (
-                <>
-                  <View style={styles.actions}>
-                    <Button title="Dismiss" size="sm" variant="secondary" disabled={busyId === r.id} onPress={() => actOnReport(r, 'dismiss')} style={{ flex: 1 }} />
-                    <Button title="Suspend" icon="ban-outline" size="sm" loading={busyId === r.id} onPress={() => confirmSuspend(r)} style={{ flex: 1 }} />
-                  </View>
-                  <Button title="View profile" size="sm" variant="ghost" onPress={() => router.push(`/profile/${r.reportedUserId}`)} />
-                </>
-              ) : !r.reportedEnabled ? (
+                <View style={styles.actions}>
+                  <Button title="Dismiss" size="sm" variant="secondary" disabled={busyId === r.id} onPress={() => actOnReport(r, 'dismiss')} style={{ flex: 1 }} />
+                  <Button title="Suspend" icon="ban-outline" size="sm" loading={busyId === r.id} onPress={() => confirmSuspend(r)} style={{ flex: 1 }} />
+                </View>
+              ) : r.reportedEnabled ? (
+                <Button title="Suspend" icon="ban-outline" size="sm" variant="secondary" loading={busyId === r.id} onPress={() => confirmSuspend(r)} />
+              ) : (
                 <Button title="Restore member" size="sm" variant="ghost" loading={busyId === r.id} onPress={() => actOnReport(r, 'restore')} />
-              ) : null}
+              )}
+              {r.reportedEnabled ? <Button title="View profile" size="sm" variant="ghost" onPress={() => router.push(`/profile/${r.reportedUserId}`)} /> : null}
             </View>
           )}
         />

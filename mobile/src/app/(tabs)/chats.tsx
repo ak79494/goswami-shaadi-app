@@ -1,5 +1,5 @@
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
@@ -11,6 +11,7 @@ import { colors, radius } from '@/constants/theme';
 import { useActivity } from '@/lib/activity';
 import { api, errorMessage } from '@/lib/api';
 import { timeAgo } from '@/lib/format';
+import { useRealtime } from '@/lib/realtime';
 import type { ConversationSummary } from '@/lib/types';
 
 export default function Chats() {
@@ -18,6 +19,7 @@ export default function Chats() {
   const [items, setItems] = useState<ConversationSummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const isOpen = useRef(false);
 
   const load = useCallback(async () => {
     try {
@@ -32,10 +34,21 @@ export default function Chats() {
   // Reload whenever the tab is opened so last messages and unread counts stay fresh.
   useFocusEffect(
     useCallback(() => {
+      isOpen.current = true;
       load();
       refresh();
+      return () => {
+        isOpen.current = false;
+      };
     }, [load, refresh]),
   );
+
+  // New and deleted messages show up straight away while the list is on screen. Typing signals don't change it.
+  useRealtime<{ event?: string }>('chat', (e) => {
+    if (!isOpen.current || e.event === 'typing') return;
+    load();
+    refresh();
+  });
 
   const onRefresh = async () => {
     setRefreshing(true);

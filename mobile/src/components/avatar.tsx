@@ -66,7 +66,9 @@ export function ProfileImage({
   return (
     <LinearGradient colors={['#F7C6D1', '#E7849A']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.photoFallback, style]}>
       <Text style={styles.photoInitials}>{initials(name)}</Text>
-      <Text style={styles.photoHint}>Photo coming soon</Text>
+      <Text style={styles.photoHint} numberOfLines={1} maxFontSizeMultiplier={1}>
+        Photo coming soon
+      </Text>
     </LinearGradient>
   );
 }

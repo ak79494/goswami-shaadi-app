@@ -57,6 +57,8 @@ export default function CreateProfile() {
     if (Object.values(e).some(Boolean)) {
       setErrors(e);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      // The field with the problem can be off screen, so say what's missing.
+      toast(Object.values(e).find(Boolean) ?? 'Please fill in the required details', 'error');
       return;
     }
     if (!last) return go(1);

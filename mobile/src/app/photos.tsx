@@ -33,8 +33,6 @@ export default function Photos() {
 
   const add = async () => {
     if (photos.length >= MAX) return toast(`You can add up to ${MAX} photos`, 'info');
-    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!perm.granted) return toast('Allow photo access in Settings to upload pictures', 'error');
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,

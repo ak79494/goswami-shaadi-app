@@ -19,6 +19,7 @@ public class ModerationService {
     public static final String OPEN = "OPEN";
     public static final String DISMISSED = "DISMISSED";
     public static final String SUSPENDED = "SUSPENDED";
+    public static final String RESTORED = "RESTORED";
 
     public record ReportView(Long id, Long reportedUserId, String reportedName, String reportedGoswamiId, boolean reportedEnabled,
                              String reporterName, String reporterGoswamiId, String reason, String details, String evidencePath,
@@ -58,7 +59,7 @@ public class ModerationService {
         users.save(member);
         devices.removeAllOf(member.getId());
         for (ProfileReport r : reports.findByReportedUserId(member.getId())) {
-            if (isOpen(r)) {
+            if (isOpen(r) || r.getId().equals(reportId)) {
                 r.setStatus(SUSPENDED);
                 r.setReviewedAt(LocalDateTime.now());
             }
@@ -66,11 +67,19 @@ public class ModerationService {
         return view(report);
     }
 
+    /** Brings the member back and settles every report that suspended them, so none still reads as suspended. */
     @Transactional
     public ReportView restore(Long reportId) {
         ProfileReport report = report(reportId);
-        report.getReportedUser().setEnabled(true);
-        users.save(report.getReportedUser());
+        User member = report.getReportedUser();
+        member.setEnabled(true);
+        users.save(member);
+        for (ProfileReport r : reports.findByReportedUserId(member.getId())) {
+            if (SUSPENDED.equals(r.getStatus())) {
+                r.setStatus(RESTORED);
+                r.setReviewedAt(LocalDateTime.now());
+            }
+        }
         return view(report);
     }
 

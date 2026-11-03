@@ -236,7 +236,7 @@ export type ReportedMember = {
   reason: string;
   details?: string | null;
   evidencePath?: string | null;
-  status: 'OPEN' | 'DISMISSED' | 'SUSPENDED';
+  status: 'OPEN' | 'DISMISSED' | 'SUSPENDED' | 'RESTORED';
   createdAt: string;
 };
 
