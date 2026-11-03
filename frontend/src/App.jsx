@@ -1596,7 +1596,7 @@ function Auth({mode}){
 
           <div className="premium-login-icon">
 
-            S
+            J
 
           </div>
 
@@ -2331,7 +2331,7 @@ function ForgotPassword() {
 
           <div className="forgot-card-logo">
 
-            S
+            J
 
           </div>
 

@@ -321,8 +321,8 @@ const UPI_PAYEE_NAME = "Goswami Jodi";
 
 function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
   const [method, setMethod] = useState("GOOGLE_PAY");
-  const [checking, setChecking] = useState(false);
-  const [paymentState, setPaymentState] = useState("WAITING");
+  const [utr, setUtr] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState("");
 
@@ -355,66 +355,32 @@ function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
     return () => { cancelled = true; };
   }, [upiUrl]);
 
-  const checkPaymentStatus = async () => {
-    try {
-      const response = await api.get(`/premium/orders/${orderId}/status`);
-      const data = response.data || {};
-      const status = String(data.status || "").toUpperCase();
-
-      if (["SUCCESS", "PAID", "COMPLETED", "ACTIVE"].includes(status) || data.paid === true) {
-        setPaymentState("SUCCESS");
-        onSuccess(data);
-        return true;
-      }
-
-      if (["FAILED", "CANCELLED", "EXPIRED"].includes(status)) {
-        setPaymentState("FAILED");
-        setError(data.message || "Payment was not successful. Please try again.");
-        return true;
-      }
-
-      setPaymentState("WAITING");
-      return false;
-    } catch (err) {
-      // Keep polling; a temporary network error must not mark a real payment as failed.
-      return false;
-    }
-  };
-
-  useEffect(() => {
-    if (!orderId) return undefined;
-
-    let stopped = false;
-    let timer;
-
-    const poll = async () => {
-      if (stopped) return;
-      const finished = await checkPaymentStatus();
-      if (!finished && !stopped) {
-        timer = window.setTimeout(poll, 3000);
-      }
-    };
-
-    poll();
-    return () => {
-      stopped = true;
-      if (timer) window.clearTimeout(timer);
-    };
-  }, [orderId]);
-
   const openUpi = () => {
-    setChecking(true);
-    setPaymentState("WAITING");
     setError("");
     window.location.href = upiUrl;
   };
 
-  const retryCheck = async () => {
-    setChecking(true);
+  // Nothing tells us a UPI payment has arrived: the member sends the reference and the team checks the account.
+  const submitPayment = async e => {
+    e.preventDefault();
+    const clean = utr.replace(/\s+/g, "");
+    if (!/^[A-Za-z0-9]{6,40}$/.test(clean)) {
+      setError("Enter the UPI reference / UTR number shown in your payment app (usually 12 digits).");
+      return;
+    }
+    setSubmitting(true);
     setError("");
-    const finished = await checkPaymentStatus();
-    if (!finished) setError("Payment is still being verified. Please wait a moment.");
-    setChecking(false);
+    try {
+      const response = await api.post(`/premium/orders/${orderId}/submit-payment`, {
+        paymentMethod: method,
+        transactionId: clean
+      });
+      onSuccess(response.data);
+    } catch (err) {
+      setError(err?.response?.data?.message || "We couldn't submit this. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -426,7 +392,7 @@ function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
         <i />
         <span className="active">3 <b>Pay</b></span>
         <i />
-        <span className={paymentState === "SUCCESS" ? "done" : ""}>4 <b>Complete</b></span>
+        <span>4 <b>Complete</b></span>
       </div>
 
       <div className="premium-payment-shell">
@@ -493,46 +459,32 @@ function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
               Open {methodLabel} payment <span>↗</span>
             </button>
 
-            <div className={`premium-auto-status ${paymentState.toLowerCase()}`}>
-              <span className="premium-auto-status-icon">
-                {paymentState === "SUCCESS" ? "✓" : paymentState === "FAILED" ? "!" : "↻"}
-              </span>
-              <div>
-                <strong>
-                  {paymentState === "SUCCESS"
-                    ? "Payment successful"
-                    : paymentState === "FAILED"
-                      ? "Payment failed"
-                      : "Waiting for payment confirmation"}
-                </strong>
-                <small>
-                  {paymentState === "SUCCESS"
-                    ? "Your Premium membership is being completed."
-                    : paymentState === "FAILED"
-                      ? error
-                      : "Complete the payment in your UPI app. We will verify it automatically."}
-                </small>
+            <form className="premium-utr-form" onSubmit={submitPayment}>
+              <div className="premium-qr-heading">
+                <span className="premium-qr-number">02</span>
+                <div>
+                  <h3>Enter your payment reference</h3>
+                  <p>Find the UPI reference / UTR number under the transaction details in your payment app.</p>
+                </div>
               </div>
-            </div>
-
-            {error && paymentState !== "FAILED" && (
-              <div className="premium-form-error">{error}</div>
-            )}
-
-            <button
-              type="button"
-              className="premium-check-payment-btn"
-              onClick={retryCheck}
-              disabled={checking || paymentState === "SUCCESS"}
-            >
-              {checking ? "Checking payment…" : "Check payment status"}
-            </button>
+              <input
+                className="premium-utr-input"
+                value={utr}
+                onChange={e => setUtr(e.target.value)}
+                placeholder="e.g. 431245678901"
+                aria-label="UPI reference or UTR number"
+              />
+              {error && <div className="premium-form-error">{error}</div>}
+              <button type="submit" className="premium-check-payment-btn" disabled={submitting}>
+                {submitting ? "Submitting…" : "Submit for verification"}
+              </button>
+            </form>
           </div>
 
           <div className="premium-payment-help premium-auto-help">
-            <span>Automatic payment verification</span>
+            <span>How your payment is verified</span>
             <small>
-              After you pay, this page checks the order status automatically. You do not need to type a UTR manually.
+              Our team checks that the payment reached our account, then activates Premium and notifies you. This usually takes a few hours.
             </small>
           </div>
         </div>
@@ -557,15 +509,14 @@ function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
 
           <div className="premium-guarantee-card">
             <div className="guarantee-icon">✓</div>
-            <strong>Automatic activation</strong>
-            <p>After the verified payment is received, your selected Premium plan is activated automatically.</p>
+            <strong>Activated after verification</strong>
+            <p>Your selected Premium plan starts as soon as our team has confirmed your payment.</p>
           </div>
 
           <div className="premium-side-features">
-            <span>✓ No manual amount entry</span>
-            <span>✓ No manual UTR entry</span>
-            <span>✓ Automatic payment status</span>
-            <span>✓ Premium success screen</span>
+            <span>✓ Amount already filled in for you</span>
+            <span>✓ Paid directly by UPI</span>
+            <span>✓ You are notified when it is active</span>
           </div>
         </aside>
       </div>
@@ -591,14 +542,12 @@ function PaymentSuccess({ data }) {
 
         </div>
 
-        <span className="premium-flow-eyebrow">PAYMENT SUCCESSFUL</span>
+        <span className="premium-flow-eyebrow">PAYMENT SUBMITTED</span>
 
-        <h1>Welcome to Premium!</h1>
+        <h1>We are checking your payment</h1>
 
         <p>
-
-          Your GoswamiJodi account is now a Premium Member account.
-
+          We will activate your plan and notify you as soon as our team confirms it, usually within a few hours.
         </p>
 
         <div className="premium-success-plan">
@@ -621,17 +570,9 @@ function PaymentSuccess({ data }) {
 
           <div>
 
-            <small>VALID UNTIL</small>
+            <small>STATUS</small>
 
-            <strong>{data.validUntil ? new Date(data.validUntil).toLocaleDateString("en-IN", {
-
-              day: "2-digit",
-
-              month: "short",
-
-              year: "numeric"
-
-            }) : "Active"}</strong>
+            <strong>Being verified</strong>
 
           </div>
 
@@ -646,16 +587,6 @@ function PaymentSuccess({ data }) {
           </div>
 
         )}
-
-        <div className="premium-success-benefits">
-
-          <span>✓ Premium member badge</span>
-
-          <span>✓ Enhanced profile visibility</span>
-
-          <span>✓ Premium facilities enabled</span>
-
-        </div>
 
         <button onClick={() => nav("/")} className="premium-success-primary">
 
@@ -750,6 +681,16 @@ export default function Premium() {
       <PremiumHeader status={status} />
 
       <main className="premium-plans-page">
+        {status?.latestOrder?.status === "PENDING" && (
+          <div className="premium-form-error premium-pending-note">
+            Your {status.latestOrder.planName} payment is being verified. We will notify you as soon as it is confirmed.
+          </div>
+        )}
+        {status?.latestOrder?.status === "REJECTED" && (
+          <div className="premium-form-error premium-pending-note">
+            Your last payment could not be verified: {status.latestOrder.adminNote}
+          </div>
+        )}
 
         <section className="premium-hero-banner">
 
