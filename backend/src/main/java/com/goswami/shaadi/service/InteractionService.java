@@ -34,6 +34,7 @@ public class InteractionService {
     private final ProfileReportRepository reports;
     private final ProfileRepository profiles;
     private final ProfilePhotoRepository photos;
+    private final PushService push;
 
     public InteractionService(
             UserRepository u,
@@ -44,7 +45,8 @@ public class InteractionService {
             HiddenProfileRepository h,
             ProfileReportRepository rp,
             ProfileRepository p,
-            ProfilePhotoRepository ph
+            ProfilePhotoRepository ph,
+            PushService push
     ) {
         users = u;
         requests = r;
@@ -55,6 +57,7 @@ public class InteractionService {
         reports = rp;
         profiles = p;
         photos = ph;
+        this.push = push;
     }
 
     // Notifications show the sender's first name (or Goswami ID), never their email address.
@@ -754,5 +757,10 @@ public class InteractionService {
         n.setMessage(message);
 
         notifications.save(n);
+
+        // The member who sent a report doesn't need a phone alert saying so; the team does.
+        if (!"REPORT".equals(type) || user.getRole() == Role.ADMIN) {
+            push.send(user.getId(), new PushService.Push(PushService.MESSAGES, null, "GoswamiJodi", message, java.util.Map.of("type", "notification")));
+        }
     }
 }

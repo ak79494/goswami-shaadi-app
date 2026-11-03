@@ -37,6 +37,7 @@ public class ChatService {
     private final InterestRequestRepository requests;
     private final SimpUserRegistry online;
     private final Path uploadDir;
+    private final PushService push;
 
     public ChatService(
             UserRepository users,
@@ -48,7 +49,8 @@ public class ChatService {
             ProfilePhotoRepository photos,
             InterestRequestRepository requests,
             SimpUserRegistry online,
-            @Value("${app.upload-dir}") String uploadDir
+            @Value("${app.upload-dir}") String uploadDir,
+            PushService push
     ) {
         this.users = users;
         this.profiles = profiles;
@@ -60,9 +62,16 @@ public class ChatService {
         this.requests = requests;
         this.online = online;
         this.uploadDir = Paths.get(uploadDir).toAbsolutePath().normalize();
+        this.push = push;
     }
 
     // Notifications show the sender's first name (or Goswami ID), never their email address.
+    /** Says who wrote, never what they wrote: phones show notifications on the lock screen. */
+    private void pushMessage(User sender, Long toUserId, String body) {
+        push.send(toUserId, new PushService.Push(PushService.MESSAGES, "chat-" + sender.getId(), senderLabel(sender), body,
+            java.util.Map.of("type", "chat", "userId", String.valueOf(sender.getId()))));
+    }
+
     private String senderLabel(User u) {
         return profiles.findByUserId(u.getId())
                 .map(Profile::getFirstName)
@@ -215,6 +224,7 @@ public class ChatService {
         n.setRead(false);
 
         notifications.save(n);
+        pushMessage(sender, receiver.getId(), "Sent you a message");
 
         return saved;
     }
@@ -277,6 +287,7 @@ public class ChatService {
         n.setMessage("You received a voice message from " + senderLabel(sender));
         n.setRead(false);
         notifications.save(n);
+        pushMessage(sender, toUserId, "Sent you a voice message");
 
         return saved;
     }

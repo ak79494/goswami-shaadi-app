@@ -64,6 +64,10 @@ app:
     account-number: ${PAYMENT_ACCOUNT_NUMBER:}
     ifsc: ${PAYMENT_IFSC:}
 
+  # Notifications while the app is closed. Off until this points at the Firebase service account key.
+  push:
+    service-account-file: ${FIREBASE_SERVICE_ACCOUNT_FILE:}
+
   # In-app voice calls (WebRTC). Calls between two mobile-data connections may need a TURN relay:
   # set turn-urls / turn-username / turn-credential (e.g. from a free metered.ca account).
   calls:

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Premium membership paid by UPI. The member pays to the configured UPI ID / bank account,
@@ -24,12 +25,14 @@ public class PremiumService {
     private final NotificationRepository notifications;
     private final ProfileRepository profiles;
     private final PaymentInfo paymentInfo;
+    private final PushService push;
 
     public PremiumService(
         UserRepository users,
         PremiumOrderRepository orders,
         NotificationRepository notifications,
         ProfileRepository profiles,
+        PushService push,
         @Value("${app.payment.upi-id:}") String upiId,
         @Value("${app.payment.payee-name:Goswami Jodi}") String payeeName,
         @Value("${app.payment.bank-name:}") String bankName,
@@ -41,6 +44,7 @@ public class PremiumService {
         this.orders = orders;
         this.notifications = notifications;
         this.profiles = profiles;
+        this.push = push;
         this.paymentInfo = new PaymentInfo(upiId, payeeName, bankName, accountName, accountNumber, ifsc);
     }
 
@@ -283,6 +287,7 @@ public class PremiumService {
         n.setMessage(message.length() > 500 ? message.substring(0, 500) : message);
         n.setRead(false);
         notifications.save(n);
+        push.send(user.getId(), new PushService.Push(PushService.MESSAGES, null, "GoswamiJodi", n.getMessage(), Map.of("type", "notification")));
     }
 
     private User getUser(Long userId) {

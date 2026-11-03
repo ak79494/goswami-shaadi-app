@@ -56,6 +56,7 @@ public class CallService {
     private final NotificationRepository notifications;
     private final SimpMessagingTemplate broker;
     private final SimpUserRegistry online;
+    private final PushService push;
     private final List<Map<String, Object>> iceServers;
 
     /** Calls ringing or in progress, by call id. In memory: a call only lives as long as the server. */
@@ -73,6 +74,7 @@ public class CallService {
         NotificationRepository notifications,
         SimpMessagingTemplate broker,
         SimpUserRegistry online,
+        PushService push,
         @Value("${app.calls.stun-urls:stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302}") String stunUrls,
         @Value("${app.calls.turn-urls:}") String turnUrls,
         @Value("${app.calls.turn-username:}") String turnUsername,
@@ -85,6 +87,7 @@ public class CallService {
         this.notifications = notifications;
         this.broker = broker;
         this.online = online;
+        this.push = push;
 
         List<Map<String, Object>> servers = new ArrayList<>();
         List<String> stun = split(stunUrls);
@@ -158,7 +161,7 @@ public class CallService {
             } else if (FINAL.contains(s.type()) && call.endedAt == null) {
                 call.endedAt = Instant.now();
                 if (call.acceptedAt == null && !"decline".equals(s.type()) && !"busy".equals(s.type())) {
-                    missedCall(call);
+                    missedCall(call, s.callId());
                 }
             }
         } else {
@@ -176,7 +179,15 @@ public class CallService {
         payload.put("at", System.currentTimeMillis());
         remember(s.toUserId(), payload);
         broker.convertAndSend("/topic/call/" + s.toUserId(), payload);
-        return new SignalResult(online.getUser(String.valueOf(s.toUserId())) != null);
+        boolean connected = online.getUser(String.valueOf(s.toUserId())) != null;
+        // With the app closed, this notification is the only way the phone can ring. Opening it picks up the call (ringingFor).
+        if ("invite".equals(s.type()) && !connected) {
+            boolean video = s.data() != null && s.data().path("video").asBoolean(false);
+            push.send(s.toUserId(), new PushService.Push(PushService.CALLS, "call-" + s.callId(),
+                "Incoming " + (video ? "video" : "voice") + " call", firstName(fromUserId) + " is calling you on GoswamiJodi",
+                Map.of("type", "call")));
+        }
+        return new SignalResult(connected);
     }
 
     public record Inbox(long seq, List<Map<String, Object>> signals) {}
@@ -239,13 +250,14 @@ public class CallService {
         }
     }
 
-    private void missedCall(Call call) {
+    private void missedCall(Call call, String callId) {
         users.findById(call.callee).ifPresent(callee -> {
             Notification n = new Notification();
             n.setUser(callee);
             n.setType("CALL");
             n.setMessage("Missed " + (call.video ? "video" : "voice") + " call from " + firstName(call.caller));
             notifications.save(n);
+            push.send(call.callee, new PushService.Push(PushService.MESSAGES, "call-" + callId, "Missed call", n.getMessage(), Map.of("type", "notification")));
         });
     }
 

@@ -13,6 +13,7 @@ import { colors } from '@/constants/theme';
 import { ActivityProvider } from '@/lib/activity';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { CallProvider } from '@/lib/calls';
+import { useOpenFromNotification } from '@/lib/push';
 import { RealtimeProvider } from '@/lib/realtime';
 
 SplashScreen.preventAutoHideAsync();
@@ -80,6 +81,7 @@ function Opening() {
 
 function Screens() {
   const { status, error, reload, signOut } = useAuth();
+  useOpenFromNotification(status === 'ready');
 
   if (status === 'loading') return null;
   if (status === 'offline') return <Offline message={error} onRetry={reload} onSignOut={signOut} />;

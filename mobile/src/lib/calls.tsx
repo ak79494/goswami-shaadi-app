@@ -6,6 +6,7 @@ import { AppState, Platform } from 'react-native';
 
 import { api } from './api';
 import { useAuth } from './auth';
+import { registerForPush } from './push';
 import { usePublish, useRealtime, useRealtimeConnected } from './realtime';
 
 export type SignalType =
@@ -224,7 +225,7 @@ export function CallProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (status !== 'ready') return;
     catchUp();
-    setUpNotifications();
+    setUpNotifications().then(registerForPush);
     const sub = AppState.addEventListener('change', (state) => {
       if (state !== 'active') return;
       catchUp();

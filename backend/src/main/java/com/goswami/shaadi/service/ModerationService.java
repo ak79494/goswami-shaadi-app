@@ -2,6 +2,7 @@ package com.goswami.shaadi.service;
 
 import com.goswami.shaadi.model.ProfileReport;
 import com.goswami.shaadi.model.User;
+import com.goswami.shaadi.repository.DeviceTokenRepository;
 import com.goswami.shaadi.repository.ProfileReportRepository;
 import com.goswami.shaadi.repository.ProfileRepository;
 import com.goswami.shaadi.repository.UserRepository;
@@ -26,11 +27,13 @@ public class ModerationService {
     private final ProfileReportRepository reports;
     private final UserRepository users;
     private final ProfileRepository profiles;
+    private final DeviceTokenRepository devices;
 
-    public ModerationService(ProfileReportRepository reports, UserRepository users, ProfileRepository profiles) {
+    public ModerationService(ProfileReportRepository reports, UserRepository users, ProfileRepository profiles, DeviceTokenRepository devices) {
         this.reports = reports;
         this.users = users;
         this.profiles = profiles;
+        this.devices = devices;
     }
 
     @Transactional(readOnly = true)
@@ -53,6 +56,7 @@ public class ModerationService {
         User member = report.getReportedUser();
         member.setEnabled(false);
         users.save(member);
+        devices.removeAllOf(member.getId());
         for (ProfileReport r : reports.findByReportedUserId(member.getId())) {
             if (isOpen(r)) {
                 r.setStatus(SUSPENDED);

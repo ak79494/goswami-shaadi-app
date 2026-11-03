@@ -114,6 +114,7 @@ public class AccountService {
         removeLinks("profile_visits", "visitor_user_id", "profile_user_id", id);
         removeLinks("profile_reports", "reporter_user_id", "reported_user_id", id);
         jdbc.update("DELETE FROM notifications WHERE user_id = ?", id);
+        jdbc.update("DELETE FROM device_tokens WHERE user_id = ?", id);
         jdbc.update("DELETE FROM help_requests WHERE user_id = ?", id);
         jdbc.update("DELETE FROM partner_preferences WHERE user_id = ?", id);
         jdbc.update("DELETE FROM profile_photos WHERE user_id = ?", id);

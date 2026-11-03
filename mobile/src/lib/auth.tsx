@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { AppState } from 'react-native';
 
 import { api, ApiError, errorMessage, setAuthToken, setSessionExpiredHandler } from './api';
+import { forgetPushToken } from './push';
 import { storage } from './storage';
 import type { AuthResponse, Gender, Photo, PremiumStatus, Profile } from './types';
 
@@ -42,6 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   const clearSession = useCallback(async () => {
+    forgetPushToken();
     setAuthToken(null);
     setSession(null);
     setProfile(null);
