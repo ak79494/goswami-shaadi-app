@@ -41,7 +41,7 @@ export default function About() {
         <Animated.View entering={motion.enter(60)} style={styles.card}>
           <Text style={styles.cardTitle}>Who we are</Text>
           <Text style={styles.text}>
-            {info.companyName} is a trusted matrimonial platform for individuals and families looking for meaningful, compatible and
+            {info.companyName} is a matrimonial platform for individuals and families looking for meaningful, compatible and
             lasting relationships. Every profile represents a real person with dreams, expectations and a family — so every
             interaction here should be respectful, secure and meaningful.
           </Text>

@@ -168,7 +168,7 @@ export default function ProfileDetail() {
   const whatsApp = () => {
     const number = contact?.whatsapp || contact?.phone;
     if (contact?.available && number) {
-      openWhatsApp(number, `Namaste ${profile.firstName}, I saw your profile (${profile.user.goswamiId}) on Goswami Jodi${me ? ` — I am ${fullName(me)} (${me.user.goswamiId})` : ''}.`);
+      openWhatsApp(number, `Namaste ${profile.firstName}, I saw your profile (${profile.user.goswamiId}) on GoswamiJodi${me ? ` — I am ${fullName(me)} (${me.user.goswamiId})` : ''}.`);
     } else if (!contact || contact.reason === 'PREMIUM_REQUIRED') {
       toast('Messaging on WhatsApp is a premium feature', 'info');
       router.push('/premium');

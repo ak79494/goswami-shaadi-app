@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 
 const SUPPORT_PHONE = "9142764834";
 const SUPPORT_WHATSAPP = "919142764834";
-const SUPPORT_MESSAGE = "Hello Goswami Jodi Support, I need help with my account.";
+const SUPPORT_MESSAGE = "Hello GoswamiJodi Support, I need help with my account.";
 const SUPPORT_WHATSAPP_URL = `https://wa.me/${SUPPORT_WHATSAPP}?text=${encodeURIComponent(SUPPORT_MESSAGE)}`;
 
 const categories = [
@@ -95,7 +95,7 @@ const helpArticles = [
 
     category: "Profile & Account",
 
-    q: "How do I create my Goswami Jodi profile?",
+    q: "How do I create my GoswamiJodi profile?",
 
     a: "Open Registration, enter your basic details and complete the profile information. Add your photo, family, education, career and location details so other members can understand your profile better.",
 
@@ -397,7 +397,7 @@ const helpArticles = [
 
     q: "What is Premium Membership?",
 
-    a: "Premium membership provides paid features according to the plan selected on Goswami Jodi. Open the Premium page to see the current plans and features available to your account.",
+    a: "Premium membership provides paid features according to the plan selected on GoswamiJodi. Open the Premium page to see the current plans and features available to your account.",
 
     keywords: ["premium", "membership", "paid plan", "premium kya hai", "premium benefits"],
 
@@ -493,7 +493,7 @@ const helpArticles = [
 
     q: "How can I get help with a payment or transaction?",
 
-    a: "Keep your order ID/transaction reference, payment date and amount ready, then contact Goswami Jodi support. Never share your UPI PIN, OTP or banking password with support or another member.",
+    a: "Keep your order ID/transaction reference, payment date and amount ready, then contact GoswamiJodi support. Never share your UPI PIN, OTP or banking password with support or another member.",
 
     keywords: ["payment help", "transaction help", "upi payment", "billing", "payment problem"],
 
@@ -541,7 +541,7 @@ const helpArticles = [
 
     q: "Someone is asking me for money. What should I do?",
 
-    a: "Do not send money and do not share banking details, UPI PIN, OTP or passwords. Stop the interaction, block/report the member where possible and contact Goswami Jodi support.",
+    a: "Do not send money and do not share banking details, UPI PIN, OTP or passwords. Stop the interaction, block/report the member where possible and contact GoswamiJodi support.",
 
     keywords: ["money", "asking money", "scam", "fraud", "paise mang raha", "money demand"],
 
@@ -845,7 +845,7 @@ export default function HelpSupport() {
 
         <div className="help-hero-content">
 
-          <div className="help-small-badge">GOSWAMI JODI SUPPORT</div>
+          <div className="help-small-badge">GOSWAMIJODI SUPPORT</div>
 
           <h1>
 
@@ -859,7 +859,7 @@ export default function HelpSupport() {
 
             Ask your question in normal language. Search works with common
 
-            English, Hindi/Hinglish words and Goswami Jodi help topics.
+            English, Hindi/Hinglish words and GoswamiJodi help topics.
 
           </p>
 
@@ -1019,7 +1019,7 @@ export default function HelpSupport() {
 
             <p>
 
-              We found the closest solutions from the Goswami Jodi help
+              We found the closest solutions from the GoswamiJodi help
 
               centre.
 
@@ -1153,7 +1153,7 @@ export default function HelpSupport() {
 
           <span>✓</span>
 
-          <strong>Trusted Support</strong>
+          <strong>Support Team</strong>
 
           <small>Here for your journey</small>
 
@@ -1239,7 +1239,7 @@ export default function HelpSupport() {
 
           <h2>Frequently Asked Questions</h2>
 
-          <p>Find answers to common Goswami Jodi questions.</p>
+          <p>Find answers to common GoswamiJodi questions.</p>
 
         </div>
 
@@ -1395,7 +1395,7 @@ export default function HelpSupport() {
 
           <div>
 
-            <small>GOSWAMI JODI SUPPORT</small>
+            <small>GOSWAMIJODI SUPPORT</small>
 
             <a href={SUPPORT_WHATSAPP_URL} target="_blank" rel="noreferrer">{SUPPORT_PHONE}</a>
 
@@ -1435,7 +1435,7 @@ export default function HelpSupport() {
 
         <p>
 
-          Finding your life partner is a special journey. Goswami Jodi is
+          Finding your life partner is a special journey. GoswamiJodi is
 
           here to make it simpler, safer and more meaningful.
 

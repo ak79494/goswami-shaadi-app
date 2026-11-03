@@ -11,7 +11,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 import { easeIn, easeOut } from '@/constants/motion';
 import { colors, gradients } from '@/constants/theme';
 
-const TITLE = 'Goswami Jodi';
+const TITLE = 'GoswamiJodi';
 /** The opening stays up at least this long, then waits for the app to be ready. All the words are in by 2.8s, which leaves time to read them. */
 const MIN_SHOW_MS = 4500;
 /** Same colour and heart as the native splash (app.json), so the hand-over can't be seen. */
@@ -99,7 +99,7 @@ export function IntroSplash({ ready, onDone }: { ready: boolean; onDone: () => v
   const footerStyle = useAnimatedStyle(() => ({ opacity: footer.value }));
 
   return (
-    <Animated.View style={[styles.root, rootStyle]} accessibilityLabel="Goswami Jodi. Find your perfect life partner.">
+    <Animated.View style={[styles.root, rootStyle]} accessibilityLabel="GoswamiJodi. Find your perfect life partner.">
       <StatusBar style="light" />
       <Animated.View style={[StyleSheet.absoluteFill, washStyle]}>
         <LinearGradient colors={gradients.hero} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />

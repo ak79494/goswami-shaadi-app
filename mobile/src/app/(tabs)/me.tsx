@@ -160,7 +160,7 @@ export default function Me() {
           />
           <MenuRow icon="planet-outline" title="Astro Chat" subtitle="Kundli matching and horoscope questions" onPress={() => router.push('/astro')} />
           <MenuRow icon="help-buoy-outline" title="Help & Support" onPress={() => router.push('/help')} />
-          <MenuRow icon="information-circle-outline" title="About Goswami Jodi" onPress={() => router.push('/about')} />
+          <MenuRow icon="information-circle-outline" title="About GoswamiJodi" onPress={() => router.push('/about')} />
         </Group>
 
         <Group title="Account">

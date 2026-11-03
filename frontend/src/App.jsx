@@ -1490,7 +1490,7 @@ function Auth({mode}){
 
           <div className="premium-brand-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -2191,7 +2191,7 @@ function ForgotPassword() {
 
           <div className="forgot-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -2751,7 +2751,7 @@ function Home() {
 
           <div className="premium-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -2847,9 +2847,9 @@ function Home() {
 
           <div>
 
-            <strong>10,000+</strong>
+            <strong>Free</strong>
 
-            <span>Registered Members</span>
+            <span>To Create Your Profile</span>
 
           </div>
 
@@ -2889,9 +2889,9 @@ function Home() {
 
           <div>
 
-            <strong>100%</strong>
+            <strong>Your Choice</strong>
 
-            <span>Privacy First</span>
+            <span>Who Sees Your Details</span>
 
           </div>
 
@@ -2957,13 +2957,13 @@ function Home() {
 
             <div className="premium-feature-icon">🛡️</div>
 
-            <h3>Trusted & Secure</h3>
+            <h3>Privacy Controls</h3>
 
             <p>
 
-              Your privacy matters. Connect confidently
+              You choose who can see your photos
 
-              in a safe matrimonial environment.
+              and contact details.
 
             </p>
 
@@ -13729,7 +13729,7 @@ function EmailSmsAlertsPage() {
 
           <div className="alerts-eyebrow">
 
-            GOSWAMI JODI
+            GOSWAMIJODI
 
           </div>
 
@@ -17454,7 +17454,7 @@ function SafetyTips() {
 
             <a className="gst-contact" href="tel:9142764834"><span className="gst-contact-icon">☎</span><span><small>Helpline</small><strong>9142764834</strong></span></a>
 
-            <a className="gst-contact" href="mailto:akgoswami0143@gmail.com"><span className="gst-contact-icon">✉</span><span><small>Email</small><strong>akgoswami0143@gmail.com</strong></span></a>
+            <a className="gst-contact" href="mailto:support@goswamijodi.com"><span className="gst-contact-icon">✉</span><span><small>Email</small><strong>support@goswamijodi.com</strong></span></a>
 
             <a className="gst-contact" href="https://cybercrime.gov.in" target="_blank" rel="noreferrer"><span className="gst-contact-icon">◎</span><span><small>Cyber Crime Portal</small><strong>cybercrime.gov.in</strong></span></a>
 
@@ -17768,7 +17768,7 @@ function SafetyCentre() {
 
           </a>
 
-          <a href="mailto:akgoswami0143@gmail.com">
+          <a href="mailto:support@goswamijodi.com">
 
             <span>✉</span>
 
@@ -17776,7 +17776,7 @@ function SafetyCentre() {
 
               <small>Email</small>
 
-              <strong>akgoswami0143@gmail.com</strong>
+              <strong>support@goswamijodi.com</strong>
 
             </div>
 
@@ -18142,7 +18142,7 @@ function SafetyDetailPage({
 
             </a>
 
-            <a href="mailto:akgoswami0143@gmail.com">
+            <a href="mailto:support@goswamijodi.com">
 
               ✉ Email Support
 
@@ -18592,9 +18592,9 @@ function ReportProfile() {
 
           </a>
 
-          <a href="mailto:akgoswami0143@gmail.com">
+          <a href="mailto:support@goswamijodi.com">
 
-            ✉ <strong>akgoswami0143@gmail.com</strong>
+            ✉ <strong>support@goswamijodi.com</strong>
 
           </a>
 
@@ -19326,11 +19326,11 @@ function MentalWellbeing() {
 
             </a>
 
-            <a href="mailto:akgoswami0143@gmail.com">
+            <a href="mailto:support@goswamijodi.com">
 
               <span>✉</span>
 
-              akgoswami0143@gmail.com
+              support@goswamijodi.com
 
             </a>
 

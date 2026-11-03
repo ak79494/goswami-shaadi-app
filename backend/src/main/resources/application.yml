@@ -48,7 +48,7 @@ app:
 
   # Shown on the app's About, Help and Astro screens.
   company:
-    name: Goswami Jodi
+    name: GoswamiJodi
     founder: Arun Goswami
     phone: ${SUPPORT_PHONE:7903508584}
     whatsapp: ${SUPPORT_WHATSAPP:7903508584}
@@ -58,7 +58,7 @@ app:
   # Where members pay for premium. Bank fields are optional; set them in application-local.yml.
   payment:
     upi-id: ${PAYMENT_UPI_ID:goswamiarun263@okicici}
-    payee-name: ${PAYMENT_PAYEE_NAME:Goswami Jodi}
+    payee-name: ${PAYMENT_PAYEE_NAME:GoswamiJodi}
     bank-name: ${PAYMENT_BANK_NAME:}
     account-name: ${PAYMENT_ACCOUNT_NAME:}
     account-number: ${PAYMENT_ACCOUNT_NUMBER:}

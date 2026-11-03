@@ -4,7 +4,7 @@ import QRCode from "qrcode";
 import { getAstrologer } from "./AstroChat";
 
 const UPI_ID = "goswamiarun263@okicici";
-const PAYEE = "Goswami Jodi";
+const PAYEE = "GoswamiJodi";
 
 export default function AstroPayment() {
   const nav = useNavigate();
@@ -76,11 +76,11 @@ export default function AstroPayment() {
             <button className={method === "GOOGLE_PAY" ? "active" : ""} onClick={() => setMethod("GOOGLE_PAY")} type="button"><span className="gpay-logo">G</span><small>GPay</small></button>
             <button type="button" onClick={() => setMethod("OTHER")}><span className="other-logo">₹</span><small>Other UPI</small></button>
           </div>
-          <div className="astro-upi-detail-row"><span>Goswami Jodi</span><code>{UPI_ID}</code></div>
+          <div className="astro-upi-detail-row"><span>GoswamiJodi</span><code>{UPI_ID}</code></div>
           {qr && <img className="astro-payment-qr" src={qr} alt="UPI payment QR" />}
           <button className="astro-open-payment" type="button" onClick={openPayment}>Pay ₹{amount + Math.round(amount * 0.18)} with {method === "PHONEPE" ? "PhonePe" : method === "GOOGLE_PAY" ? "Google Pay" : "UPI"} ↗</button>
           {opened && <button className="astro-confirm-payment" type="button" onClick={continueAfterPayment}>I have completed the payment → Continue</button>}
-          <p className="astro-payment-safe">🔒 Amount is locked to the selected recharge. Payee name: <b>Goswami Jodi</b>.</p>
+          <p className="astro-payment-safe">🔒 Amount is locked to the selected recharge. Payee name: <b>GoswamiJodi</b>.</p>
         </section>
       </main>
     </div>

@@ -66,7 +66,7 @@ export default function CreateProfile() {
     try {
       await api.put<Profile>('/profiles/me', toRequest({ ...form, profileVisible: true }));
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      toast('Profile created! Add photos to get 10x more interests.');
+      toast('Profile created! Add photos so families can get to know you.');
       await reload();
     } catch (err) {
       toast(errorMessage(err), 'error');
@@ -110,7 +110,7 @@ export default function CreateProfile() {
             <Animated.View entering={motion.enter(200)} style={styles.tip}>
               <Ionicons name="bulb-outline" size={18} color={colors.warning} />
               <Text style={styles.tipText}>
-                Tip: profiles with a heartfelt “About me” and 3+ photos receive far more interests.
+                Tip: a heartfelt “About me” and a few clear photos help families get to know you.
               </Text>
             </Animated.View>
           ) : null}

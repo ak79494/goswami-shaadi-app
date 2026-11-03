@@ -12,8 +12,8 @@
       "bundleIdentifier": "com.goswamijodi.app",
       "supportsTablet": false,
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Goswami Jodi uses the microphone for voice calls with your matches.",
-        "NSCameraUsageDescription": "Goswami Jodi uses the camera for video calls with your matches."
+        "NSMicrophoneUsageDescription": "GoswamiJodi uses the microphone for voice calls with your matches.",
+        "NSCameraUsageDescription": "GoswamiJodi uses the camera for video calls with your matches."
       }
     },
     "android": {
@@ -62,7 +62,7 @@
         "expo-image-picker",
         {
           "photosPermission": "GoswamiJodi needs access to your photos so you can add them to your profile.",
-          "cameraPermission": "Goswami Jodi uses the camera for video calls and profile photos."
+          "cameraPermission": "GoswamiJodi uses the camera for video calls and profile photos."
         }
       ],
       "expo-sharing",

@@ -57,7 +57,7 @@ export default function Admin() {
     return (
       <View style={styles.root}>
         <Header title="Admin panel" />
-        <EmptyState icon="lock-closed-outline" title="Admins only" message="This area is for the Goswami Jodi team." actionLabel="Go back" onAction={() => router.back()} />
+        <EmptyState icon="lock-closed-outline" title="Admins only" message="This area is for the GoswamiJodi team." actionLabel="Go back" onAction={() => router.back()} />
       </View>
     );
   }
@@ -195,7 +195,7 @@ export default function Admin() {
                   icon="logo-whatsapp"
                   size="sm"
                   variant="success"
-                  onPress={() => openWhatsApp(r.phone, `Namaste ${r.name}, this is Goswami Jodi. You asked us for help with: ${r.topic}.`)}
+                  onPress={() => openWhatsApp(r.phone, `Namaste ${r.name}, this is GoswamiJodi. You asked us for help with: ${r.topic}.`)}
                   style={{ flex: 1 }}
                 />
               </View>

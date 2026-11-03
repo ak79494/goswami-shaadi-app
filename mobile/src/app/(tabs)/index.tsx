@@ -112,7 +112,7 @@ export default function Home() {
               <Text style={styles.completionTitle}>{completion < 100 ? 'Complete your profile' : 'Profile complete'}</Text>
               <Text style={styles.completionSub}>
                 {photos.length === 0
-                  ? 'Members with photos get up to 10x more responses.'
+                  ? 'A clear photo helps families get to know you.'
                   : completion < 100
                     ? 'A complete profile builds trust with families.'
                     : 'Looking great! Your profile is ready to impress.'}
@@ -137,7 +137,7 @@ export default function Home() {
 
         {error ? <ErrorBanner message={error} onRetry={load} /> : null}
 
-        <SectionTitle title="Daily Recommendations" subtitle="Handpicked new members for you" onSeeAll={() => router.navigate('/matches')} />
+        <SectionTitle title="Daily Recommendations" subtitle="New members for you" onSeeAll={() => router.navigate('/matches')} />
         <Carousel data={recommended} />
 
         <SectionTitle title="Recently Active" subtitle="Members who were online recently" onSeeAll={() => router.navigate('/matches?tab=active')} />

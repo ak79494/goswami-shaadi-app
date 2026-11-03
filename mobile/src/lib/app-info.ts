@@ -5,7 +5,7 @@ import type { AppInfo } from './types';
 
 /** Used until the server answers (and if it can't be reached), so About and Help always work. */
 export const DEFAULT_APP_INFO: AppInfo = {
-  companyName: 'Goswami Jodi',
+  companyName: 'GoswamiJodi',
   founderName: 'Arun Goswami',
   supportPhone: '7903508584',
   supportWhatsapp: '7903508584',

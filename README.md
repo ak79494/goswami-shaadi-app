@@ -1,4 +1,4 @@
-# Goswami Jodi App
+# GoswamiJodi App
 
 A full-stack matrimonial application inspired by common matchmaking workflows (not a copy of Shaadi.com branding/assets).
 

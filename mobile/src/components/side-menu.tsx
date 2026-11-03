@@ -149,12 +149,12 @@ function SideMenu({ visible, onClose, onSearch }: { visible: boolean; onClose: (
             <Item icon="shield-checkmark-outline" label="Privacy Settings" onPress={() => go('/privacy')} />
             <Item icon="ban-outline" label="Blocked Members" onPress={() => go('/blocked')} />
             <Item icon="help-buoy-outline" label="Help & Support" onPress={() => go('/help')} />
-            <Item icon="information-circle-outline" label="About Goswami Jodi" onPress={() => go('/about')} />
+            <Item icon="information-circle-outline" label="About GoswamiJodi" onPress={() => go('/about')} />
             {isAdmin ? <Item icon="briefcase-outline" label="Admin panel" onPress={() => go('/admin')} /> : null}
             <View style={styles.divider} />
             <Item icon="log-out-outline" label="Log out" danger onPress={logout} />
           </View>
-          <Text style={styles.version}>Goswami Jodi v{APP_VERSION}</Text>
+          <Text style={styles.version}>GoswamiJodi v{APP_VERSION}</Text>
         </ScrollView>
       </Animated.View>
     </Modal>

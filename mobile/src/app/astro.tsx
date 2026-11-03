@@ -101,7 +101,7 @@ export default function Astro() {
     }
     // Both kundlis go in the message, so the astrologer has everything needed for Guna Milan.
     ask(
-      `Namaste 🙏 Please do kundli matching (Guna Milan) for these two Goswami Jodi profiles.\n\n` +
+      `Namaste 🙏 Please do kundli matching (Guna Milan) for these two GoswamiJodi profiles.\n\n` +
         `👤 Profile 1 (me)\n${birthDetails(profile)}\n\n` +
         `👤 Profile 2\n${birthDetails(other)}`,
     );

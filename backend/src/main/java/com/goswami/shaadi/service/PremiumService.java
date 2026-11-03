@@ -34,7 +34,7 @@ public class PremiumService {
         ProfileRepository profiles,
         PushService push,
         @Value("${app.payment.upi-id:}") String upiId,
-        @Value("${app.payment.payee-name:Goswami Jodi}") String payeeName,
+        @Value("${app.payment.payee-name:GoswamiJodi}") String payeeName,
         @Value("${app.payment.bank-name:}") String bankName,
         @Value("${app.payment.account-name:}") String accountName,
         @Value("${app.payment.account-number:}") String accountNumber,

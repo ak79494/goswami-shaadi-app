@@ -17,7 +17,7 @@ const ASTROLOGERS = [
     available: true,
     phone: "9386289377",
     whatsapp: "9386289377",
-    source: "Goswami Jodi profile"
+    source: "GoswamiJodi profile"
   },
   {
     id: "jayashree",
@@ -138,7 +138,7 @@ export default function AstroChat() {
       <main className="astro-main">
         <section className="astro-hero">
           <div>
-            <span className="astro-kicker">GOSWAMI JODI • ASTROLOGY</span>
+            <span className="astro-kicker">GOSWAMIJODI • ASTROLOGY</span>
             <h1>Talk to a real astrologer</h1>
             <p>Marriage, kundli, career, relationships and personal guidance — chat privately with an astrologer.</p>
           </div>

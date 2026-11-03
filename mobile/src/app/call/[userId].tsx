@@ -47,8 +47,8 @@ async function allowed(what: 'mic' | 'camera'): Promise<boolean> {
   const result = await PermissionsAndroid.request(
     what === 'mic' ? PermissionsAndroid.PERMISSIONS.RECORD_AUDIO : PermissionsAndroid.PERMISSIONS.CAMERA,
     what === 'mic'
-      ? { title: 'Microphone for calls', message: 'Goswami Jodi needs your microphone so the other person can hear you.', buttonPositive: 'Allow' }
-      : { title: 'Camera for video calls', message: 'Goswami Jodi needs your camera so the other person can see you.', buttonPositive: 'Allow' },
+      ? { title: 'Microphone for calls', message: 'GoswamiJodi needs your microphone so the other person can hear you.', buttonPositive: 'Allow' }
+      : { title: 'Camera for video calls', message: 'GoswamiJodi needs your camera so the other person can see you.', buttonPositive: 'Allow' },
   );
   return result === PermissionsAndroid.RESULTS.GRANTED;
 }
@@ -494,7 +494,7 @@ export default function CallScreen() {
         <View style={styles.topRow} pointerEvents="none">
           <View style={styles.chip}>
             <Ionicons name={relay ? 'git-network-outline' : 'lock-closed'} size={12} color="rgba(255,255,255,0.8)" />
-            <Text style={styles.chipText}>{relay ? 'Connected through Goswami Jodi' : 'Encrypted call'}</Text>
+            <Text style={styles.chipText}>{relay ? 'Connected through GoswamiJodi' : 'Encrypted call'}</Text>
           </View>
           {inCall && quality ? <QualityBars level={quality} /> : null}
         </View>

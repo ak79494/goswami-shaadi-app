@@ -15,7 +15,7 @@ function LegalShell({ title, updated, children }) {
     <div className="site-legal-page">
       <header className="site-legal-header">
         <button type="button" className="site-legal-back" onClick={() => nav(-1)} aria-label="Go back">←</button>
-        <div className="site-legal-brand"><strong><span>Goswami</span>Jodi</strong><small>Trusted Matrimonial Platform</small></div>
+        <div className="site-legal-brand"><strong><span>Goswami</span>Jodi</strong><small>Goswami Community Matrimony</small></div>
       </header>
       <main className="site-legal-content">
         <div className="site-legal-badge">GoswamiJodi</div>

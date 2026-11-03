@@ -14,7 +14,7 @@ public class AppInfoController {
     private final AppInfo info;
 
     public AppInfoController(
-            @Value("${app.company.name:Goswami Jodi}") String companyName,
+            @Value("${app.company.name:GoswamiJodi}") String companyName,
             @Value("${app.company.founder:Arun Goswami}") String founder,
             @Value("${app.company.phone:7903508584}") String phone,
             @Value("${app.company.whatsapp:7903508584}") String whatsapp,

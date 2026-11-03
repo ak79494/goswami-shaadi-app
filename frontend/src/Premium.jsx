@@ -317,7 +317,7 @@ function OrderSummary({ plan, onClose, onProceed }) {
 
 }
 
-const UPI_PAYEE_NAME = "Goswami Jodi";
+const UPI_PAYEE_NAME = "GoswamiJodi";
 
 function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
   const [method, setMethod] = useState("GOOGLE_PAY");
