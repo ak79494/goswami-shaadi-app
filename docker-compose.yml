@@ -1,15 +1,17 @@
 services:
-  postgres:
-    image: postgres:16
-    container_name: goswami-shaadi-postgres
+  mysql:
+    image: mysql:8.4
+    container_name: goswami-shaadi-mysql
     environment:
-      POSTGRES_DB: goswami_shaadi
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      MYSQL_DATABASE: goswami_shaadi
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Kolkata
     ports:
-      - "5432:5432"
+      # Only reachable from this computer. Use MYSQL_PORT=3307 if another MySQL already runs on 3306.
+      - "127.0.0.1:${MYSQL_PORT:-3306}:3306"
     volumes:
-      - goswami_pgdata:/var/lib/postgresql/data
+      - goswami_mysqldata:/var/lib/mysql
+    restart: unless-stopped
 
 volumes:
-  goswami_pgdata:
+  goswami_mysqldata:

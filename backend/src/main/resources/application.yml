@@ -27,8 +27,10 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ak79494@gmail.com
-    password: "jtdkkxndykwodgxo"  # 🔥 APP PASSWORD (NOT "Arun@9809")
+    # Never commit real credentials. Set MAIL_USERNAME / MAIL_PASSWORD (a Gmail app password)
+    # as environment variables, or put them in the gitignored application-local.yml.
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -36,13 +38,39 @@ spring:
           starttls:
             enable: true
             required: true
-        debug: true
+        debug: false
 app:
   jwt:
     secret: ${JWT_SECRET:change-this-development-secret-to-a-long-random-production-secret}
     expiry-ms: ${JWT_EXPIRY_MS:86400000}
 
   upload-dir: ${UPLOAD_DIR:uploads}
+
+  # Shown on the app's About, Help and Astro screens.
+  company:
+    name: Goswami Shaadi
+    founder: Arun Goswami
+    phone: ${SUPPORT_PHONE:7903508584}
+    whatsapp: ${SUPPORT_WHATSAPP:7903508584}
+    email: ${SUPPORT_EMAIL:}
+    astro-whatsapp: ${ASTRO_WHATSAPP:7903508584}
+
+  # Where members pay for premium. Bank fields are optional; set them in application-local.yml.
+  payment:
+    upi-id: ${PAYMENT_UPI_ID:goswamiarun263@okicici}
+    payee-name: ${PAYMENT_PAYEE_NAME:Goswami Shaadi}
+    bank-name: ${PAYMENT_BANK_NAME:}
+    account-name: ${PAYMENT_ACCOUNT_NAME:}
+    account-number: ${PAYMENT_ACCOUNT_NUMBER:}
+    ifsc: ${PAYMENT_IFSC:}
+
+  # In-app voice calls (WebRTC). Calls between two mobile-data connections may need a TURN relay:
+  # set turn-urls / turn-username / turn-credential (e.g. from a free metered.ca account).
+  calls:
+    stun-urls: ${CALL_STUN_URLS:stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302}
+    turn-urls: ${CALL_TURN_URLS:}
+    turn-username: ${CALL_TURN_USERNAME:}
+    turn-credential: ${CALL_TURN_CREDENTIAL:}
 
 logging:
   level:

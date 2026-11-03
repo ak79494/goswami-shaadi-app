@@ -1,6 +1,7 @@
 package com.goswami.shaadi.service;
 
 import com.goswami.shaadi.dto.ProfileDtos.*;
+import static com.goswami.shaadi.dto.ProfileDtos.*;
 import com.goswami.shaadi.model.*;
 import com.goswami.shaadi.repository.*;
 
@@ -14,15 +15,37 @@ public class ProfileService {
     private final ProfileRepository profiles;
     private final UserRepository users;
     private final PartnerPreferenceRepository prefs;
+    private final BlockRepository blocks;
+    private final com.fasterxml.jackson.databind.ObjectMapper mapper;
 
     public ProfileService(
             ProfileRepository p,
             UserRepository u,
-            PartnerPreferenceRepository pr
+            PartnerPreferenceRepository pr,
+            BlockRepository b,
+            com.fasterxml.jackson.databind.ObjectMapper mapper
     ) {
         profiles = p;
         users = u;
         prefs = pr;
+        blocks = b;
+        this.mapper = mapper;
+    }
+
+    /**
+     * The member's own profile, including the private fields that are hidden from everyone else
+     * (login email, registered phone, mobile and WhatsApp numbers).
+     */
+    public com.fasterxml.jackson.databind.node.ObjectNode ownerView(Profile p) {
+        com.fasterxml.jackson.databind.node.ObjectNode node = mapper.valueToTree(p);
+        node.put("mobileNumber", p.getMobileNumber());
+        node.put("whatsappNumber", p.getWhatsappNumber());
+        com.fasterxml.jackson.databind.node.ObjectNode user = (com.fasterxml.jackson.databind.node.ObjectNode) node.get("user");
+        if (user != null && p.getUser() != null) {
+            user.put("email", p.getUser().getEmail());
+            user.put("phone", p.getUser().getPhone());
+        }
+        return node;
     }
 
     // =========================================
@@ -45,7 +68,13 @@ public class ProfileService {
         p.setFirstName(r.firstName());
         p.setLastName(r.lastName());
         p.setDateOfBirth(r.dateOfBirth());
-        p.setMobileNumber(r.mobileNumber());
+        // Older clients don't send the contact fields; keep what is stored instead of wiping it.
+        if (r.mobileNumber() != null) {
+            p.setMobileNumber(digitsOrNull(r.mobileNumber()));
+        }
+        if (r.whatsappNumber() != null) {
+            p.setWhatsappNumber(digitsOrNull(r.whatsappNumber()));
+        }
 
         p.setCity(r.city());
         p.setState(r.state());
@@ -105,9 +134,21 @@ public class ProfileService {
         }
         
 
-        // Contact visibility
-        if (r.contactVisible() != null) {
+        // Contact visibility. contactDisplayOption is the setting the apps use; contactVisible is
+        // kept in step with it for older clients.
+        if (r.contactDisplayOption() != null) {
+            String option = switch (r.contactDisplayOption().trim().toUpperCase()) {
+                case CONTACT_CONNECTED -> CONTACT_CONNECTED;
+                case CONTACT_HIDDEN -> CONTACT_HIDDEN;
+                default -> CONTACT_PREMIUM;
+            };
+            p.setContactDisplayOption(option);
+            p.setContactVisible(!CONTACT_HIDDEN.equals(option));
+        } else if (r.contactVisible() != null && r.contactVisible() != p.isContactVisible()) {
+            // Only an actual flip of the old on/off switch counts: every profile created before
+            // contactDisplayOption existed still carries contactVisible=false by default.
             p.setContactVisible(r.contactVisible());
+            p.setContactDisplayOption(r.contactVisible() ? CONTACT_PREMIUM : CONTACT_HIDDEN);
         }
 
         p.setUpdatedAt(
@@ -153,6 +194,13 @@ public class ProfileService {
     // =========================================
     // GET MY PROFILE
     // =========================================
+
+    /** Someone who blocked you can't be opened by you, however you try to reach their profile. */
+    public void checkNotBlockedBy(Long owner, Long viewer) {
+        if (blocks.findByUserIdAndBlockedUserId(owner, viewer).isPresent()) {
+            throw new IllegalArgumentException("This profile is not available");
+        }
+    }
 
     public Profile get(Long uid) {
 
@@ -224,6 +272,8 @@ public class ProfileService {
         city = blank(city);
         religion = blank(religion);
         profession = blank(profession);
+        java.time.LocalDateTime declinedSince =
+                java.time.LocalDateTime.now().minusDays(InteractionService.DECLINE_PAUSE_DAYS);
 
         // =========================================
         // ACTIVE PROFILES
@@ -237,6 +287,7 @@ public class ProfileService {
                     city,
                     religion,
                     profession,
+                    declinedSince,
                     pageable
             );
         }
@@ -251,6 +302,7 @@ public class ProfileService {
                 city,
                 religion,
                 profession,
+                declinedSince,
                 pageable
         );
     }
@@ -259,6 +311,20 @@ public class ProfileService {
     // =========================================
     // BLANK FILTER HELPER
     // =========================================
+
+    private String digitsOrNull(String s) {
+        String digits = s.replaceAll("[^0-9]", "");
+        if (digits.length() == 12 && digits.startsWith("91")) {
+            digits = digits.substring(2);
+        }
+        if (digits.isEmpty()) {
+            return null;
+        }
+        if (digits.length() != 10) {
+            throw new IllegalArgumentException("Enter a valid 10-digit mobile number");
+        }
+        return digits;
+    }
 
     private String blank(String s) {
 
@@ -703,6 +769,58 @@ public class ProfileService {
                 message,
                 details
         );
+    }
+
+
+    @Transactional(readOnly = true)
+    public CompatibilityResponse compatibility(Long viewerUid, Long otherUid) {
+        Profile viewer = get(viewerUid);
+        Profile other = profiles.findByUserId(otherUid)
+                .orElseThrow(() -> new IllegalArgumentException("Profile not found"));
+
+        PreferenceSide theirs = preferenceSide(viewer, prefs.findByUserId(otherUid).orElse(null));
+        PreferenceSide mine = preferenceSide(other, prefs.findByUserId(viewerUid).orElse(null));
+
+        int total = theirs.total() + mine.total();
+        Integer percentage = total == 0
+                ? null
+                : Math.round(100f * (theirs.matched() + mine.matched()) / total);
+        return new CompatibilityResponse(percentage, theirs, mine);
+    }
+
+    /** Checks a candidate's profile against each preference that was actually set. */
+    private PreferenceSide preferenceSide(Profile candidate, PartnerPreference pref) {
+        java.util.List<PreferenceMatchDetail> details = new java.util.ArrayList<>();
+        if (pref != null) {
+            if (pref.getMinAge() != null || pref.getMaxAge() != null) {
+                Integer age = calculateAge(candidate.getDateOfBirth());
+                boolean ok = age != null
+                        && (pref.getMinAge() == null || age >= pref.getMinAge())
+                        && (pref.getMaxAge() == null || age <= pref.getMaxAge());
+                details.add(new PreferenceMatchDetail(
+                        "Age", buildAgePreference(pref.getMinAge(), pref.getMaxAge()) + " years", ok));
+            }
+            addIfSet(details, "Marital status", pref.getMaritalStatuses(), candidate.getMaritalStatus());
+            addIfSet(details, "Religion", pref.getReligions(), candidate.getReligion());
+            addIfSet(details, "Community", pref.getCommunities(), candidate.getCommunity());
+            addIfSet(details, "City", pref.getCities(), candidate.getCity());
+            addIfSet(details, "Education", pref.getEducation(), candidate.getEducation());
+            addIfSet(details, "Profession", pref.getProfession(), candidate.getProfession());
+            addIfSet(details, "Diet", pref.getFoodPreference(), candidate.getFoodPreference());
+            addIfSet(details, "Lifestyle", pref.getLifestyle(), candidate.getLifestyle());
+        }
+        int matched = (int) details.stream().filter(PreferenceMatchDetail::matched).count();
+        return new PreferenceSide(matched, details.size(), details);
+    }
+
+    private void addIfSet(
+            java.util.List<PreferenceMatchDetail> details,
+            String label,
+            String preference,
+            String actual
+    ) {
+        if (preference == null || preference.isBlank()) return;
+        details.add(new PreferenceMatchDetail(label, preference.trim(), matchesPreference(actual, preference)));
     }
 
 

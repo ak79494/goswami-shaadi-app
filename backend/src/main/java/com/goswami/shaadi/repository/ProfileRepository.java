@@ -14,6 +14,10 @@ import java.util.Optional;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
+    // Both searches leave out profiles the member declined in the last few days
+    // (InteractionService.DECLINE_PAUSE_DAYS); after that they come back into their matches.
+    // Blocking hides two members from each other, whichever of them did it.
+
     Optional<Profile> findByUserId(Long userId);
 
     @Query("""
@@ -23,6 +27,13 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
               and p.user.id <> :uid
               and p.user.gender = :gender
               and not exists (select h.id from HiddenProfile h where h.user.id = :uid and h.hiddenUser.id = p.user.id)
+              and not exists (select b.id from Block b
+                              where (b.user.id = :uid and b.blockedUser.id = p.user.id)
+                                 or (b.user.id = p.user.id and b.blockedUser.id = :uid))
+              and not exists (select r.id from InterestRequest r
+                              where r.receiver.id = :uid and r.sender.id = p.user.id
+                                and r.status = com.goswami.shaadi.model.RequestStatus.REJECTED
+                                and r.respondedAt > :declinedSince)
               and (:city is null or lower(p.city) = lower(:city))
               and (:religion is null or lower(p.religion) = lower(:religion))
               and (:profession is null
@@ -35,6 +46,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             @Param("city") String city,
             @Param("religion") String religion,
             @Param("profession") String profession,
+            @Param("declinedSince") java.time.LocalDateTime declinedSince,
             Pageable pageable
     );
 
@@ -49,6 +61,13 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
               and p.user.id <> :uid
               and p.user.gender = :gender
               and not exists (select h.id from HiddenProfile h where h.user.id = :uid and h.hiddenUser.id = p.user.id)
+              and not exists (select b.id from Block b
+                              where (b.user.id = :uid and b.blockedUser.id = p.user.id)
+                                 or (b.user.id = p.user.id and b.blockedUser.id = :uid))
+              and not exists (select r.id from InterestRequest r
+                              where r.receiver.id = :uid and r.sender.id = p.user.id
+                                and r.status = com.goswami.shaadi.model.RequestStatus.REJECTED
+                                and r.respondedAt > :declinedSince)
               and (:city is null or lower(p.city) = lower(:city))
               and (:religion is null or lower(p.religion) = lower(:religion))
               and (:profession is null
@@ -61,6 +80,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             @Param("city") String city,
             @Param("religion") String religion,
             @Param("profession") String profession,
+            @Param("declinedSince") java.time.LocalDateTime declinedSince,
             Pageable pageable
     );
 }

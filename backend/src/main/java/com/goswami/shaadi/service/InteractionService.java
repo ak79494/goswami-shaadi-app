@@ -1,5 +1,6 @@
 package com.goswami.shaadi.service;
 
+import com.goswami.shaadi.dto.PrivacySafetyDtos.BlockedMember;
 import com.goswami.shaadi.model.*;
 import com.goswami.shaadi.repository.*;
 
@@ -8,12 +9,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class InteractionService {
 
     private static final long COOLDOWN_DAYS = 15;
+
+    /**
+     * After a member declines an interest, the sender stays out of their matches and can't send a
+     * new interest for this many days. Then the profile comes back into their matches.
+     */
+    public static final long DECLINE_PAUSE_DAYS = 7;
 
     private final UserRepository users;
     private final InterestRequestRepository requests;
@@ -22,6 +32,8 @@ public class InteractionService {
     private final NotificationRepository notifications;
     private final HiddenProfileRepository hiddenProfiles;
     private final ProfileReportRepository reports;
+    private final ProfileRepository profiles;
+    private final ProfilePhotoRepository photos;
 
     public InteractionService(
             UserRepository u,
@@ -30,7 +42,9 @@ public class InteractionService {
             BlockRepository b,
             NotificationRepository n,
             HiddenProfileRepository h,
-            ProfileReportRepository rp
+            ProfileReportRepository rp,
+            ProfileRepository p,
+            ProfilePhotoRepository ph
     ) {
         users = u;
         requests = r;
@@ -39,6 +53,15 @@ public class InteractionService {
         notifications = n;
         hiddenProfiles = h;
         reports = rp;
+        profiles = p;
+        photos = ph;
+    }
+
+    // Notifications show the sender's first name (or Goswami ID), never their email address.
+    private String senderLabel(User u) {
+        return profiles.findByUserId(u.getId())
+                .map(Profile::getFirstName)
+                .orElse(u.getGoswamiId());
     }
 
     // =========================================================
@@ -93,7 +116,7 @@ public class InteractionService {
                     receiver,
                     "INTEREST",
                     "New interest request from "
-                            + sender.getEmail()
+                            + senderLabel(sender)
             );
 
             return saved;
@@ -157,7 +180,7 @@ public class InteractionService {
                     receiver,
                     "INTEREST",
                     "New interest request from "
-                            + sender.getEmail()
+                            + senderLabel(sender)
             );
 
             return saved;
@@ -166,11 +189,22 @@ public class InteractionService {
 
         // =====================================================
         // REJECTED
-        // Receiver declined -> immediately resend allowed
+        // Receiver declined -> resend allowed after DECLINE_PAUSE_DAYS
         // =====================================================
 
         if (existing.getStatus()
                 == RequestStatus.REJECTED) {
+
+            LocalDateTime declinedAt = existing.getRespondedAt();
+            if (declinedAt != null) {
+                long days = Duration.between(declinedAt, now).toDays();
+                if (days < DECLINE_PAUSE_DAYS) {
+                    throw new IllegalArgumentException(
+                            senderLabel(receiver) + " declined your interest recently. You can send it again after "
+                                    + (DECLINE_PAUSE_DAYS - days) + " day(s)."
+                    );
+                }
+            }
 
             existing.setStatus(RequestStatus.PENDING);
             existing.setCreatedAt(now);
@@ -183,7 +217,7 @@ public class InteractionService {
                     receiver,
                     "INTEREST",
                     "New interest request from "
-                            + sender.getEmail()
+                            + senderLabel(sender)
             );
 
             return saved;
@@ -205,7 +239,7 @@ public class InteractionService {
                 receiver,
                 "INTEREST",
                 "New interest request from "
-                        + sender.getEmail()
+                        + senderLabel(sender)
         );
 
         return saved;
@@ -283,7 +317,11 @@ public class InteractionService {
 
     public List<InterestRequest> incoming(Long uid) {
 
-        return requests.findByReceiverIdOrderByCreatedAtDesc(uid);
+        Set<Long> blocked = blockedWith(uid);
+
+        return requests.findByReceiverIdOrderByCreatedAtDesc(uid).stream()
+                .filter(r -> !blocked.contains(r.getSender().getId()))
+                .toList();
     }
 
 
@@ -293,7 +331,11 @@ public class InteractionService {
 
     public List<InterestRequest> outgoing(Long uid) {
 
-        return requests.findBySenderIdOrderByCreatedAtDesc(uid);
+        Set<Long> blocked = blockedWith(uid);
+
+        return requests.findBySenderIdOrderByCreatedAtDesc(uid).stream()
+                .filter(r -> !blocked.contains(r.getReceiver().getId()))
+                .toList();
     }
 
 
@@ -509,8 +551,12 @@ public class InteractionService {
 
     public List<Shortlist> shortlists(Long uid) {
 
+        Set<Long> blocked = blockedWith(uid);
+
         return shortlists
-                .findByUserIdOrderByCreatedAtDesc(uid);
+                .findByUserIdOrderByCreatedAtDesc(uid).stream()
+                .filter(l -> !blocked.contains(l.getTargetUser().getId()))
+                .toList();
     }
 
 
@@ -622,9 +668,37 @@ public class InteractionService {
     // BLOCK LIST
     // =========================================================
 
-    public List<Block> blocks(Long uid) {
+    public List<BlockedMember> blockedMembers(Long uid) {
 
-        return blocks.findByUserId(uid);
+        return blocks.findByUserId(uid).stream()
+                .sorted(Comparator.comparing(Block::getCreatedAt).reversed())
+                .map(b -> {
+                    User u = b.getBlockedUser();
+                    String name = profiles.findByUserId(u.getId())
+                            .map(p -> (p.getFirstName() + " " + (p.getLastName() == null ? "" : p.getLastName())).trim())
+                            .orElse(u.getGoswamiId());
+                    List<ProfilePhoto> list = photos.findByUserIdOrderBySortOrderAsc(u.getId());
+                    String photo = list.stream()
+                            .filter(ProfilePhoto::isPrimaryPhoto)
+                            .findFirst()
+                            .or(() -> list.stream().findFirst())
+                            .map(ProfilePhoto::getUrl)
+                            .orElse(null);
+                    return new BlockedMember(u.getId(), b.getCreatedAt(), name, u.getGoswamiId(), photo);
+                })
+                .toList();
+    }
+
+
+    // Members who blocked this member or were blocked by them; each stays out of the other's lists.
+    private Set<Long> blockedWith(Long uid) {
+
+        Set<Long> ids = new HashSet<>();
+
+        blocks.findByUserId(uid).forEach(b -> ids.add(b.getBlockedUser().getId()));
+        blocks.findByBlockedUserId(uid).forEach(b -> ids.add(b.getUser().getId()));
+
+        return ids;
     }
 
 

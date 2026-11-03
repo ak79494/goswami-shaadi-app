@@ -44,10 +44,22 @@ public class ProfileDtos {
             String placeOfBirth,
             String manglik,
             String nakshatra,
-            String rashi
-            
+            String rashi,
+            String whatsappNumber,
+            String contactDisplayOption
     ) {
     }
+
+    /** Who may see a member's phone and WhatsApp numbers. */
+    public static final String CONTACT_PREMIUM = "PREMIUM";
+    public static final String CONTACT_CONNECTED = "CONNECTED";
+    public static final String CONTACT_HIDDEN = "HIDDEN";
+
+    /**
+     * Result of a contact lookup. When {@code available} is false, {@code reason} says why:
+     * PREMIUM_REQUIRED, CONNECT_FIRST, HIDDEN, BLOCKED or NO_NUMBER.
+     */
+    public record ContactResponse(boolean available, String reason, String phone, String whatsapp) {}
 
     /** Dedicated payload for the Interests & Hobbies editor. */
     public record HobbiesRequest(
@@ -83,6 +95,15 @@ public class ProfileDtos {
             String message,
             java.util.List<PreferenceMatchDetail> details
     ) {}
+
+    /** How one member fits the other member's partner preferences (only the preferences they set). */
+    public record PreferenceSide(int matched, int total, java.util.List<PreferenceMatchDetail> details) {}
+
+    /**
+     * Two-way compatibility for the "You & her" section: theirs = how the viewer fits their
+     * preferences, mine = how they fit the viewer's. percentage is null when neither set any.
+     */
+    public record CompatibilityResponse(Integer percentage, PreferenceSide theirs, PreferenceSide mine) {}
     
     
 }

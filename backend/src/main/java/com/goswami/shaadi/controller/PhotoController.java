@@ -11,13 +11,15 @@ import java.util.*;
 
 @RestController @RequestMapping("/api/photos")
 public class PhotoController {
- private final ProfilePhotoRepository photos; private final UserRepository users;
+ private final ProfilePhotoRepository photos; private final UserRepository users; private final BlockRepository blocks;
  private final Path uploadDir;
- public PhotoController(ProfilePhotoRepository p,UserRepository u,@Value("${app.upload-dir}")String dir){photos=p;users=u;uploadDir = Paths.get(dir).toAbsolutePath().normalize();}
+ public PhotoController(ProfilePhotoRepository p,UserRepository u,BlockRepository b,@Value("${app.upload-dir}")String dir){photos=p;users=u;blocks=b;uploadDir = Paths.get(dir).toAbsolutePath().normalize();}
  private Long uid(Authentication a){return (Long)a.getPrincipal();}
  @GetMapping public List<ProfilePhoto> list(Authentication a){return photos.findByUserIdOrderBySortOrderAsc(uid(a));}
  @GetMapping("/user/{userId}")
- public List<ProfilePhoto> listUserPhotos(@PathVariable Long userId) {
+ public List<ProfilePhoto> listUserPhotos(Authentication a, @PathVariable Long userId) {
+     // Someone who blocked this member shows no photos to them.
+     if (blocks.findByUserIdAndBlockedUserId(userId, uid(a)).isPresent()) return List.of();
      return photos.findByUserIdOrderBySortOrderAsc(userId);
  }
  @PostMapping(consumes=MediaType.MULTIPART_FORM_DATA_VALUE)

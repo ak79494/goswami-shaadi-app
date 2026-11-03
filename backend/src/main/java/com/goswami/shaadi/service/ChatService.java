@@ -5,12 +5,15 @@ import com.goswami.shaadi.dto.MessageDtos.SendMessageRequest;
 import com.goswami.shaadi.model.*;
 import com.goswami.shaadi.repository.*;
 
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +35,7 @@ public class ChatService {
     private final NotificationRepository notifications;
     private final ProfilePhotoRepository photos;
     private final InterestRequestRepository requests;
+    private final SimpUserRegistry online;
     private final Path uploadDir;
 
     public ChatService(
@@ -43,6 +47,7 @@ public class ChatService {
             NotificationRepository notifications,
             ProfilePhotoRepository photos,
             InterestRequestRepository requests,
+            SimpUserRegistry online,
             @Value("${app.upload-dir}") String uploadDir
     ) {
         this.users = users;
@@ -53,7 +58,15 @@ public class ChatService {
         this.notifications = notifications;
         this.photos = photos;
         this.requests = requests;
+        this.online = online;
         this.uploadDir = Paths.get(uploadDir).toAbsolutePath().normalize();
+    }
+
+    // Notifications show the sender's first name (or Goswami ID), never their email address.
+    private String senderLabel(User u) {
+        return profiles.findByUserId(u.getId())
+                .map(Profile::getFirstName)
+                .orElse(u.getGoswamiId());
     }
 
     private Conversation conversation(Long a, Long b) {
@@ -92,6 +105,26 @@ public class ChatService {
                 || requests.findBySenderIdAndReceiverId(b, a)
                 .map(r -> r.getStatus() == RequestStatus.PENDING || r.getStatus() == RequestStatus.ACCEPTED)
                 .orElse(false);
+    }
+
+    public boolean canMessage(Long a, Long b) {
+        return hasMessagingInterest(a, b)
+                && blocks.findByUserIdAndBlockedUserId(a, b).isEmpty()
+                && blocks.findByUserIdAndBlockedUserId(b, a).isEmpty();
+    }
+
+    private boolean isOnline(Long userId) {
+        return online.getUser(String.valueOf(userId)) != null;
+    }
+
+    private static boolean hiddenFor(Long uid, Message m) {
+        return m.getSender().getId().equals(uid) ? m.isHiddenForSender() : m.isHiddenForReceiver();
+    }
+
+    private static String quoteOf(Message m) {
+        if ("VOICE".equals(m.getMessageType())) return "🎤 Voice message";
+        String text = m.getContent();
+        return text.length() > 200 ? text.substring(0, 200) + "…" : text;
     }
 
     // =========================================
@@ -154,6 +187,19 @@ public class ChatService {
         m.setSender(sender);
         m.setContent(r.content());
         m.setRead(false);
+        if (isOnline(r.toUserId())) m.setDeliveredAt(LocalDateTime.now());
+
+        if (r.replyToId() != null) {
+            Message quoted = messages.findById(r.replyToId())
+                    .filter(q -> q.getConversation().getId().equals(c.getId())
+                            && !Message.TYPE_DELETED.equals(q.getMessageType()))
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "The message you're replying to is no longer available"
+                    ));
+            m.setReplyToId(quoted.getId());
+            m.setReplyToSenderId(quoted.getSender().getId());
+            m.setReplyToText(quoteOf(quoted));
+        }
 
         Message saved = messages.save(m);
 
@@ -164,7 +210,7 @@ public class ChatService {
         n.setType("MESSAGE");
         n.setMessage(
                 "You received a new message from "
-                + sender.getEmail()
+                + senderLabel(sender)
         );
         n.setRead(false);
 
@@ -222,12 +268,13 @@ public class ChatService {
         m.setMessageType("VOICE");
         m.setAudioUrl("/uploads/" + safe);
         m.setRead(false);
+        if (isOnline(toUserId)) m.setDeliveredAt(LocalDateTime.now());
         Message saved = messages.save(m);
 
         Notification n = new Notification();
         n.setUser(receiver);
         n.setType("MESSAGE");
-        n.setMessage("You received a voice message from " + sender.getEmail());
+        n.setMessage("You received a voice message from " + senderLabel(sender));
         n.setRead(false);
         notifications.save(n);
 
@@ -249,7 +296,72 @@ public class ChatService {
         return messages
                 .findByConversationIdOrderByCreatedAtAsc(
                         c.getId()
+                )
+                .stream()
+                .filter(m -> !hiddenFor(uid, m))
+                .toList();
+    }
+
+    // =========================================
+    // DELETE FOR ME / FOR EVERYONE
+    // =========================================
+
+    /** Returns the members whose chat changed and should reload it. "Delete for me" tells no one. */
+    @Transactional
+    public Set<Long> deleteMessages(
+            Long uid,
+            List<Long> ids,
+            boolean forEveryone
+    ) {
+
+        Set<Long> changedFor = new HashSet<>();
+
+        for (Message m : messages.findAllById(ids)) {
+
+            Conversation c = m.getConversation();
+            Long user1 = c.getUser1().getId();
+            Long user2 = c.getUser2().getId();
+
+            if (!user1.equals(uid) && !user2.equals(uid)) {
+                throw new IllegalArgumentException("Message not found");
+            }
+
+            if (!forEveryone) {
+                if (m.getSender().getId().equals(uid)) m.setHiddenForSender(true);
+                else m.setHiddenForReceiver(true);
+                continue;
+            }
+
+            if (!m.getSender().getId().equals(uid)) {
+                throw new IllegalArgumentException("You can only delete your own messages for everyone");
+            }
+            if (m.getDeleteForEveryoneSeconds() <= 0) {
+                throw new IllegalArgumentException(
+                        "Messages can only be deleted for everyone within "
+                        + Message.DELETE_FOR_EVERYONE_HOURS + " hours of sending"
                 );
+            }
+
+            removeVoiceFile(m.getAudioUrl());
+            m.setContent(Message.DELETED_TEXT);
+            m.setMessageType(Message.TYPE_DELETED);
+            m.setAudioUrl(null);
+            m.setReplyToId(null);
+            m.setReplyToSenderId(null);
+            m.setReplyToText(null);
+            messages.updateQuotes(m.getId(), Message.DELETED_TEXT);
+            changedFor.add(user1.equals(uid) ? user2 : user1);
+        }
+
+        return changedFor;
+    }
+
+    private void removeVoiceFile(String audioUrl) {
+        if (audioUrl == null) return;
+        try {
+            Files.deleteIfExists(uploadDir.resolve(audioUrl.substring(audioUrl.lastIndexOf('/') + 1)));
+        } catch (Exception ignored) {
+        }
     }
 
     // =========================================
@@ -280,7 +392,7 @@ public class ChatService {
                 otherUser = c.getUser1();
             }
 
-            String name = otherUser.getEmail();
+            String name = otherUser.getGoswamiId();
 
             try {
                 Profile profile =
@@ -315,7 +427,10 @@ public class ChatService {
                     messages
                             .findByConversationIdOrderByCreatedAtAsc(
                                     c.getId()
-                            );
+                            )
+                            .stream()
+                            .filter(m -> !hiddenFor(uid, m))
+                            .toList();
 
             String lastMessage = "";
 
@@ -327,7 +442,9 @@ public class ChatService {
                         msgs.get(msgs.size() - 1);
 
                 lastMessage =
-                        last.getContent();
+                        Message.TYPE_DELETED.equals(last.getMessageType()) && last.getSender().getId().equals(uid)
+                        ? "You deleted this message"
+                        : last.getContent();
 
                 if (last.getCreatedAt() != null) {
                     lastMessageTime =
@@ -415,11 +532,29 @@ public class ChatService {
     }
 
     // =========================================
+    // MARK MESSAGES AS DELIVERED
+    // =========================================
+
+    /** Everything waiting for this member has reached their phone. Returns who sent it. */
+    @Transactional
+    public List<Long> markDelivered(Long uid) {
+
+        List<Long> senders = messages.sendersWaitingOnDelivery(uid);
+
+        if (!senders.isEmpty()) {
+            messages.markDelivered(uid, LocalDateTime.now());
+        }
+
+        return senders;
+    }
+
+    // =========================================
     // MARK MESSAGES AS READ
     // =========================================
 
+    /** Returns whether anything was newly read, so the sender's ticks can update. */
     @Transactional
-    public void markRead(
+    public boolean markRead(
             Long uid,
             Long otherUserId
     ) {
@@ -434,10 +569,16 @@ public class ChatService {
                                 otherUserId
                         );
 
+        LocalDateTime now = LocalDateTime.now();
+
         for (Message m : unread) {
             m.setRead(true);
+            m.setReadAt(now);
+            if (m.getDeliveredAt() == null) m.setDeliveredAt(now);
         }
 
         messages.saveAll(unread);
+
+        return !unread.isEmpty();
     }
 }

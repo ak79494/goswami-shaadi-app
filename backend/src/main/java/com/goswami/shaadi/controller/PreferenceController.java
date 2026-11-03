@@ -13,6 +13,11 @@ public class PreferenceController {
  @GetMapping public PartnerPreference get(Authentication a){return s.getPreference(uid(a));}
  @PutMapping public PartnerPreference save(Authentication a,@Valid @RequestBody PreferenceRequest r){return s.savePreference(uid(a),r);}
  
+ @GetMapping("/compatibility/{userId}")
+ public CompatibilityResponse compatibility(Authentication a, @PathVariable Long userId) {
+     return s.compatibility(uid(a), userId);
+ }
+
  @GetMapping("/match/{userId}")
  public PreferenceMatchResponse match(
          Authentication a,

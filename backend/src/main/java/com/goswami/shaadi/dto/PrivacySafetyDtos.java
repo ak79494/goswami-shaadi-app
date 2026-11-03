@@ -7,6 +7,14 @@ public final class PrivacySafetyDtos {
 
     public record ProfileActionItem(Long targetUserId, LocalDateTime createdAt) {}
 
+    public record BlockedMember(
+            Long targetUserId,
+            LocalDateTime createdAt,
+            String name,
+            String goswamiId,
+            String photoUrl
+    ) {}
+
     public record ReportItem(
             Long id,
             Long reportedUserId,

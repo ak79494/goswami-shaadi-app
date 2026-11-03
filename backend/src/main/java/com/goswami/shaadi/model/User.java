@@ -1,5 +1,6 @@
 package com.goswami.shaadi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -9,9 +10,12 @@ public class User {
     }
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;
-    @Column(nullable=false, unique=true) private String email;
-    @Column(nullable=false, unique=true) private String phone;
-    @Column(nullable=false) private String passwordHash;
+    // Login details are private: User is embedded in profile, interest and message responses.
+    // The owner gets them from /api/profiles/me; others only via the premium contact endpoint.
+    @JsonIgnore @Column(nullable=false, unique=true) private String email;
+    @JsonIgnore @Column(nullable=false, unique=true) private String phone;
+    // Never serialize: User is embedded in profile, interest and message responses.
+    @JsonIgnore @Column(nullable=false) private String passwordHash;
     @Enumerated(EnumType.STRING) @Column(nullable=false) private Gender gender;
     @Enumerated(EnumType.STRING) @Column(nullable=false) private Role role = Role.USER;
     @Column(name = "goswami_id", unique = true, nullable = false, length = 20)

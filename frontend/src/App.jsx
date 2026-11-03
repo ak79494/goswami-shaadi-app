@@ -1660,7 +1660,7 @@ function Auth({mode}){
 
             <div>
 
-              <span>��</span>
+              <span>🔒</span>
 
               <strong>Privacy Protected</strong>
 
@@ -2914,7 +2914,7 @@ function Home() {
 
             <div>
 
-              <strong>��</strong>
+              <strong>🔒</strong>
 
               <span>Privacy Protected</span>
 
@@ -2964,7 +2964,7 @@ function Home() {
 
         <div className="premium-stat">
 
-          <div className="premium-stat-icon">��</div>
+          <div className="premium-stat-icon">💞</div>
 
           <div>
 
@@ -2978,7 +2978,7 @@ function Home() {
 
         <div className="premium-stat">
 
-          <div className="premium-stat-icon">��</div>
+          <div className="premium-stat-icon">✅</div>
 
           <div>
 
@@ -3032,7 +3032,7 @@ function Home() {
 
           <div className="premium-feature-card">
 
-            <div className="premium-feature-icon">��</div>
+            <div className="premium-feature-icon">💑</div>
 
             <h3>Compatibility First</h3>
 
@@ -3064,7 +3064,7 @@ function Home() {
 
           <div className="premium-feature-card">
 
-            <div className="premium-feature-icon">👨‍👩‍��</div>
+            <div className="premium-feature-icon">👨‍👩‍👧</div>
 
             <h3>Family Values</h3>
 
@@ -4238,7 +4238,7 @@ const selectField = (
 
     "4.8",
 
-    "4.9",
+    "4.9","4.10","4.11",
 
     "5.0",
 
@@ -4258,7 +4258,7 @@ const selectField = (
 
     "5.8",
 
-    "5.9",
+    "5.9","5.10","5.11",
 
     "6.0",
 
@@ -4278,7 +4278,7 @@ const selectField = (
 
     "6.8",
 
-    "6.9",
+    "6.9","6.10","6.11",
 
     "7.0"
 
@@ -8805,7 +8805,7 @@ function MyProfileView(){
 
   <div className="mini-highlight">
 
-    <span className="mini-icon">��</span>
+    <span className="mini-icon">🔒</span>
 
     <div>
 
@@ -9801,15 +9801,15 @@ function BasicDetails() {
 
               {[
 
-                "4.5","4.6","4.7","4.8","4.9",
+                "4.5","4.6","4.7","4.8","4.9","4.10","4.11",
 
                 "5.0","5.1","5.2","5.3","5.4",
 
-                "5.5","5.6","5.7","5.8","5.9",
+                "5.5","5.6","5.7","5.8","5.9","5.10","5.11",
 
                 "6.0","6.1","6.2","6.3","6.4",
 
-                "6.5","6.6","6.7","6.8","6.9",
+                "6.5","6.6","6.7","6.8","6.9","6.10","6.11",
 
                 "7.0"
 
@@ -10089,7 +10089,7 @@ function BasicDetails() {
 
         <div className="basic-footer-note">
 
-          <span>��</span>
+          <span>🔒</span>
 
           <div>
 
@@ -12318,7 +12318,7 @@ const addShortlist = async () => {
 
                 <div className="premium-upgrade-note">
 
-                  <span>��</span>
+                  <span>🔒</span>
 
                   <div><strong>Contact details are protected</strong><small>Upgrade to Premium to view full contact details.</small></div>
 
@@ -12582,17 +12582,17 @@ const addShortlist = async () => {
 
               <h3>Profile Highlights</h3>
 
-              <div className="side-stat"><span>��</span><div><small>Lives in</small><strong>{location}</strong></div></div>
+              <div className="side-stat"><span>📍</span><div><small>Lives in</small><strong>{location}</strong></div></div>
 
-              <div className="side-stat"><span>��</span><div><small>Works as</small><strong>{p.profession || "Professional"}</strong></div></div>
+              <div className="side-stat"><span>💼</span><div><small>Works as</small><strong>{p.profession || "Professional"}</strong></div></div>
 
-              <div className="side-stat"><span>��</span><div><small>Education</small><strong>{p.education || "Not specified"}</strong></div></div>
+              <div className="side-stat"><span>🎓</span><div><small>Education</small><strong>{p.education || "Not specified"}</strong></div></div>
 
             </div>
 
             <div className="premium-side-card premium-privacy-card">
 
-              <div className="privacy-shield">��</div>
+              <div className="privacy-shield">🛡️</div>
 
               <h3>Your Privacy Matters</h3>
 
@@ -12727,6 +12727,9 @@ function Chat({ id }) {
     const ws = new Client({
 
       brokerURL: `${API.replace(/^http/, "ws")}/ws`,
+
+      // The server only accepts signed-in websocket connections.
+      connectHeaders: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 
       reconnectDelay: 5000,
 
@@ -13326,7 +13329,7 @@ function Chat({ id }) {
 
               <div className="chat-empty">
 
-                <div>��</div>
+                <div>💬</div>
 
                 <p>
 
@@ -13382,7 +13385,7 @@ function Chat({ id }) {
 
                     <div className="chat-voice-message">
 
-                      <span className="chat-voice-icon" aria-hidden="true">��</span>
+                      <span className="chat-voice-icon" aria-hidden="true">🎤</span>
 
                       <audio controls preload="metadata" src={`${API}${m.audioUrl}`} />
 
@@ -17813,13 +17816,13 @@ function SafetyTips() {
 
           <div className="gst-tip"><div className="gst-icon">🛡️</div><div><h3>Take Your Time</h3><p>Build trust gradually. Learn about a person before moving conversations offline or making important decisions.</p><span className="gst-do">Stay comfortable at every step</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Protect Personal Information</h3><p>Never share passwords, OTPs, UPI PINs, card PINs or sensitive account information with another member.</p><span className="gst-do">Keep private details private</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🔐</div><div><h3>Protect Personal Information</h3><p>Never share passwords, OTPs, UPI PINs, card PINs or sensitive account information with another member.</p><span className="gst-do">Keep private details private</span></div></div>
 
           <div className="gst-tip"><div className="gst-icon">⚠️</div><div><h3>Be Alert About Money Requests</h3><p>Be cautious if someone asks for money, investments, urgent financial help or payment outside normal platform processes.</p><span className="gst-do">Never send money under pressure</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Verify Before Meeting</h3><p>Use reasonable verification and choose a public place for an initial meeting. Tell someone you trust about your plans.</p><span className="gst-do">Meet safely and thoughtfully</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🤝</div><div><h3>Verify Before Meeting</h3><p>Use reasonable verification and choose a public place for an initial meeting. Tell someone you trust about your plans.</p><span className="gst-do">Meet safely and thoughtfully</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Report Suspicious Behaviour</h3><p>If a profile behaves abusively, deceptively or suspiciously, use the platform's reporting and support options.</p><span className="gst-do">Your report can help protect others</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🚩</div><div><h3>Report Suspicious Behaviour</h3><p>If a profile behaves abusively, deceptively or suspiciously, use the platform's reporting and support options.</p><span className="gst-do">Your report can help protect others</span></div></div>
 
           <section className="gst-support">
 
@@ -18927,7 +18930,7 @@ function ReportProfile() {
 
         <section className="safety-bottom-note">
 
-          <span>��</span>
+          <span>🚩</span>
 
           <div>
 
@@ -19329,7 +19332,7 @@ function PrivacySettings() {
 
         <section className="safety-bottom-note">
 
-          <span>��</span>
+          <span>🔒</span>
 
           <div>
 

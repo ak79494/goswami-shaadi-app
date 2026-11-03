@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -46,6 +47,10 @@ public class AuthService {
         u.setPhone(r.phone());
         u.setPasswordHash(encoder.encode(r.password()));
         u.setGender(r.gender());
+
+        // goswami_id is NOT NULL, but the real value needs the generated user id, so insert
+        // with a unique placeholder first and replace it below in the same transaction.
+        u.setGoswamiId("TMP" + UUID.randomUUID().toString().replace("-", "").substring(0, 16));
 
         // First save -> database generates User ID
         users.save(u);

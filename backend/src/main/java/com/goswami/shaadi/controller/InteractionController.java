@@ -230,12 +230,10 @@ public class InteractionController {
 
 
     @GetMapping("/blocks")
-    public List<ProfileActionItem> blocks(
+    public List<BlockedMember> blocks(
             Authentication a
     ) {
 
-        return s.blocks(uid(a)).stream()
-                .map(b -> new ProfileActionItem(b.getBlockedUser().getId(), b.getCreatedAt()))
-                .toList();
+        return s.blockedMembers(uid(a));
     }
 }
