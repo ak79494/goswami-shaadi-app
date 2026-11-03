@@ -150,6 +150,15 @@ Backend properties are in `backend/src/main/resources/application.yml`.
 - Add production monitoring/logging and backups.
 - Configure CORS to the production frontend domain only.
 
+## Going live
+
+The live server runs on Ubuntu with Caddy (HTTPS), MySQL in Docker, coturn (call relay) and the Spring Boot jar:
+
+1. Run `deploy/setup-server.sh <server-ip>` on the server as root, once. It makes the database, login and relay secrets there, in `/etc/goswamijodi/env`.
+2. Run `deploy/deploy.sh <server-ip>` from this Mac to build and install the server and the website.
+
+`docs/go-live-your-steps.md` lists the accounts the owner has to create, and `docs/play-store/` holds the store listing and the answers for Google's forms.
+
 ## API groups
 - `/api/auth/*` authentication
 - `/api/profiles/*` profile CRUD/search
