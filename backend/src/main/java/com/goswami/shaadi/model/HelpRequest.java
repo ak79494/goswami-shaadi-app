@@ -3,7 +3,7 @@ package com.goswami.shaadi.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-/** A "please call me back" request from the Help screen — a lead for the GoswamiShaadi team. */
+/** A "please call me back" request from the Help screen — a lead for the GoswamiJodi team. */
 @Entity
 @Table(name = "help_requests")
 public class HelpRequest {

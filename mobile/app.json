@@ -1,23 +1,23 @@
 {
   "expo": {
-    "name": "GoswamiShaadi",
+    "name": "GoswamiJodi",
     "slug": "goswami-shaadi",
-    "version": "1.5.1",
+    "version": "1.6.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "goswamishaadi",
+    "scheme": "goswamijodi",
     "userInterfaceStyle": "light",
     "backgroundColor": "#FFF8FA",
     "ios": {
-      "bundleIdentifier": "com.goswami.shaadi",
+      "bundleIdentifier": "com.goswamijodi.app",
       "supportsTablet": false,
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Goswami Shaadi uses the microphone for voice calls with your matches.",
-        "NSCameraUsageDescription": "Goswami Shaadi uses the camera for video calls with your matches."
+        "NSMicrophoneUsageDescription": "Goswami Jodi uses the microphone for voice calls with your matches.",
+        "NSCameraUsageDescription": "Goswami Jodi uses the camera for video calls with your matches."
       }
     },
     "android": {
-      "package": "com.goswami.shaadi",
+      "package": "com.goswamijodi.app",
       "adaptiveIcon": {
         "backgroundColor": "#D92F4B",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -25,8 +25,13 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
+      "allowBackup": false,
       "blockedPermissions": [
-        "android.permission.SYSTEM_ALERT_WINDOW"
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
       ],
       "permissions": [
         "android.permission.RECORD_AUDIO",
@@ -56,8 +61,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "GoswamiShaadi needs access to your photos so you can add them to your profile.",
-          "cameraPermission": "Goswami Shaadi uses the camera for video calls and profile photos."
+          "photosPermission": "GoswamiJodi needs access to your photos so you can add them to your profile.",
+          "cameraPermission": "Goswami Jodi uses the camera for video calls and profile photos."
         }
       ],
       "expo-sharing",

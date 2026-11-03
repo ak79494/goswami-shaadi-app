@@ -4,11 +4,14 @@ import com.goswami.shaadi.dto.AuthDtos.*;
 import com.goswami.shaadi.model.*;
 import com.goswami.shaadi.repository.UserRepository;
 import com.goswami.shaadi.security.JwtService;
+import com.goswami.shaadi.security.LoginGuard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
@@ -25,15 +28,19 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtService jwt;
     private final EmailService emailService;
+    private final LoginGuard guard;
+
+    private static final int MAX_OTP_TRIES = 5;
 
     private final Map<String, OtpData> otpStore = new ConcurrentHashMap<>();
     private final SecureRandom random = new SecureRandom();
 
-    public AuthService(UserRepository u, PasswordEncoder e, JwtService j, EmailService emailService) {
+    public AuthService(UserRepository u, PasswordEncoder e, JwtService j, EmailService emailService, LoginGuard guard) {
         users = u;
         encoder = e;
         jwt = j;
         this.emailService = emailService;
+        this.guard = guard;
     }
 
     @Transactional
@@ -56,7 +63,7 @@ public class AuthService {
         users.save(u);
 
         // Generate Goswami ID from database User ID
-        String goswamiId = "GS" + String.format("%04d", u.getId());
+        String goswamiId = "GJ" + String.format("%04d", u.getId());
         u.setGoswamiId(goswamiId);
 
         // Save Goswami ID
@@ -71,11 +78,18 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest r) {
-        User u = users.findByEmail(r.email())
-            .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
+        guard.check(r.email());
+        User u = users.findByEmail(r.email()).orElse(null);
 
-        if (!encoder.matches(r.password(), u.getPasswordHash())) {
+        if (u == null || !encoder.matches(r.password(), u.getPasswordHash())) {
+            guard.failed(r.email());
             throw new IllegalArgumentException("Invalid credentials");
+        }
+        guard.succeeded(r.email());
+
+        if (!u.isEnabled()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                "This account has been suspended. Please contact support.");
         }
 
         u.setLastActiveAt(LocalDateTime.now());
@@ -114,7 +128,7 @@ public class AuthService {
         String otp = String.format("%06d", random.nextInt(1000000));
         LocalDateTime expiry = LocalDateTime.now().plusMinutes(10);
 
-        otpStore.put(email, new OtpData(otp, expiry));
+        otpStore.put(email, new OtpData(otp, expiry, 0));
         log.info("OTP generated for: {}, expiry: {}", email, expiry);
 
         try {
@@ -150,6 +164,12 @@ public class AuthService {
 
         if (!data.otp().equals(otp)) {
             log.warn("Invalid OTP provided for: {}", email);
+            // A 6-digit code could be guessed if tries were unlimited.
+            if (data.tries() + 1 >= MAX_OTP_TRIES) {
+                otpStore.remove(email);
+                throw new IllegalArgumentException("Too many wrong codes. Please request a new OTP.");
+            }
+            otpStore.put(email, new OtpData(data.otp(), data.expiry(), data.tries() + 1));
             throw new IllegalArgumentException("Invalid OTP");
         }
 
@@ -163,5 +183,5 @@ public class AuthService {
         log.info("✅ Password reset successful for: {}", email);
     }
 
-    private record OtpData(String otp, LocalDateTime expiry) {}
+    private record OtpData(String otp, LocalDateTime expiry, int tries) {}
 }

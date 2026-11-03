@@ -48,7 +48,8 @@ public class SecurityConfig {
         c.setAllowedOrigins(List.of(
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "http://172.20.10.2:5173",
+            "https://goswamijodi.com",
+            "https://www.goswamijodi.com",
             // Expo web preview of the mobile app (the native app sends no Origin header).
             "http://localhost:8081",
             "http://127.0.0.1:8081"

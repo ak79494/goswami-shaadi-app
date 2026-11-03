@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import { AppState } from 'react-native';
 
 import { api, ApiError, errorMessage, setAuthToken, setSessionExpiredHandler } from './api';
-import { loadServerOverride } from './config';
 import { storage } from './storage';
 import type { AuthResponse, Gender, Photo, PremiumStatus, Profile } from './types';
 
@@ -92,10 +91,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [loadAccount],
   );
 
-  // Restore the server address and a saved login when the app starts.
+  // Restore a saved login when the app starts.
   useEffect(() => {
     (async () => {
-      await loadServerOverride();
       const [token, saved] = await Promise.all([storage.get(TOKEN_KEY), storage.get(SESSION_KEY)]);
       if (!token || !saved) {
         setStatus('signedOut');

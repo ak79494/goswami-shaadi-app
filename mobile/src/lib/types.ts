@@ -186,17 +186,6 @@ export type Page<T> = {
 
 export type AuthResponse = { token: string; userId: number; email: string; role: string };
 
-export type PremiumPlanInfo = { plan: string; planName: string; months: number; amount: number; features: string[] };
-
-export type PaymentInfo = {
-  upiId: string;
-  payeeName: string;
-  bankName?: string | null;
-  accountName?: string | null;
-  accountNumber?: string | null;
-  ifsc?: string | null;
-};
-
 export type PremiumOrderSummary = {
   orderId: number;
   plan: string;
@@ -227,12 +216,28 @@ export type AppInfo = {
 };
 
 export type AdminOrder = PremiumOrderSummary & {
-  userId: number;
-  goswamiId: string;
+  // Empty once the member has deleted their account.
+  userId: number | null;
+  goswamiId: string | null;
   name: string;
   email?: string | null;
   phone?: string | null;
   paidAt?: string | null;
+};
+
+export type ReportedMember = {
+  id: number;
+  reportedUserId: number;
+  reportedName: string;
+  reportedGoswamiId: string;
+  reportedEnabled: boolean;
+  reporterName: string;
+  reporterGoswamiId: string;
+  reason: string;
+  details?: string | null;
+  evidencePath?: string | null;
+  status: 'OPEN' | 'DISMISSED' | 'SUSPENDED';
+  createdAt: string;
 };
 
 export type HelpRequest = {

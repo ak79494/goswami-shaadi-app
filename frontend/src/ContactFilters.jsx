@@ -389,7 +389,7 @@ function ContactFiltersPage() {
         <div className="cf-page-header">
 
           <div className="cf-eyebrow">
-            MY GOSWAMISHAADI
+            MY GOSWAMIJODI
           </div>
 
           <h1>

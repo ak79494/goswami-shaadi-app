@@ -168,7 +168,7 @@ export default function ProfileDetail() {
   const whatsApp = () => {
     const number = contact?.whatsapp || contact?.phone;
     if (contact?.available && number) {
-      openWhatsApp(number, `Namaste ${profile.firstName}, I saw your profile (${profile.user.goswamiId}) on Goswami Shaadi${me ? ` — I am ${fullName(me)} (${me.user.goswamiId})` : ''}.`);
+      openWhatsApp(number, `Namaste ${profile.firstName}, I saw your profile (${profile.user.goswamiId}) on Goswami Jodi${me ? ` — I am ${fullName(me)} (${me.user.goswamiId})` : ''}.`);
     } else if (!contact || contact.reason === 'PREMIUM_REQUIRED') {
       toast('Messaging on WhatsApp is a premium feature', 'info');
       router.push('/premium');
@@ -413,7 +413,7 @@ export default function ProfileDetail() {
                   </View>
                   {contact.reason === 'PREMIUM_REQUIRED' ? (
                     <Button
-                      title="Upgrade to Premium"
+                      title="About Premium"
                       icon="diamond-outline"
                       size="sm"
                       onPress={() => router.push('/premium')}
@@ -468,7 +468,7 @@ export default function ProfileDetail() {
         visible={reportOpen}
         title="Why are you reporting this profile?"
         message="Your report is private. Our team reviews every report."
-        actions={['Fake profile', 'Inappropriate photos', 'Asking for money', 'Already married', 'Rude or abusive behaviour'].map((reason) => ({
+        actions={['Fake profile', 'Inappropriate photos', 'Asking for money', 'Already married', 'Rude or abusive behaviour', 'Under 18 or child safety concern'].map((reason) => ({
           label: reason,
           onPress: () => report(reason),
         }))}
@@ -481,7 +481,7 @@ export default function ProfileDetail() {
 function contactLockedText(reason: Contact['reason'], name: string): string {
   switch (reason) {
     case 'PREMIUM_REQUIRED':
-      return `Upgrade to Premium to see ${name}'s mobile number and message on WhatsApp.`;
+      return `${name}'s mobile number and WhatsApp are for Premium members.`;
     case 'CONNECT_FIRST':
       return `${name} shares contact details with premium members after you connect. Send an interest to connect.`;
     case 'HIDDEN':

@@ -156,7 +156,7 @@ export default function Biodata() {
   }, []);
 
   const getShareText = () =>
-    `GoswamiShaadi Biodata\n\n` +
+    `GoswamiJodi Biodata\n\n` +
     `${name}\n` +
     `Profile ID: ${id}\n\n` +
     `View marriage biodata: ${window.location.href}`;
@@ -209,8 +209,8 @@ export default function Biodata() {
     const pdf = await buildBiodataPdf();
     if (!pdf) return null;
     const blob = pdf.output("blob");
-    const safeName = name.replace(/[^a-z0-9]+/gi, "_") || "GoswamiShaadi_Member";
-    return new File([blob], `GoswamiShaadi_Biodata_${safeName}.pdf`, { type: "application/pdf" });
+    const safeName = name.replace(/[^a-z0-9]+/gi, "_") || "GoswamiJodi_Member";
+    return new File([blob], `GoswamiJodi_Biodata_${safeName}.pdf`, { type: "application/pdf" });
   };
 
   const shareFile = async () => {
@@ -219,7 +219,7 @@ export default function Biodata() {
 
     if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
       await navigator.share({
-        title: `GoswamiShaadi Biodata - ${name}`,
+        title: `GoswamiJodi Biodata - ${name}`,
         text: getShareText(),
         files: [file],
       });
@@ -251,7 +251,7 @@ export default function Biodata() {
 
   const shareEmail = () => {
     if (!profile) return;
-    const subject = `GoswamiShaadi Biodata - ${name}`;
+    const subject = `GoswamiJodi Biodata - ${name}`;
     const body = getShareText();
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setShareOpen(false);
@@ -287,8 +287,8 @@ export default function Biodata() {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: `GoswamiShaadi Biodata - ${name}`,
-          text: `GoswamiShaadi Biodata of ${name} (Profile ID: ${id})`,
+          title: `GoswamiJodi Biodata - ${name}`,
+          text: `GoswamiJodi Biodata of ${name} (Profile ID: ${id})`,
           url: window.location.href,
         });
       } else {
@@ -332,8 +332,8 @@ export default function Biodata() {
     try {
       const pdf = await buildBiodataPdf();
       if (!pdf) return;
-      const safeName = name.replace(/[^a-z0-9]+/gi, "_") || "GoswamiShaadi_Member";
-      pdf.save(`GoswamiShaadi_Biodata_${safeName}.pdf`);
+      const safeName = name.replace(/[^a-z0-9]+/gi, "_") || "GoswamiJodi_Member";
+      pdf.save(`GoswamiJodi_Biodata_${safeName}.pdf`);
     } catch (e) {
       console.error("Biodata PDF error:", e);
       alert("PDF create nahi ho paaya. Please page ko refresh karke dobara try karein.");
@@ -356,7 +356,7 @@ export default function Biodata() {
     </div>
   );
 
-  const name = `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "GoswamiShaadi Member";
+  const name = `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "GoswamiJodi Member";
   const age = ageFromDob(profile.dateOfBirth);
   const id = profile.user?.goswamiId || `GS${String(profile.user?.id || profile.id || "").padStart(4, "0")}`;
   const location = [profile.city, profile.state, profile.country].filter(Boolean).join(", ");
@@ -367,7 +367,7 @@ export default function Biodata() {
       <div className="bio-reference-wrap">
         <div className="bio-reference-toolbar">
           <button className="bio-ref-back" onClick={() => nav(-1)}>← Back</button>
-          <div><strong>Goswami<span>Shaadi</span></strong><small>Marriage Biodata</small></div>
+          <div><strong>Goswami<span>Jodi</span></strong><small>Marriage Biodata</small></div>
           <div className="bio-ref-actions">
             <div className="bio-share-wrap" ref={shareWrapRef}>
               <button type="button" className="bio-ref-share" onClick={() => setShareOpen(v => !v)} aria-expanded={shareOpen} aria-haspopup="menu">

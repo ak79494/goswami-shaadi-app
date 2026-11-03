@@ -26,8 +26,8 @@ export function setSessionExpiredHandler(handler: (() => void) | null) {
 const TIMEOUT_MS = 20000;
 
 // ngrok's free plan can put a "visit site" warning page in front of requests unless this
-// header is present. Other servers ignore it.
-export const TUNNEL_HEADERS = { 'ngrok-skip-browser-warning': '1' };
+// header is present. Only test builds go through ngrok.
+export const TUNNEL_HEADERS: Record<string, string> = getApiUrl().includes('ngrok') ? { 'ngrok-skip-browser-warning': '1' } : {};
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const headers: Record<string, string> = { Accept: 'application/json', ...TUNNEL_HEADERS };
@@ -57,7 +57,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 function networkError() {
   return new ApiError(
     0,
-    "Can't reach the GoswamiShaadi server. Check your internet connection and try again — the server may be offline right now.",
+    "Can't reach the GoswamiJodi server. Check your internet connection and try again — the server may be offline right now.",
   );
 }
 

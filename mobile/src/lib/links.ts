@@ -1,5 +1,23 @@
 import { Linking } from 'react-native';
 
+import { WEBSITE_URL } from './config';
+
+/** Pages on the website that the app links to. They must never lead on to a payment page (see premium.tsx). */
+export const PAGES = {
+  privacy: '/privacy-policy',
+  terms: '/terms-conditions',
+  childSafety: '/child-safety',
+};
+
+export async function openWebsite(path: string): Promise<boolean> {
+  try {
+    await Linking.openURL(`${WEBSITE_URL}${path}`);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** Indian numbers are stored as 10 digits; links and dialers want the +91 country code. */
 function withCountryCode(phone: string): string {
   const digits = phone.replace(/\D/g, '');

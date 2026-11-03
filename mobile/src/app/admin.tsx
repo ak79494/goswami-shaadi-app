@@ -14,9 +14,9 @@ import { api, errorMessage } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { timeAgo } from '@/lib/format';
 import { callPhone, formatPhone, openWhatsApp } from '@/lib/links';
-import type { AdminOrder, HelpRequest } from '@/lib/types';
+import type { AdminOrder, HelpRequest, ReportedMember } from '@/lib/types';
 
-type Tab = 'payments' | 'reviewed' | 'help';
+type Tab = 'payments' | 'reviewed' | 'help' | 'reports';
 
 const REJECT_REASONS = [
   'Payment not received in the account',
@@ -24,13 +24,14 @@ const REJECT_REASONS = [
   'UPI reference (UTR) not found',
 ];
 
-/** Back office: verify premium payments and follow up on help requests. Admins only. */
+/** Back office: verify premium payments, follow up on help requests and act on reported members. Admins only. */
 export default function Admin() {
   const { isAdmin } = useAuth();
   const toast = useToast();
   const [tab, setTab] = useState<Tab>('payments');
   const [orders, setOrders] = useState<AdminOrder[] | null>(null);
   const [requests, setRequests] = useState<HelpRequest[] | null>(null);
+  const [reports, setReports] = useState<ReportedMember[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [busyId, setBusyId] = useState<number | null>(null);
@@ -39,6 +40,7 @@ export default function Admin() {
   const load = useCallback(async () => {
     try {
       if (tab === 'help') setRequests(await api.get<HelpRequest[]>('/admin/help-requests'));
+      else if (tab === 'reports') setReports(await api.get<ReportedMember[]>('/admin/reports'));
       else setOrders(await api.get<AdminOrder[]>(`/admin/premium/orders?status=${tab === 'payments' ? 'PENDING' : 'REVIEWED'}`));
       setError(null);
     } catch (e) {
@@ -55,7 +57,7 @@ export default function Admin() {
     return (
       <View style={styles.root}>
         <Header title="Admin panel" />
-        <EmptyState icon="lock-closed-outline" title="Admins only" message="This area is for the Goswami Shaadi team." actionLabel="Go back" onAction={() => router.back()} />
+        <EmptyState icon="lock-closed-outline" title="Admins only" message="This area is for the Goswami Jodi team." actionLabel="Go back" onAction={() => router.back()} />
       </View>
     );
   }
@@ -88,13 +90,31 @@ export default function Admin() {
     }
   };
 
+  const actOnReport = async (report: ReportedMember, action: 'dismiss' | 'suspend' | 'restore') => {
+    setBusyId(report.id);
+    try {
+      await api.post(`/admin/reports/${report.id}/${action}`);
+      setReports(await api.get<ReportedMember[]>('/admin/reports'));
+    } catch (e) {
+      toast(errorMessage(e), 'error');
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  const confirmSuspend = (report: ReportedMember) =>
+    Alert.alert('Suspend this member?', `${report.reportedName} will be signed out and hidden from everyone until you restore them.`, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Suspend', style: 'destructive', onPress: () => actOnReport(report, 'suspend') },
+    ]);
+
   const onRefresh = async () => {
     setRefreshing(true);
     await load();
     setRefreshing(false);
   };
 
-  const list = tab === 'help' ? requests : orders;
+  const list = tab === 'help' ? requests : tab === 'reports' ? reports : orders;
 
   return (
     <View style={styles.root}>
@@ -104,7 +124,8 @@ export default function Admin() {
           tabs={[
             { key: 'payments', label: 'To verify', badge: tab === 'payments' ? orders?.length : undefined },
             { key: 'reviewed', label: 'Reviewed' },
-            { key: 'help', label: 'Help requests' },
+            { key: 'help', label: 'Help' },
+            { key: 'reports', label: 'Reports', badge: reports?.filter((r) => r.status === 'OPEN').length },
           ]}
           value={tab}
           onChange={setTab}
@@ -113,6 +134,41 @@ export default function Admin() {
       {error ? <ErrorBanner message={error} onRetry={load} /> : null}
       {list === null && !error ? (
         <ActivityIndicator color={colors.primary} style={{ marginTop: 40 }} />
+      ) : tab === 'reports' ? (
+        <FlatList
+          data={reports ?? []}
+          keyExtractor={(r) => String(r.id)}
+          contentContainerStyle={styles.list}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primary]} />}
+          ListEmptyComponent={<EmptyState icon="flag-outline" title="No reports" message="Members reported by others show up here." />}
+          renderItem={({ item: r }) => (
+            <View style={styles.card}>
+              <View style={styles.cardHead}>
+                <Text style={styles.name}>{r.reportedName}</Text>
+                <Text style={[styles.status, r.status === 'OPEN' && styles.statusNew]}>{r.status}</Text>
+              </View>
+              <Text style={styles.meta}>
+                {r.reportedGoswamiId} · {timeAgo(r.createdAt)}
+              </Text>
+              <Text style={styles.message}>{r.reason}</Text>
+              {r.details ? <Text style={styles.meta}>{r.details}</Text> : null}
+              <Text style={styles.meta}>
+                Reported by {r.reporterName} ({r.reporterGoswamiId})
+              </Text>
+              {r.status === 'OPEN' ? (
+                <>
+                  <View style={styles.actions}>
+                    <Button title="Dismiss" size="sm" variant="secondary" disabled={busyId === r.id} onPress={() => actOnReport(r, 'dismiss')} style={{ flex: 1 }} />
+                    <Button title="Suspend" icon="ban-outline" size="sm" loading={busyId === r.id} onPress={() => confirmSuspend(r)} style={{ flex: 1 }} />
+                  </View>
+                  <Button title="View profile" size="sm" variant="ghost" onPress={() => router.push(`/profile/${r.reportedUserId}`)} />
+                </>
+              ) : !r.reportedEnabled ? (
+                <Button title="Restore member" size="sm" variant="ghost" loading={busyId === r.id} onPress={() => actOnReport(r, 'restore')} />
+              ) : null}
+            </View>
+          )}
+        />
       ) : tab === 'help' ? (
         <FlatList
           data={requests ?? []}
@@ -139,7 +195,7 @@ export default function Admin() {
                   icon="logo-whatsapp"
                   size="sm"
                   variant="success"
-                  onPress={() => openWhatsApp(r.phone, `Namaste ${r.name}, this is Goswami Shaadi. You asked us for help with: ${r.topic}.`)}
+                  onPress={() => openWhatsApp(r.phone, `Namaste ${r.name}, this is Goswami Jodi. You asked us for help with: ${r.topic}.`)}
                   style={{ flex: 1 }}
                 />
               </View>
@@ -174,7 +230,7 @@ export default function Admin() {
                 <Text style={styles.amount}>₹{o.amount}</Text>
               </View>
               <Text style={styles.meta}>
-                {o.goswamiId} · {o.planName} · {timeAgo(o.paidAt ?? o.createdAt)}
+                {o.goswamiId ? `${o.goswamiId} · ` : ''}{o.planName} · {timeAgo(o.paidAt ?? o.createdAt)}
               </Text>
               <View style={styles.utr}>
                 <Ionicons name="receipt-outline" size={16} color={colors.textMuted} />

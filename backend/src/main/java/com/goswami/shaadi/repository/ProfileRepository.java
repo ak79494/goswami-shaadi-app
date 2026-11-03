@@ -24,6 +24,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             select p
             from Profile p
             where p.profileVisible = true
+              and p.user.enabled = true
               and p.user.id <> :uid
               and p.user.gender = :gender
               and not exists (select h.id from HiddenProfile h where h.user.id = :uid and h.hiddenUser.id = p.user.id)
@@ -58,6 +59,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
             select p
             from Profile p
             where p.profileVisible = true
+              and p.user.enabled = true
               and p.user.id <> :uid
               and p.user.gender = :gender
               and not exists (select h.id from HiddenProfile h where h.user.id = :uid and h.hiddenUser.id = p.user.id)

@@ -6,10 +6,9 @@ import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } 
 import { Button } from '@/components/button';
 import { TextField } from '@/components/fields';
 import { Header, KeyboardScreen } from '@/components/screen';
-import { ChangeServerLink } from '@/components/server-sheet';
 import { motion } from '@/constants/motion';
 import { colors } from '@/constants/theme';
-import { ApiError, errorMessage } from '@/lib/api';
+import { errorMessage } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 
 export default function Login() {
@@ -17,7 +16,6 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [unreachable, setUnreachable] = useState(false);
   const [busy, setBusy] = useState(false);
   const shake = useSharedValue(0);
   const shakeStyle = useAnimatedStyle(() => ({ transform: [{ translateX: shake.value }] }));
@@ -42,7 +40,6 @@ export default function Login() {
     try {
       await signIn(email, password);
     } catch (e) {
-      setUnreachable(e instanceof ApiError && e.status === 0);
       fail(errorMessage(e) === 'Invalid credentials' ? 'Email or password is incorrect' : errorMessage(e));
     } finally {
       setBusy(false);
@@ -87,20 +84,16 @@ export default function Login() {
           />
         </Animated.View>
 
-        {unreachable ? (
-          <ChangeServerLink />
-        ) : (
-          <Text style={styles.forgot} onPress={() => router.push('/forgot-password')}>
-            Forgot password?
-          </Text>
-        )}
+        <Text style={styles.forgot} onPress={() => router.push('/forgot-password')}>
+          Forgot password?
+        </Text>
 
         <Animated.View entering={motion.enter(240)}>
           <Button title="Log in" size="lg" iconRight="arrow-forward" loading={busy} onPress={submit} />
         </Animated.View>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>New to GoswamiShaadi? </Text>
+          <Text style={styles.footerText}>New to GoswamiJodi? </Text>
           <Text style={styles.link} onPress={() => router.replace('/register')}>
             Create an account
           </Text>

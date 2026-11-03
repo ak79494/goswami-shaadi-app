@@ -143,7 +143,7 @@ function PremiumHeader({ status }) {
 
         <span className="premium-flow-brand-mark">G</span>
 
-        <span>Goswami<span>Shaadi</span></span>
+        <span>Goswami<span>Jodi</span></span>
 
       </div>
 
@@ -247,7 +247,7 @@ function OrderSummary({ plan, onClose, onProceed }) {
 
         <div className="premium-summary-icon">♛</div>
 
-        <div className="premium-summary-kicker">GOSWAMISHAADI PREMIUM</div>
+        <div className="premium-summary-kicker">GOSWAMIJODI PREMIUM</div>
 
         <h2>Order Summary</h2>
 
@@ -317,7 +317,7 @@ function OrderSummary({ plan, onClose, onProceed }) {
 
 }
 
-const UPI_PAYEE_NAME = "Goswami Shaadi";
+const UPI_PAYEE_NAME = "Goswami Jodi";
 
 function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
   const [method, setMethod] = useState("GOOGLE_PAY");
@@ -336,7 +336,7 @@ function PaymentScreen({ plan, orderId, onBack, onSuccess }) {
     `&pn=${encodeURIComponent(UPI_PAYEE_NAME)}` +
     `&am=${encodeURIComponent(amount)}` +
     `&cu=INR` +
-    `&tn=${encodeURIComponent(`GoswamiShaadi ${plan.name} Premium`)}`;
+    `&tn=${encodeURIComponent(`GoswamiJodi ${plan.name} Premium`)}`;
 
   useEffect(() => {
     let cancelled = false;
@@ -597,7 +597,7 @@ function PaymentSuccess({ data }) {
 
         <p>
 
-          Your GoswamiShaadi account is now a Premium Member account.
+          Your GoswamiJodi account is now a Premium Member account.
 
         </p>
 
@@ -659,7 +659,7 @@ function PaymentSuccess({ data }) {
 
         <button onClick={() => nav("/")} className="premium-success-primary">
 
-          Continue to GoswamiShaadi
+          Continue to GoswamiJodi
 
         </button>
 
@@ -707,7 +707,7 @@ export default function Premium() {
 
     if (status?.active) return "Extend your Premium membership";
 
-    return "Upgrade to GoswamiShaadi Premium";
+    return "Upgrade to GoswamiJodi Premium";
 
   }, [status]);
 
@@ -887,7 +887,7 @@ export default function Premium() {
 
             <div><b>02</b><span>◉</span><h3>Better Visibility</h3><p>Premium plans are designed to give your profile greater discovery priority.</p></div>
 
-            <div><b>03</b><span>♡</span><h3>Premium Facilities</h3><p>Unlock the premium facilities available across GoswamiShaadi.</p></div>
+            <div><b>03</b><span>♡</span><h3>Premium Facilities</h3><p>Unlock the premium facilities available across GoswamiJodi.</p></div>
 
             <div><b>04</b><span>��</span><h3>Secure Checkout</h3><p>Pay the exact plan amount through UPI using Google Pay or PhonePe.</p></div>
 

@@ -53,6 +53,8 @@ Link: https://www.namecheap.com/domains/registration/results/?domain=goswamijodi
 | A Record | `www` | your server's IP |
 | A Record | `api` | your server's IP |
 
+4. Open **Domain**, find **Redirect Email** (Email Forwarding), and forward `support` to the new Gmail address from step 5. Your app and legal pages show `support@goswamijodi.com`, so emails to it must reach you. Do this after step 5.
+
 ## 4. Firebase (free, for notifications when the app is closed)
 
 Link: https://console.firebase.google.com
@@ -81,5 +83,5 @@ Find 12 people with Android phones and collect their Gmail addresses. They must 
 - The server's IP address
 - Confirmation that the domain is bought and the three records are added
 - Confirmation that the two Firebase files are in the folder
-- The new support email address
+- Confirmation that emails to `support@goswamijodi.com` reach your new Gmail
 - The name of the person Google should list as the child-safety contact, and whether Arun Goswami should be named as the grievance officer on your legal pages

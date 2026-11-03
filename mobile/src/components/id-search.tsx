@@ -11,7 +11,7 @@ import { Button } from './button';
 import { TextField } from './fields';
 import { BottomSheet } from './sheet';
 
-/** Opens a member's profile from their Goswami Shaadi ID (e.g. GS0014). */
+/** Opens a member's profile from their Goswami Jodi ID (e.g. GJ0014). */
 export function IdSearchSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
   const { session } = useAuth();
   const [id, setId] = useState('');
@@ -29,7 +29,7 @@ export function IdSearchSheet({ visible, onClose }: { visible: boolean; onClose:
   const search = async () => {
     const clean = id.trim().toUpperCase().replace(/\s+/g, '');
     if (clean.length < 3) {
-      setError('Enter a profile ID, for example GS0014');
+      setError('Enter a profile ID, for example GJ0014');
       return;
     }
     setBusy(true);
@@ -48,14 +48,14 @@ export function IdSearchSheet({ visible, onClose }: { visible: boolean; onClose:
 
   return (
     <BottomSheet visible={visible} onClose={onClose} title="Search by Profile ID">
-      <Text style={styles.text}>Every member has a Goswami Shaadi ID on their profile. Enter it to open that profile.</Text>
+      <Text style={styles.text}>Every member has a Goswami Jodi ID on their profile. Enter it to open that profile.</Text>
       <TextField
         value={id}
         onChangeText={(v) => {
           setId(v);
           if (error) setError(null);
         }}
-        placeholder="e.g. GS0014"
+        placeholder="e.g. GJ0014"
         icon="search-outline"
         autoCapitalize="characters"
         returnKeyType="search"

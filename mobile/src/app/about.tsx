@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -11,7 +11,7 @@ import { colors, gradients, radius, shadow } from '@/constants/theme';
 import { useAppInfo } from '@/lib/app-info';
 import { APP_VERSION } from '@/lib/config';
 import { initials } from '@/lib/format';
-import { callPhone, formatPhone, openWhatsApp } from '@/lib/links';
+import { callPhone, formatPhone, openWebsite, openWhatsApp, PAGES } from '@/lib/links';
 
 const VALUES: { icon: IconName; title: string; text: string }[] = [
   { icon: 'shield-checkmark', title: 'Privacy first', text: 'Your contact details are shared only the way you choose.' },
@@ -94,11 +94,27 @@ export default function About() {
           </View>
         </Animated.View>
 
+        <Animated.View entering={motion.enter(280)} style={styles.card}>
+          <Text style={styles.cardTitle}>Legal</Text>
+          <LegalLink title="Privacy Policy" path={PAGES.privacy} />
+          <LegalLink title="Terms & Conditions" path={PAGES.terms} />
+          <LegalLink title="Child Safety Standards" path={PAGES.childSafety} />
+        </Animated.View>
+
         <Text style={styles.version}>
           {info.companyName} app v{APP_VERSION}
         </Text>
       </ScrollView>
     </View>
+  );
+}
+
+function LegalLink({ title, path }: { title: string; path: string }) {
+  return (
+    <Pressable onPress={() => openWebsite(path)} style={styles.legalRow} accessibilityRole="link">
+      <Text style={styles.legalText}>{title}</Text>
+      <Ionicons name="open-outline" size={16} color={colors.textMuted} />
+    </Pressable>
   );
 }
 
@@ -122,6 +138,8 @@ const styles = StyleSheet.create({
   founderLabel: { fontSize: 11, fontWeight: '800', color: colors.primary, letterSpacing: 1.5, marginTop: 12 },
   founderName: { fontSize: 22, fontWeight: '800', color: colors.text, marginTop: 2 },
   quote: { fontSize: 14, lineHeight: 21, color: colors.textMuted, textAlign: 'center', fontStyle: 'italic', marginTop: 10 },
+  legalRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 10 },
+  legalText: { fontSize: 14, fontWeight: '600', color: colors.primary },
   contactRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 12 },
   contactText: { fontSize: 16, fontWeight: '700', color: colors.text },
   buttons: { flexDirection: 'row', gap: 10, marginTop: 16 },

@@ -8,11 +8,11 @@ import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import { Button } from '@/components/button';
 import { TextField } from '@/components/fields';
 import { Header, KeyboardScreen } from '@/components/screen';
-import { ChangeServerLink } from '@/components/server-sheet';
 import { motion, timing } from '@/constants/motion';
 import { colors, radius } from '@/constants/theme';
-import { ApiError, errorMessage } from '@/lib/api';
+import { errorMessage } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
+import { openWebsite, PAGES } from '@/lib/links';
 import type { Gender } from '@/lib/types';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,6 +39,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
 
@@ -50,6 +51,7 @@ export default function Register() {
     if (!EMAIL.test(email.trim())) e.email = 'Enter a valid email address';
     if (!/^\d{10}$/.test(phone)) e.phone = 'Enter your 10-digit mobile number';
     if (password.length < 8) e.password = 'Password must be at least 8 characters';
+    if (!agreed) e.consent = 'Please confirm this to continue';
     setErrors(e);
     if (Object.keys(e).length || !gender) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
@@ -59,7 +61,7 @@ export default function Register() {
     try {
       await signUp({ email, phone, password, gender });
     } catch (err) {
-      setErrors({ form: errorMessage(err), ...(err instanceof ApiError && err.status === 0 ? { network: '1' } : {}) });
+      setErrors({ form: errorMessage(err) });
     } finally {
       setBusy(false);
     }
@@ -129,8 +131,30 @@ export default function Register() {
           ) : null}
         </Animated.View>
 
+        <Pressable
+          onPress={() => {
+            setAgreed(!agreed);
+            if (errors.consent) setErrors({ ...errors, consent: '' });
+          }}
+          style={styles.consent}
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: agreed }}>
+          <Ionicons name={agreed ? 'checkbox' : 'square-outline'} size={22} color={agreed ? colors.primary : colors.textMuted} />
+          <Text style={styles.consentText}>
+            I am at least 18 years old and looking for a marriage partner. I agree to the{' '}
+            <Text style={styles.consentLink} onPress={() => openWebsite(PAGES.terms)}>
+              Terms & Conditions
+            </Text>{' '}
+            and{' '}
+            <Text style={styles.consentLink} onPress={() => openWebsite(PAGES.privacy)}>
+              Privacy Policy
+            </Text>
+            .
+          </Text>
+        </Pressable>
+        {errors.consent ? <Text style={styles.error}>{errors.consent}</Text> : null}
+
         {errors.form ? <Text style={[styles.error, styles.formError]}>{errors.form}</Text> : null}
-        {errors.network ? <ChangeServerLink /> : null}
 
         <Button title="Continue" size="lg" iconRight="arrow-forward" loading={busy} onPress={submit} style={{ marginTop: 12 }} />
 
@@ -208,6 +232,9 @@ const styles = StyleSheet.create({
   strengthLabel: { fontSize: 12, fontWeight: '700', marginLeft: 6, width: 64 },
   error: { color: colors.primaryBright, fontSize: 12, marginTop: 6, fontWeight: '600' },
   formError: { textAlign: 'center', fontSize: 14, marginBottom: 4 },
+  consent: { flexDirection: 'row', gap: 10, marginTop: 4, marginBottom: 8 },
+  consentText: { flex: 1, fontSize: 13, lineHeight: 19, color: colors.textMuted },
+  consentLink: { color: colors.primary, fontWeight: '700' },
   footer: { flexDirection: 'row', justifyContent: 'center', marginTop: 24 },
   footerText: { color: colors.textMuted, fontSize: 14 },
   link: { color: colors.primary, fontWeight: '800', fontSize: 14 },

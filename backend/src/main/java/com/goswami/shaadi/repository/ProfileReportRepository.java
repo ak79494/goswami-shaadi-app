@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProfileReportRepository extends JpaRepository<ProfileReport, Long> {
     List<ProfileReport> findByReporterIdOrderByCreatedAtDesc(Long reporterId);
+    List<ProfileReport> findByReportedUserId(Long reportedUserId);
+    List<ProfileReport> findTop100ByOrderByCreatedAtDesc();
 }

@@ -8,13 +8,11 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { Button } from '@/components/button';
 import { IntroSplash, NATIVE_SPLASH_FADE_MS } from '@/components/intro-splash';
-import { ServerSheet } from '@/components/server-sheet';
 import { ToastProvider } from '@/components/toast';
 import { colors } from '@/constants/theme';
 import { ActivityProvider } from '@/lib/activity';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { CallProvider } from '@/lib/calls';
-import { getApiUrl } from '@/lib/config';
 import { RealtimeProvider } from '@/lib/realtime';
 
 SplashScreen.preventAutoHideAsync();
@@ -105,6 +103,9 @@ function Screens() {
       <Stack.Protected guard={status === 'needsProfile'} redirectTo={home}>
         <Stack.Screen name="create-profile" options={{ animation: 'fade' }} />
       </Stack.Protected>
+      <Stack.Protected guard={status === 'ready' || status === 'needsProfile'} redirectTo={home}>
+        <Stack.Screen name="delete-account" />
+      </Stack.Protected>
       <Stack.Protected guard={status === 'ready'} redirectTo={home}>
         <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
         <Stack.Screen name="profile/[userId]" />
@@ -128,7 +129,6 @@ function Screens() {
 }
 
 function Offline({ message, onRetry, onSignOut }: { message: string | null; onRetry: () => void; onSignOut: () => void }) {
-  const [serverOpen, setServerOpen] = useState(false);
   return (
     <View style={styles.center}>
       <View style={styles.icon}>
@@ -136,17 +136,8 @@ function Offline({ message, onRetry, onSignOut }: { message: string | null; onRe
       </View>
       <Text style={styles.title}>Can’t connect</Text>
       <Text style={styles.text}>{message}</Text>
-      <Text style={styles.hint}>Server: {getApiUrl()}</Text>
       <Button title="Try again" icon="refresh" onPress={onRetry} style={[styles.wide, { marginTop: 24 }]} />
-      <Button
-        title="Change server address"
-        icon="server-outline"
-        variant="secondary"
-        onPress={() => setServerOpen(true)}
-        style={[styles.wide, { marginTop: 10 }]}
-      />
       <Button title="Log out" variant="ghost" onPress={onSignOut} style={[styles.wide, { marginTop: 4 }]} />
-      <ServerSheet visible={serverOpen} onClose={() => setServerOpen(false)} onSaved={onRetry} />
     </View>
   );
 }

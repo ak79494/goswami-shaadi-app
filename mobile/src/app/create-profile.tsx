@@ -1,5 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Haptics from 'expo-haptics';
+import { router } from 'expo-router';
 import { useEffect, useRef, useState, type ComponentRef } from 'react';
 import { BackHandler, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -79,9 +80,14 @@ export default function CreateProfile() {
           <Text style={styles.stepText}>
             Step {step + 1} of {SECTIONS.length}
           </Text>
-          <Text style={styles.logout} onPress={signOut}>
-            Log out
-          </Text>
+          <View style={styles.topLinks}>
+            <Text style={styles.logout} onPress={signOut}>
+              Log out
+            </Text>
+            <Text style={styles.logout} onPress={() => router.push('/delete-account')}>
+              Delete account
+            </Text>
+          </View>
         </View>
         <ProgressBar value={((step + 1) / SECTIONS.length) * 100} />
       </View>
@@ -127,6 +133,7 @@ const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   top: { paddingHorizontal: 20, paddingBottom: 14, gap: 10, backgroundColor: colors.bg },
   topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  topLinks: { flexDirection: 'row', gap: 10 },
   stepText: { fontSize: 13, fontWeight: '700', color: colors.primary, letterSpacing: 0.4 },
   logout: { fontSize: 13, fontWeight: '600', color: colors.textMuted, padding: 4 },
   body: { paddingHorizontal: 20, paddingTop: 8, paddingBottom: 32 },

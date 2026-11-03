@@ -22,7 +22,7 @@ export function CallEngine({ ref, onEvent, visible }: { ref: Ref<CallEngineHandl
   return (
     <WebView
       ref={webview as never}
-      source={{ html: CALL_ENGINE_HTML, baseUrl: 'https://call.goswamishaadi.app' }}
+      source={{ html: CALL_ENGINE_HTML, baseUrl: 'https://call.goswamijodi.app' }}
       originWhitelist={['*']}
       javaScriptEnabled
       mediaPlaybackRequiresUserAction={false}

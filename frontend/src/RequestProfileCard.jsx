@@ -698,7 +698,7 @@ function RequestProfileCard({
               }
             >
               <span>💬</span>
-              Shaadi Chat
+              Chat
             </button>
 
           </div>

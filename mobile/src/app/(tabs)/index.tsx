@@ -37,7 +37,7 @@ function greeting() {
 
 export default function Home() {
   const insets = useSafeAreaInsets();
-  const { profile, photos, premium } = useAuth();
+  const { profile, photos } = useAuth();
   const openMenu = useSideMenu();
   const { pendingIncoming, unreadNotifications, refresh } = useActivity();
   const [recommended, setRecommended] = useState<Profile[] | null>(null);
@@ -132,23 +132,6 @@ export default function Home() {
             />
           ) : null}
         </Animated.View>
-
-        {premium && !premium.active ? (
-          <Animated.View entering={motion.enter(60)}>
-            <PressableScale onPress={() => router.push('/premium')} scaleTo={0.98} accessibilityLabel="Upgrade to Premium">
-              <LinearGradient colors={['#2B2140', '#4A2C5E']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.premium}>
-                <View style={styles.premiumIcon}>
-                  <Ionicons name="diamond" size={22} color={colors.gold} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.premiumTitle}>Upgrade to Premium</Text>
-                  <Text style={styles.premiumText}>See mobile numbers and message members on WhatsApp</Text>
-                </View>
-                <Ionicons name="chevron-forward" size={20} color="rgba(255,255,255,0.8)" />
-              </LinearGradient>
-            </PressableScale>
-          </Animated.View>
-        ) : null}
 
         {pendingIncoming > 0 ? <InterestsAlert count={pendingIncoming} /> : null}
 
@@ -287,10 +270,6 @@ const styles = StyleSheet.create({
   completionTitle: { fontSize: 16, fontWeight: '800', color: colors.text },
   completionSub: { fontSize: 13, color: colors.textMuted, marginTop: 3, lineHeight: 18 },
   completionPct: { fontSize: 26, fontWeight: '900', color: colors.primary },
-  premium: { flexDirection: 'row', alignItems: 'center', gap: 12, marginHorizontal: 16, marginTop: 14, padding: 16, borderRadius: radius.lg },
-  premiumIcon: { width: 42, height: 42, borderRadius: 21, backgroundColor: 'rgba(255,255,255,0.1)', alignItems: 'center', justifyContent: 'center' },
-  premiumTitle: { fontSize: 15, fontWeight: '800', color: colors.white },
-  premiumText: { fontSize: 12, color: 'rgba(255,255,255,0.8)', marginTop: 2, lineHeight: 17 },
   alert: {
     marginHorizontal: 16,
     marginTop: 14,

@@ -14,6 +14,7 @@ import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import com.goswami.shaadi.repository.UserRepository;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -41,9 +42,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private static final long[] SERVER_HEARTBEAT = {10_000, 0};
 
     private final JwtService jwt;
+    private final UserRepository users;
 
-    public WebSocketConfig(JwtService jwt) {
+    public WebSocketConfig(JwtService jwt, UserRepository users) {
         this.jwt = jwt;
+        this.users = users;
     }
 
     private TaskScheduler heartbeatScheduler() {
@@ -88,6 +91,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                     }
                     try {
                         String userId = jwt.parse(header.substring(7)).getSubject();
+                        if (!users.existsByIdAndEnabledTrue(Long.valueOf(userId))) throw new MessagingException("Account closed");
                         accessor.setUser(new UsernamePasswordAuthenticationToken(userId, null, List.of()));
                     } catch (Exception e) {
                         throw new MessagingException("Invalid token");

@@ -18,7 +18,7 @@ import { colors, gradients, radius, shadow } from '@/constants/theme';
 import { errorMessage } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
 import { shareMyBiodata } from '@/lib/biodata';
-import { APP_VERSION, getApiUrl } from '@/lib/config';
+import { APP_VERSION } from '@/lib/config';
 import { fullName, longDate, profileCompletion, profileHeadline } from '@/lib/format';
 import type { Profile } from '@/lib/types';
 
@@ -110,10 +110,10 @@ export default function Me() {
                 ? `Premium till ${longDate(premium.validUntil)}`
                 : premium?.latestOrder?.status === 'PENDING'
                   ? 'Payment being verified'
-                  : 'Upgrade to see contact numbers'}
+                  : 'Contact numbers are for Premium members'}
             </Text>
           </View>
-          <Button title={premium?.active ? 'Renew' : 'Upgrade'} icon="diamond-outline" size="sm" onPress={() => router.push('/premium')} />
+          <Button title="Premium" icon="diamond-outline" size="sm" onPress={() => router.push('/premium')} />
         </View>
 
         <Group title="Edit profile">
@@ -160,15 +160,16 @@ export default function Me() {
           />
           <MenuRow icon="planet-outline" title="Astro Chat" subtitle="Kundli matching and horoscope questions" onPress={() => router.push('/astro')} />
           <MenuRow icon="help-buoy-outline" title="Help & Support" onPress={() => router.push('/help')} />
-          <MenuRow icon="information-circle-outline" title="About Goswami Shaadi" onPress={() => router.push('/about')} />
+          <MenuRow icon="information-circle-outline" title="About Goswami Jodi" onPress={() => router.push('/about')} />
         </Group>
 
         <Group title="Account">
           <MenuRow icon="mail-outline" title={session?.email ?? ''} subtitle="Login email" />
           <MenuRow icon="log-out-outline" title="Log out" danger onPress={confirmLogout} />
+          <MenuRow icon="trash-outline" title="Delete account" danger onPress={() => router.push('/delete-account')} />
         </Group>
 
-        <Text style={styles.footer}>GoswamiShaadi v{APP_VERSION} · {getApiUrl()}</Text>
+        <Text style={styles.footer}>GoswamiJodi v{APP_VERSION}</Text>
       </ScrollView>
     </View>
   );

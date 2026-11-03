@@ -19,6 +19,7 @@ import { FloatingHearts } from '@/components/floating-hearts';
 import { LightStatusBar } from '@/components/screen';
 import { motion, easeOut } from '@/constants/motion';
 import { gradients } from '@/constants/theme';
+import { openWebsite, PAGES } from '@/lib/links';
 
 const FEATURES = [
   { icon: 'shield-checkmark', text: 'Verified Goswami community profiles' },
@@ -53,7 +54,7 @@ export default function Welcome() {
             </Animated.View>
           </Animated.View>
           <Animated.Text entering={motion.enter(150)} style={styles.brand}>
-            Goswami<Text style={styles.brandBold}>Shaadi</Text>
+            Goswami<Text style={styles.brandBold}>Jodi</Text>
           </Animated.Text>
           <Animated.Text entering={motion.enter(260)} style={styles.tagline}>
             Where meaningful relationships begin
@@ -74,7 +75,16 @@ export default function Welcome() {
         <Animated.View entering={motion.enterUp(800)} style={styles.actions}>
           <Button title="Create free account" variant="light" size="lg" iconRight="arrow-forward" onPress={() => router.push('/register')} />
           <Button title="I already have an account" variant="outlineLight" size="lg" onPress={() => router.push('/login')} />
-          <Text style={styles.legal}>By continuing you agree to our Terms & Privacy Policy</Text>
+          <Text style={styles.legal}>
+            By continuing you agree to our{' '}
+            <Text style={styles.legalLink} onPress={() => openWebsite(PAGES.terms)}>
+              Terms
+            </Text>{' '}
+            &{' '}
+            <Text style={styles.legalLink} onPress={() => openWebsite(PAGES.privacy)}>
+              Privacy Policy
+            </Text>
+          </Text>
         </Animated.View>
       </View>
     </LinearGradient>
@@ -121,4 +131,5 @@ const styles = StyleSheet.create({
   featureText: { flex: 1, color: '#FFFFFF', fontSize: 14, fontWeight: '600' },
   actions: { gap: 12 },
   legal: { textAlign: 'center', color: 'rgba(255,255,255,0.75)', fontSize: 12, marginTop: 4 },
+  legalLink: { textDecorationLine: 'underline', color: '#FFFFFF' },
 });

@@ -155,7 +155,7 @@ export function CallProvider({ children }: { children: ReactNode }) {
         params: { userId: String(s.fromUserId), callId: s.callId, incoming: '1', video: video ? '1' : '0' },
       });
       if (AppState.currentState !== 'active') {
-        notify(`Incoming ${video ? 'video' : 'voice'} call`, `${s.fromName} is calling you on Goswami Shaadi`, { callId: s.callId }).then(
+        notify(`Incoming ${video ? 'video' : 'voice'} call`, `${s.fromName} is calling you on Goswami Jodi`, { callId: s.callId }).then(
           (id) => id && notices.current.set(s.callId, id),
         );
       }

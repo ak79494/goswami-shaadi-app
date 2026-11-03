@@ -2203,7 +2203,7 @@ body {
 
 
 /* =========================================================
-   GOSWAMI SHAADI — MY PROFILE PAGE
+   GOSWAMI JODI — MY PROFILE PAGE
    Shaadi-style desktop layout for /profile
    ========================================================= */
 
@@ -4836,7 +4836,7 @@ body {
 }
 
 
-/* GoswamiShaadi */
+/* GoswamiJodi */
 
 .brand {
   text-decoration: none;
@@ -6961,7 +6961,7 @@ body {
 }
 
 /* =====================================================
-   PREMIUM GOSWAMI SHAADI - HELP & SUPPORT
+   PREMIUM GOSWAMI JODI - HELP & SUPPORT
 ===================================================== */
 
 .premium-help-page {
@@ -7755,7 +7755,7 @@ body {
 }
 
 /* =========================================================
-   PREMIUM GOSWAMISHAADI HOME PAGE
+   PREMIUM GOSWAMIJODI HOME PAGE
    ========================================================= */
 
 .premium-home {
@@ -9563,7 +9563,7 @@ body {
 
 }
 /* =========================================================
-   HIGH PREMIUM GOSWAMISHAADI LOGIN
+   HIGH PREMIUM GOSWAMIJODI LOGIN
    ========================================================= */
 
 .auth {
@@ -10093,7 +10093,7 @@ body {
 
 
 /* =====================================================
-   GOSWAMI SHAADI - EMAIL / SMS ALERTS PREMIUM PAGE
+   GOSWAMI JODI - EMAIL / SMS ALERTS PREMIUM PAGE
    ===================================================== */
 
 .alerts-page {
@@ -13919,7 +13919,7 @@ body {
 
 }
 /* =========================================================
-   GOSWAMISHAADI - PREMIUM VIEWED PROFILE
+   GOSWAMIJODI - PREMIUM VIEWED PROFILE
    Applies automatically to every visited user profile
 ========================================================= */
 
@@ -16525,7 +16525,7 @@ body {
 }
 
 /* =========================================================
-   GOSWAMISHAADI - MODERN SENT PROFILE CARD
+   GOSWAMIJODI - MODERN SENT PROFILE CARD
    ========================================================= */
 
 .premium-requests-page .premium-sent-card {
@@ -17315,7 +17315,7 @@ body {
   }
 }
 /* =========================================================
-   GOSWAMI SHAADI HELP SUPPORT - WORKING QUESTION SEARCH
+   GOSWAMI JODI HELP SUPPORT - WORKING QUESTION SEARCH
    Append this block at the end of style.css
    ========================================================= */
 
@@ -17562,7 +17562,7 @@ body {
   }
 }
 /* =========================================================
-   GOSWAMISHAADI PROFILE — MOBILE FIX
+   GOSWAMIJODI PROFILE — MOBILE FIX
    Desktop layout remains unchanged
    ========================================================= */
 
@@ -18911,7 +18911,7 @@ body {
 
 
 /* =========================================================
-   GOSWAMISHAADI - MOBILE DAILY MATCHES FLOW
+   GOSWAMIJODI - MOBILE DAILY MATCHES FLOW
    Mobile only. Desktop styles remain unchanged.
    ========================================================= */
 @media (max-width: 700px) {
@@ -24645,7 +24645,7 @@ body {
    LOGGED-IN PROFILE HEADER - DESKTOP + MOBILE SAME
    ========================================================= */
 
-/* Purana GoswamiShaadi drawer header hide */
+/* Purana GoswamiJodi drawer header hide */
 .drawer-desktop-header {
   display: none !important;
 }
@@ -25020,7 +25020,7 @@ body {
 }
 
 /* =========================================
-   GOSWAMISHAADI WEBSITE LEGAL PAGES
+   GOSWAMIJODI WEBSITE LEGAL PAGES
    Separate from AstroChat legal pages
 ========================================= */
 .site-legal-page {
@@ -27827,7 +27827,7 @@ body {
   }
 
 
-  /* GoswamiShaadi logo hide on Messages mobile */
+  /* GoswamiJodi logo hide on Messages mobile */
   .messages-page-header .brand {
     display: none !important;
   }
@@ -28907,7 +28907,7 @@ body {
   }
 }
 /* =====================================================
-   GOSWAMISHAADI SAFETY CENTRE
+   GOSWAMIJODI SAFETY CENTRE
    MOBILE ONLY
    DESKTOP/LAPTOP = NO CHANGE
    ===================================================== */
@@ -29296,7 +29296,7 @@ body {
   }
 }
 /* =====================================================
-   GOSWAMISHAADI PREMIUM SAFETY CENTRE
+   GOSWAMIJODI PREMIUM SAFETY CENTRE
    MOBILE ONLY
    ===================================================== */
 
@@ -31089,7 +31089,7 @@ body {
 }
 
 /* =========================================================
-   GOSWAMISHAADI - MENTAL WELLBEING PREMIUM PAGE
+   GOSWAMIJODI - MENTAL WELLBEING PREMIUM PAGE
    ========================================================= */
 
 .mw-page {
@@ -36496,3 +36496,13 @@ body {
     transform-origin: center center !important;
   }
 }
+/* =====================================
+   PUBLIC DELETE ACCOUNT PAGE
+===================================== */
+.site-legal-form { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 18px; }
+.site-legal-form label { display: flex; flex-direction: column; gap: 6px; color: #26344f; font-size: 14px; font-weight: 600; }
+.site-legal-form input:not([type="checkbox"]), .site-legal-form select { padding: 11px 12px; border: 1px solid #d8dbe3; border-radius: 10px; font: inherit; font-weight: 400; background: #fff; }
+.site-legal-form .site-legal-check { flex-direction: row; align-items: flex-start; gap: 10px; font-weight: 400; }
+.site-legal-form button { padding: 13px 16px; border: 0; border-radius: 10px; background: #d92f4b; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.site-legal-form button:disabled { opacity: .6; cursor: default; }
+.site-legal-content .site-legal-error { margin: 0; color: #c0263f; font-weight: 600; }

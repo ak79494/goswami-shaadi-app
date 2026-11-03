@@ -98,7 +98,7 @@ function biodataHtml(profile: Profile, photo: string | null, preference: Prefere
       <div class="meta">${esc(
         [age ? `${age} years` : null, heightLabel(profile.height), profile.maritalStatus].filter(Boolean).join(' · '),
       )}<br/>${esc([profile.profession, [profile.city, profile.state].filter(Boolean).join(', ')].filter(Boolean).join(' · '))}</div>
-      <span class="id">Goswami Shaadi ID: ${esc(profile.user.goswamiId)}</span>
+      <span class="id">Goswami Jodi ID: ${esc(profile.user.goswamiId)}</span>
     </div>
   </div>
   ${profile.aboutMe ? `<section><h2>About me</h2><p class="about">${esc(profile.aboutMe)}</p></section>` : ''}
@@ -156,7 +156,7 @@ function biodataHtml(profile: Profile, photo: string | null, preference: Prefere
   ${section('Contact', [
     ['Mobile & WhatsApp', formatPhone(phone)],
   ])}
-  <div class="footer">Created with the Goswami Shaadi app</div>
+  <div class="footer">Created with the Goswami Jodi app</div>
 </div></body></html>`;
 }
 

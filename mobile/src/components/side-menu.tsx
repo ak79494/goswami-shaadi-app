@@ -123,7 +123,7 @@ function SideMenu({ visible, onClose, onSearch }: { visible: boolean; onClose: (
             <View style={styles.headButtons}>
               <Button title="Edit Profile" icon="create-outline" variant="light" size="sm" onPress={() => go('/me')} style={{ flex: 1 }} />
               <Button
-                title={isPremium ? 'Renew' : 'Upgrade'}
+                title="Premium"
                 icon="diamond-outline"
                 variant="outlineLight"
                 size="sm"
@@ -134,7 +134,7 @@ function SideMenu({ visible, onClose, onSearch }: { visible: boolean; onClose: (
           </LinearGradient>
 
           <View style={styles.items}>
-            <Item icon="diamond-outline" tint={colors.gold} label={isPremium ? 'Renew Premium' : 'Upgrade to Premium'} onPress={() => go('/premium')} />
+            <Item icon="diamond-outline" tint={colors.gold} label="Premium membership" onPress={() => go('/premium')} />
             <Item
               icon="search-outline"
               label="Search by Profile ID"
@@ -149,12 +149,12 @@ function SideMenu({ visible, onClose, onSearch }: { visible: boolean; onClose: (
             <Item icon="shield-checkmark-outline" label="Privacy Settings" onPress={() => go('/privacy')} />
             <Item icon="ban-outline" label="Blocked Members" onPress={() => go('/blocked')} />
             <Item icon="help-buoy-outline" label="Help & Support" onPress={() => go('/help')} />
-            <Item icon="information-circle-outline" label="About Goswami Shaadi" onPress={() => go('/about')} />
+            <Item icon="information-circle-outline" label="About Goswami Jodi" onPress={() => go('/about')} />
             {isAdmin ? <Item icon="briefcase-outline" label="Admin panel" onPress={() => go('/admin')} /> : null}
             <View style={styles.divider} />
             <Item icon="log-out-outline" label="Log out" danger onPress={logout} />
           </View>
-          <Text style={styles.version}>Goswami Shaadi v{APP_VERSION}</Text>
+          <Text style={styles.version}>Goswami Jodi v{APP_VERSION}</Text>
         </ScrollView>
       </Animated.View>
     </Modal>

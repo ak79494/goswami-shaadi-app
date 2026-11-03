@@ -42,23 +42,23 @@ spring:
 app:
   jwt:
     secret: ${JWT_SECRET:change-this-development-secret-to-a-long-random-production-secret}
-    expiry-ms: ${JWT_EXPIRY_MS:86400000}
+    expiry-ms: ${JWT_EXPIRY_MS:2592000000}
 
   upload-dir: ${UPLOAD_DIR:uploads}
 
   # Shown on the app's About, Help and Astro screens.
   company:
-    name: Goswami Shaadi
+    name: Goswami Jodi
     founder: Arun Goswami
     phone: ${SUPPORT_PHONE:7903508584}
     whatsapp: ${SUPPORT_WHATSAPP:7903508584}
-    email: ${SUPPORT_EMAIL:}
+    email: ${SUPPORT_EMAIL:support@goswamijodi.com}
     astro-whatsapp: ${ASTRO_WHATSAPP:7903508584}
 
   # Where members pay for premium. Bank fields are optional; set them in application-local.yml.
   payment:
     upi-id: ${PAYMENT_UPI_ID:goswamiarun263@okicici}
-    payee-name: ${PAYMENT_PAYEE_NAME:Goswami Shaadi}
+    payee-name: ${PAYMENT_PAYEE_NAME:Goswami Jodi}
     bank-name: ${PAYMENT_BANK_NAME:}
     account-name: ${PAYMENT_ACCOUNT_NAME:}
     account-number: ${PAYMENT_ACCOUNT_NUMBER:}

@@ -604,6 +604,9 @@ public class InteractionService {
         r.setEvidencePath(evidencePath);
         reports.save(r);
         notify(reporter, "REPORT", "Your report has been submitted successfully");
+        for (User admin : users.findByRole(Role.ADMIN)) {
+            notify(admin, "REPORT", "New report to review: " + r.getReason());
+        }
     }
 
     public List<ProfileReport> myReports(Long uid) {

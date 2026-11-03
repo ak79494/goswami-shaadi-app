@@ -31,7 +31,7 @@ public class PremiumService {
         NotificationRepository notifications,
         ProfileRepository profiles,
         @Value("${app.payment.upi-id:}") String upiId,
-        @Value("${app.payment.payee-name:Goswami Shaadi}") String payeeName,
+        @Value("${app.payment.payee-name:Goswami Jodi}") String payeeName,
         @Value("${app.payment.bank-name:}") String bankName,
         @Value("${app.payment.account-name:}") String accountName,
         @Value("${app.payment.account-number:}") String accountNumber,
@@ -208,6 +208,9 @@ public class PremiumService {
     public AdminOrder approve(Long orderId) {
         PremiumOrder order = pendingOrder(orderId);
         User user = order.getUser();
+        if (user == null) {
+            throw new IllegalArgumentException("This member has deleted their account");
+        }
 
         LocalDateTime base = isActive(user) ? user.getPremiumValidUntil() : LocalDateTime.now();
         LocalDateTime validUntil = base.plusMonths(months(order.getPlan()));
@@ -237,7 +240,9 @@ public class PremiumService {
         order.setAdminNote(note.length() > 300 ? note.substring(0, 300) : note);
         orders.save(order);
 
-        notify(order.getUser(), "PREMIUM", "Your premium payment could not be verified: " + order.getAdminNote());
+        if (order.getUser() != null) {
+            notify(order.getUser(), "PREMIUM", "Your premium payment could not be verified: " + order.getAdminNote());
+        }
         return adminView(order);
     }
 
@@ -258,7 +263,8 @@ public class PremiumService {
 
     private AdminOrder adminView(PremiumOrder o) {
         User u = o.getUser();
-        return new AdminOrder(o.getId(), u.getId(), u.getGoswamiId(), label(u), u.getEmail(), u.getPhone(),
+        return new AdminOrder(o.getId(), u == null ? null : u.getId(), u == null ? null : u.getGoswamiId(),
+            u == null ? "Deleted member" : label(u), u == null ? null : u.getEmail(), u == null ? null : u.getPhone(),
             o.getPlan().name(), displayName(o.getPlan()), o.getAmount(), o.getStatus().name(),
             o.getPaymentMethod() == null ? null : o.getPaymentMethod().name(), o.getTransactionId(),
             o.getAdminNote(), o.getCreatedAt(), o.getPaidAt());

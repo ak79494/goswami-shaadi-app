@@ -1,6 +1,6 @@
-# GoswamiShaadi — mobile app
+# GoswamiJodi — mobile app
 
-Android/iOS app for GoswamiShaadi, built with Expo SDK 58 (React Native 0.88, Expo Router, Reanimated 4).
+Android/iOS app for GoswamiJodi, built with Expo SDK 58 (React Native 0.88, Expo Router, Reanimated 4).
 It talks to the Spring Boot backend in `../backend`.
 
 ## Run it on your phone (Expo Go)
@@ -16,7 +16,8 @@ It talks to the Spring Boot backend in `../backend`.
    and scan the QR code shown in the terminal.
 
 The app reaches the backend at `http://<this-computer's-ip>:8080` automatically. To use a different
-server, create `.env.local` with `EXPO_PUBLIC_API_URL=https://your-server`.
+server, create `.env.local` with `EXPO_PUBLIC_API_URL=https://your-server`. There is no way to change the server
+in an installed app, so a build can only ever talk to the address it was built for.
 
 ## Build an installable APK (EAS Build)
 
@@ -28,10 +29,7 @@ EAS_NO_VCS=1 npx eas-cli build --platform android --profile preview
 - The `preview` profile in `eas.json` bakes in the backend address (`EXPO_PUBLIC_API_URL`): the public ngrok
   address served by `scripts/start-public.sh` (see the root README), so the APK works on any phone and any network
   while that script runs on the Mac.
-- To point an installed app at a different server without a new build: on the "Can't connect" screen (or under a
-  connection error on login/sign-up) tap **Change server address**.
-- The `production` profile builds a Play Store `.aab`. It blocks plain HTTP, so set `EXPO_PUBLIC_API_URL` to an
-  **HTTPS** backend in `eas.json` before using it.
+- The `production` profile builds a Play Store `.aab` for `https://api.goswamijodi.com`. It blocks plain HTTP.
 
 ## Ship a change without a new APK (EAS Update)
 
@@ -50,6 +48,7 @@ changing `app.json` needs a new APK: bump `version` and run the build command ab
 
 - `src/app/` — screens (Expo Router: every file is a route)
   - `welcome`, `login`, `register`, `forgot-password` — signed-out screens
+  - `delete-account` — required by Google Play; the website has a matching public page
   - `create-profile` — 5-step onboarding wizard
   - `(tabs)/` — Home, Matches, Interests, Chats, Profile
   - `profile/[userId]`, `chat/[userId]`, `call/[userId]`, `edit/[section]`, `photos`, `preferences`, `notifications`, `blocked`
@@ -57,6 +56,13 @@ changing `app.json` needs a new APK: bump `version` and run the build command ab
 - `src/components/` — shared UI (buttons, fields, cards, animations, opening animation, photo viewer, match section, call engine)
 - `src/lib/` — API client, auth session, interests/shortlist state, live websocket (`realtime.tsx`), calls
   (`calls.tsx` routes call signals; `call-engine-html.ts` is the WebRTC/relay page that runs in a WebView)
+
+## Google Play rules this app follows
+
+- **Memberships are sold only on the website.** `premium.tsx` may say so in plain text, but nothing in the app may link
+  to a payment page or take a payment. The website pages the app links to (`frontend/src/LegalPages.jsx`) have no site
+  menu, so they can't lead on to one either.
+- **Accounts can be deleted** in the app and on the website without the app (see `AccountService` on the server).
 
 ## Checks
 

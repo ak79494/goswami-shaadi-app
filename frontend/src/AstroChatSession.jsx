@@ -98,7 +98,7 @@ export default function AstroChatSession() {
       </header>
 
       <div className="astro-session-notice">
-        🔒 Private consultation • Your Goswami Shaadi account is charged per minute.
+        🔒 Private consultation • Your Goswami Jodi account is charged per minute.
       </div>
 
       <main className="astro-message-list">

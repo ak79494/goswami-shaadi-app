@@ -197,7 +197,7 @@ public class ProfileService {
 
     /** Someone who blocked you can't be opened by you, however you try to reach their profile. */
     public void checkNotBlockedBy(Long owner, Long viewer) {
-        if (blocks.findByUserIdAndBlockedUserId(owner, viewer).isPresent()) {
+        if (!users.existsByIdAndEnabledTrue(owner) || blocks.findByUserIdAndBlockedUserId(owner, viewer).isPresent()) {
             throw new IllegalArgumentException("This profile is not available");
         }
     }
@@ -418,18 +418,21 @@ public class ProfileService {
      }
 
      String id = goswamiId.trim().toUpperCase();
+     // Old biodatas still show the GS IDs used under the previous name.
+     if (id.startsWith("GS")) id = "GJ" + id.substring(2);
+     final String memberId = id;
 
-     User user = users.findByGoswamiId(id)
+     User user = users.findByGoswamiId(memberId)
              .orElseThrow(() ->
                      new IllegalArgumentException(
-                             "No profile found for Goswami ID: " + id
+                             "No profile found for Goswami ID: " + memberId
                      )
              );
 
      Profile profile = profiles.findByUserId(user.getId())
              .orElseThrow(() ->
                      new IllegalArgumentException(
-                             "Profile not created for Goswami ID: " + id
+                             "Profile not created for Goswami ID: " + memberId
                      )
              );
 

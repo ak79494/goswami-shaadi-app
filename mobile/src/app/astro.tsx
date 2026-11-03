@@ -79,7 +79,7 @@ export default function Astro() {
   const matchKundli = async () => {
     const id = cleanId(partnerId);
     if (!id) {
-      toast('Enter their profile ID, e.g. GS0014', 'error');
+      toast('Enter their profile ID, e.g. GJ0014', 'error');
       return;
     }
     if (id === profile.user.goswamiId) {
@@ -101,7 +101,7 @@ export default function Astro() {
     }
     // Both kundlis go in the message, so the astrologer has everything needed for Guna Milan.
     ask(
-      `Namaste 🙏 Please do kundli matching (Guna Milan) for these two Goswami Shaadi profiles.\n\n` +
+      `Namaste 🙏 Please do kundli matching (Guna Milan) for these two Goswami Jodi profiles.\n\n` +
         `👤 Profile 1 (me)\n${birthDetails(profile)}\n\n` +
         `👤 Profile 2\n${birthDetails(other)}`,
     );
@@ -150,7 +150,7 @@ export default function Astro() {
         <Animated.View entering={motion.enter(120)} style={styles.card}>
           <Text style={styles.cardTitle}>Kundli matching</Text>
           <Text style={styles.cardText}>Found someone you like? Enter their profile ID and the astrologer will match your kundlis.</Text>
-          <TextField value={partnerId} onChangeText={setPartnerId} placeholder="Their profile ID, e.g. GS0014" icon="search-outline" autoCapitalize="characters" />
+          <TextField value={partnerId} onChangeText={setPartnerId} placeholder="Their profile ID, e.g. GJ0014" icon="search-outline" autoCapitalize="characters" />
           {partner && partner.user.goswamiId === cleanId(partnerId) ? <PartnerPreview profile={partner} /> : null}
           <Button title="Match kundli on WhatsApp" icon="logo-whatsapp" variant="success" loading={finding} onPress={matchKundli} />
           <Text style={styles.hint}>Both your birth details and theirs are sent to the astrologer.</Text>

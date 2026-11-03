@@ -20,7 +20,7 @@ export default function About() {
           </h1>
 
           <p>
-            Goswami Shaadi is a trusted matrimonial platform created
+            Goswami Jodi is a trusted matrimonial platform created
             for individuals and families looking for meaningful,
             compatible and lasting relationships.
           </p>
@@ -109,7 +109,7 @@ export default function About() {
       <section className="about-main-section">
 
         <div className="about-section-label">
-          ABOUT GOSWAMI SHAADI
+          ABOUT GOSWAMI JODI
         </div>
 
         <h2>
@@ -119,7 +119,7 @@ export default function About() {
         </h2>
 
         <p className="about-lead">
-          At Goswami Shaadi, we believe that marriage is more than
+          At Goswami Jodi, we believe that marriage is more than
           two people coming together. It is the beginning of a
           lifelong journey where two individuals, two families and
           two dreams become one.
@@ -195,7 +195,7 @@ export default function About() {
       <section className="why-goswami">
 
         <div className="about-section-label">
-          WHY GOSWAMI SHAADI
+          WHY GOSWAMI JODI
         </div>
 
         <h2>
@@ -325,7 +325,7 @@ export default function About() {
           </p>
 
           <strong>
-            Founder, Goswami Shaadi
+            Founder, Goswami Jodi
           </strong>
 
         </div>
@@ -368,7 +368,7 @@ export default function About() {
             </a>
 
             <p>
-              Goswami Shaadi Support
+              Goswami Jodi Support
             </p>
           </div>
 
@@ -398,7 +398,7 @@ export default function About() {
         <div className="cta-buttons">
 
           <Link to="/register">
-            Join Goswami Shaadi
+            Join Goswami Jodi
           </Link>
 
           <Link to="/search">

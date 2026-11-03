@@ -16,7 +16,7 @@ import { useAuth } from '@/lib/auth';
 import { fullName } from '@/lib/format';
 import { callPhone, formatPhone, openWhatsApp } from '@/lib/links';
 
-const TOPICS = ['Help me find a match', 'Premium & payments', 'My profile', 'App problem', 'Something else'];
+const TOPICS = ['Help me find a match', 'Premium membership', 'My profile', 'App problem', 'Report a safety concern', 'Something else'];
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -33,7 +33,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'How do I become a premium member?',
-    a: 'Open the ☰ menu and tap Upgrade to Premium. Pay by UPI, enter the payment reference, and Premium is activated as soon as our team verifies it.',
+    a: 'Memberships aren’t sold in this app. Go to our website to upgrade your membership. Premium works here automatically once our team confirms it.',
   },
   {
     q: 'How do I download my biodata?',
@@ -42,6 +42,14 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: 'Someone is bothering me. What should I do?',
     a: 'Open their profile, tap ⋯ and choose Block or Report profile. Blocked members can no longer see you, message you or call you. To undo it, open the ☰ menu and tap Blocked Members.',
+  },
+  {
+    q: 'How do I report someone under 18 or a child safety concern?',
+    a: 'Open their profile, tap ⋯, choose Report profile and then Under 18 or child safety concern. You can also request a call back below and choose Report a safety concern. We remove such profiles and report them to the authorities where the law requires it.',
+  },
+  {
+    q: 'How do I delete my account?',
+    a: 'Open the Profile tab, scroll to Account and tap Delete account. Your profile, photos and chats are deleted permanently. You can also do this on our website, without the app.',
   },
 ];
 
