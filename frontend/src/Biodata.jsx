@@ -358,7 +358,7 @@ export default function Biodata() {
 
   const name = `${profile.firstName || ""} ${profile.lastName || ""}`.trim() || "GoswamiJodi Member";
   const age = ageFromDob(profile.dateOfBirth);
-  const id = profile.user?.goswamiId || `GS${String(profile.user?.id || profile.id || "").padStart(4, "0")}`;
+  const id = profile.user?.goswamiId || `GJ${String(profile.user?.id || profile.id || "").padStart(4, "0")}`;
   const location = [profile.city, profile.state, profile.country].filter(Boolean).join(", ");
   const photoUrl = photo?.url ? `${API}${photo.url}` : "";
 

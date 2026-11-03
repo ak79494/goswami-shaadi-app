@@ -877,7 +877,7 @@ function Header() {
 
           {loggedInProfile?.goswamiId ||
 
-            `GS${String(
+            `GJ${String(
 
               loggedInProfile?.user?.id ||
 
@@ -983,7 +983,7 @@ function Header() {
 
           {loggedInProfile?.goswamiId ||
 
-            `GS${String(
+            `GJ${String(
 
               loggedInProfile?.user?.id ||
 
@@ -1540,7 +1540,7 @@ function Auth({mode}){
 
               <span>✓</span>
 
-              <strong>Verified Profiles</strong>
+              <strong>Community Profiles</strong>
 
             </div>
 
@@ -2245,11 +2245,11 @@ function ForgotPassword() {
 
               <div>
 
-                <strong>Verified Profiles</strong>
+                <strong>Community Profiles</strong>
 
                 <small>
 
-                  Connect with genuine members
+                  Connect with Goswami community members
 
                 </small>
 
@@ -2819,7 +2819,7 @@ function Home() {
 
               <strong>✓</strong>
 
-              <span>Verified Profiles</span>
+              <span>Community Profiles</span>
 
             </div>
 
@@ -2873,9 +2873,9 @@ function Home() {
 
           <div>
 
-            <strong>Verified</strong>
+            <strong>Goswami</strong>
 
-            <span>Genuine Profiles</span>
+            <span>Community Profiles</span>
 
           </div>
 
@@ -9014,38 +9014,6 @@ function MyProfileView(){
 
           <aside className="profile-sidebar">
 
-            <div className="profile-sidebar-card verification-sidebar-card">
-
-              <div className="verification-sidebar-title">
-
-                <span className="verification-check">✓</span>
-
-                <div>
-
-                  <h3>Verification</h3>
-
-                  <p>Verified details build trust</p>
-
-                </div>
-
-              </div>
-
-              <div className="verification-sidebar-list">
-
-                <div><span>Mobile Verified</span><strong>✓</strong></div>
-
-                <div><span>Email Verified</span><strong>✓</strong></div>
-
-                <div><span>Identity Verified</span><strong>✓</strong></div>
-
-                <div><span>Photo Verified</span><strong>✓</strong></div>
-
-                <div><span>Profile Verified</span><strong>✓</strong></div>
-
-              </div>
-
-            </div>
-
             <div className="profile-sidebar-card">
 
               <h3>Profile Completion</h3>
@@ -11875,7 +11843,7 @@ const addShortlist = async () => {
 
                 <h1>{fullName}</h1>
 
-                <p className="premium-id">Profile ID: <strong>{goswamiId || `GS${String(p.user?.id || p.id).padStart(4, "0")}`}</strong></p>
+                <p className="premium-id">Profile ID: <strong>{goswamiId || `GJ${String(p.user?.id || p.id).padStart(4, "0")}`}</strong></p>
 
               </div>
 
