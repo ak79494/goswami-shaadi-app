@@ -415,7 +415,7 @@ export default function Biodata() {
               {photoUrl ? <img src={photoUrl} alt={name} /> : <div>{name[0]}</div>}
             </div>
             <div className="bio-ref-identity">
-              <h1>{name} <span className="bio-verified">✓</span></h1>
+              <h1>{name}</h1>
               <div className="bio-ref-id"><b>{id}</b><span>│</span><b>♛ Premium Member</b></div>
               <p className="bio-ref-quote">“A simple, family-oriented person who believes in tradition and modern values.”</p>
               <div className="bio-ref-facts">

@@ -142,7 +142,7 @@ export default function AstroChat() {
             <h1>Talk to a real astrologer</h1>
             <p>Marriage, kundli, career, relationships and personal guidance — chat privately with an astrologer.</p>
           </div>
-          <div className="astro-hero-badge">✦<span>Verified<br/>profiles</span></div>
+          <div className="astro-hero-badge">✦<span>Private<br/>chat</span></div>
         </section>
 
         <div className="astro-heading-row">

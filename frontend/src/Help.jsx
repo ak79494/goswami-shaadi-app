@@ -8,11 +8,10 @@ function Help() {
   const topics = [
     { 
       id: "profile", 
-      title: "Profile & Selfie Verification",
+      title: "Profile & Photos",
       icon: "📸",
       content: [
         "How to add photos to your profile",
-        "Selfie verification process",
         "Profile completeness tips",
         "How to edit your biodata"
       ]

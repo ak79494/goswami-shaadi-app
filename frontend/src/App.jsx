@@ -865,12 +865,6 @@ function Header() {
 
           }`.trim() || "My Profile"}
 
-          <span className="mobile-drawer-verified">
-
-            ✓
-
-          </span>
-
         </div>
 
         <div className="mobile-drawer-profile-id">
@@ -970,12 +964,6 @@ function Header() {
             loggedInProfile?.lastName || ""
 
           }`.trim() || "My Profile"}
-
-          <span className="drawer-profile-verified">
-
-            ✓
-
-          </span>
 
         </div>
 
@@ -15875,14 +15863,6 @@ function AccountSettingsPage() {
 
   const [loading, setLoading] = useState(true);
 
-  const [showEmailModal, setShowEmailModal] = useState(false);
-
-  const [editEmail, setEditEmail] = useState("");
-
-  const [emailSaving, setEmailSaving] = useState(false);
-
-  const [emailMessage, setEmailMessage] = useState("");
-
   useEffect(() => {
 
     const savedEmail = localStorage.getItem("userEmail");
@@ -16027,7 +16007,7 @@ function AccountSettingsPage() {
 
               <div className="account-email-label">
 
-                Update Email Id:
+                Login email:
 
               </div>
 
@@ -16037,27 +16017,8 @@ function AccountSettingsPage() {
 
               </div>
 
-              <button
+              <p className="account-email-note">To change your login email, contact support.</p>
 
-                type="button"
-
-                className="account-email-edit"
-
-                onClick={() => {
-
-                  setEditEmail(email);
-
-                  setEmailMessage("");
-
-                  setShowEmailModal(true);
-
-                }}
-
-              >
-
-                Edit
-
-              </button>
 
             </div>
 
@@ -16163,249 +16124,7 @@ function AccountSettingsPage() {
 
       </div>
 
-
-
-
-
-      {/* =====================================================
-
-          EDIT EMAIL MODAL
-
-          IMPORTANT: THIS MUST BE INSIDE THE RETURN
-
-         \\===================================================== */}
-
-      {showEmailModal && (
-
-        <div
-
-          className="email-edit-overlay"
-
-          onClick={() => setShowEmailModal(false)}
-
-        >
-
-          <div
-
-            className="email-edit-modal"
-
-            onClick={(e) => e.stopPropagation()}
-
-          >
-
-            {/* CLOSE */}
-
-            <button
-
-              type="button"
-
-              className="email-modal-close"
-
-              onClick={() => setShowEmailModal(false)}
-
-            >
-
-              ×
-
-            </button>
-
-
-
-
-
-            {/* EMAIL ICON */}
-
-            <div className="email-modal-icon">
-
-              ✉
-
-            </div>
-
-
-
-
-
-            {/* TITLE */}
-
-            <h2>
-
-              Edit your Email ID
-
-            </h2>
-
-
-
-
-
-            {/* SUBTITLE */}
-
-            <p className="email-modal-subtitle">
-
-              Confirm and verify your email to avoid losing
-
-              access to your account &amp; Matches
-
-            </p>
-
-
-
-
-
-            {/* EMAIL INPUT */}
-
-            <div className="email-input-wrapper">
-
-              <label>
-
-                Email ID
-
-              </label>
-
-              <input
-
-                type="email"
-
-                value={editEmail}
-
-                onChange={(e) => {
-
-                  setEditEmail(e.target.value);
-
-                  setEmailMessage("");
-
-                }}
-
-                placeholder="Enter your email address"
-
-              />
-
-            </div>
-
-
-
-
-
-            {/* MESSAGE */}
-
-            {emailMessage && (
-
-              <div className="email-modal-message">
-
-                {emailMessage}
-
-              </div>
-
-            )}
-
-
-
-
-
-            {/* CONFIRM BUTTON */}
-
-            <button
-
-              type="button"
-
-              className="email-confirm-button"
-
-              disabled={
-
-                !editEmail.trim() ||
-
-                editEmail === email ||
-
-                emailSaving
-
-              }
-
-              onClick={async () => {
-
-                if (!editEmail.trim()) {
-
-                  setEmailMessage(
-
-                    "Please enter your email address."
-
-                  );
-
-                  return;
-
-                }
-
-                setEmailSaving(true);
-
-                setEmailMessage("");
-
-                try {
-
-                  /*
-
-                   * Temporary frontend update.
-
-                   * Backend email verification can be
-
-                   * connected here later.
-
-                   */
-
-                  setEmail(editEmail);
-
-                  localStorage.setItem(
-
-                    "userEmail",
-
-                    editEmail
-
-                  );
-
-                  setEmailMessage(
-
-                    "Email ID updated successfully."
-
-                  );
-
-                  setTimeout(() => {
-
-                    setShowEmailModal(false);
-
-                    setEmailMessage("");
-
-                  }, 1200);
-
-                } catch (err) {
-
-                  setEmailMessage(
-
-                    "Unable to update email. Please try again."
-
-                  );
-
-                } finally {
-
-                  setEmailSaving(false);
-
-                }
-
-              }}
-
-            >
-
-              {emailSaving
-
-                ? "Saving..."
-
-                : "Confirm Email"}
-
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
-
-    </>
+</>
 
   );
 
@@ -19527,7 +19246,7 @@ function MentalWellbeing() {
 
                 <p>
 
-                  Get verified to show you are a genuine member
+                  Add clear, recent photos so families can get to know you
 
                 </p>
 

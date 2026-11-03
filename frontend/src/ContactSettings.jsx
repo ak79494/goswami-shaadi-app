@@ -216,14 +216,6 @@ export default function ContactSettings() {
                 +91-{mobileNumber}
               </div>
 
-              <div className="contact-verified">
-                <span className="verified-circle">
-                  ✓
-                </span>
-
-                Verified
-              </div>
-
             </div>
 
           ) : (

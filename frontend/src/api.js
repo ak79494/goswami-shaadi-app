@@ -28,4 +28,14 @@ api.interceptors.request.use(config => {
   return config;
 });
 
+// A suspended or deleted account, or an expired session: go back to the login page.
+api.interceptors.response.use(undefined, error => {
+  if (error.response?.status === 401 && localStorage.getItem("token")) {
+    localStorage.clear();
+    window.location.assign("/login");
+  }
+
+  return Promise.reject(error);
+});
+
 export default api;
