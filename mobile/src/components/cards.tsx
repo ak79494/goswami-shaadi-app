@@ -157,7 +157,6 @@ export function MatchCard({ profile, index = 0 }: { profile: Profile; index?: nu
               <Text style={styles.name} numberOfLines={1}>
                 {displayName(profile)}
               </Text>
-              <Ionicons name="shield-checkmark" size={18} color="#7DD3FC" />
             </View>
             <Text style={styles.meta}>{profileHeadline(profile)}</Text>
             {community ? <Text style={styles.metaSoft}>{community}</Text> : null}

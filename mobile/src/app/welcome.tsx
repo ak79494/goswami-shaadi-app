@@ -22,7 +22,7 @@ import { gradients } from '@/constants/theme';
 import { openWebsite, PAGES } from '@/lib/links';
 
 const FEATURES = [
-  { icon: 'shield-checkmark', text: 'Profiles from the Goswami community' },
+  { icon: 'people', text: 'Profiles from the Goswami community' },
   { icon: 'heart-circle', text: 'Matches based on your preferences' },
   { icon: 'lock-closed', text: 'You control who sees your photos & contact' },
 ] as const;

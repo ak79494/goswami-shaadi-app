@@ -259,7 +259,6 @@ export default function ProfileDetail() {
                 {fullName(profile)}
                 {age ? `, ${age}` : ''}
               </Text>
-              <Ionicons name="shield-checkmark" size={20} color="#0EA5E9" />
               {premiumMember ? <Ionicons name="diamond" size={18} color={colors.gold} accessibilityLabel="Premium member" /> : null}
             </View>
             <Text style={styles.sub}>
