@@ -69,6 +69,10 @@ function parseResponse<T>(status: number, text: string): T {
     // Some endpoints return plain strings (e.g. interest status).
   }
 
+  // nginx or ngrok answering because the server behind them is down, or a Wi-Fi login page. Members shouldn't see their text.
+  if (status === 502 || status === 503 || status === 504) throw networkError();
+  if (typeof data === 'string' && (data.includes('ERR_NGROK_') || data.trimStart().startsWith('<'))) throw networkError();
+
   if (status < 200 || status >= 300) {
     // Spring Security answers 401/403 when the JWT is missing or expired.
     if ((status === 401 || status === 403) && authToken) onSessionExpired?.();
