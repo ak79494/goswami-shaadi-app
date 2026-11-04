@@ -1,5 +1,6 @@
 package com.goswami.shaadi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +17,10 @@ public class Profile {
     @Column(nullable=false) private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
-    private String mobileNumber;
+    // Contact numbers are never part of the public profile JSON. Members see them through
+    // GET /api/profiles/user/{id}/contact, which checks premium membership and privacy settings.
+    @JsonIgnore private String mobileNumber;
+    @JsonIgnore private String whatsappNumber;
     private String city;
     private String state;
     private String country = "India";
@@ -153,6 +157,12 @@ public class Profile {
 	}
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
+	}
+	public String getWhatsappNumber() {
+		return whatsappNumber;
+	}
+	public void setWhatsappNumber(String whatsappNumber) {
+		this.whatsappNumber = whatsappNumber;
 	}
 	public String getContactDisplayOption() {
 		return contactDisplayOption;

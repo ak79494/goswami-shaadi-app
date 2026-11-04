@@ -1,4 +1,4 @@
-# Goswami Shaadi API
+# GoswamiJodi API
 
 ## Authentication
 POST `/api/auth/register`

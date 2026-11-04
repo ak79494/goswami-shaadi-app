@@ -41,7 +41,7 @@ public class EmailService {
             SimpleMailMessage message = new SimpleMailMessage();
 
             message.setTo(email);
-            message.setSubject("Goswami Shaadi - Password Reset OTP");
+            message.setSubject("GoswamiJodi - Password Reset OTP");
             message.setText(
                 "Hello,\n\n" +
                 "Your password reset OTP is: " + otp + "\n\n" +
@@ -49,7 +49,7 @@ public class EmailService {
                 "If you did not request a password reset, " +
                 "please ignore this email.\n\n" +
                 "Regards,\n" +
-                "Goswami Shaadi Team"
+                "GoswamiJodi Team"
             );
 
             mailSender.send(message);

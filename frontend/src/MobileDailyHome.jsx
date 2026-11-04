@@ -436,7 +436,7 @@ const profilesSeen = Math.min(index + 1, profiles.length);
 
   const shareCurrentProfile = () => {
     if (!current) return;
-    const shareText = `GoswamiShaadi profile: ${name}${age ? `, ${age}` : ""}. ${[current.city, current.state].filter(Boolean).join(", ")}`;
+    const shareText = `GoswamiJodi profile: ${name}${age ? `, ${age}` : ""}. ${[current.city, current.state].filter(Boolean).join(", ")}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     setProfileMenuOpen(false);
@@ -713,7 +713,7 @@ const profilesSeen = Math.min(index + 1, profiles.length);
             </div>
             {reportStep === "reasons" ? (
               <>
-                <div className="mobile-report-intro">⚑ <span>You are raising a complaint against <b>{name}</b> with the GoswamiShaadi.com team.</span></div>
+                <div className="mobile-report-intro">⚑ <span>You are raising a complaint against <b>{name}</b> with the GoswamiJodi.com team.</span></div>
                 <div className="mobile-report-reasons">
                   {[
                     "Fake / Misleading Profile Information",

@@ -4,6 +4,7 @@ import com.goswami.shaadi.model.*;
 import com.goswami.shaadi.dto.PrivacySafetyDtos.*;
 import com.goswami.shaadi.service.InteractionService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
@@ -17,11 +18,14 @@ import java.util.UUID;
 public class InteractionController {
 
     private final InteractionService s;
+    private final String uploadDir;
 
     public InteractionController(
-            InteractionService s
+            InteractionService s,
+            @Value("${app.upload-dir}") String uploadDir
     ) {
         this.s = s;
+        this.uploadDir = uploadDir;
     }
 
     private Long uid(Authentication a) {
@@ -183,7 +187,7 @@ public class InteractionController {
             String ext = "";
             int dot = original.lastIndexOf('.');
             if (dot >= 0) ext = original.substring(dot).replaceAll("[^A-Za-z0-9.]", "");
-            Path dir = Paths.get("uploads", "reports").toAbsolutePath().normalize();
+            Path dir = Paths.get(uploadDir, "reports").toAbsolutePath().normalize();
             Files.createDirectories(dir);
             String safe = UUID.randomUUID().toString().replace("-", "") + ext;
             Files.copy(file.getInputStream(), dir.resolve(safe), StandardCopyOption.REPLACE_EXISTING);
@@ -230,12 +234,10 @@ public class InteractionController {
 
 
     @GetMapping("/blocks")
-    public List<ProfileActionItem> blocks(
+    public List<BlockedMember> blocks(
             Authentication a
     ) {
 
-        return s.blocks(uid(a)).stream()
-                .map(b -> new ProfileActionItem(b.getBlockedUser().getId(), b.getCreatedAt()))
-                .toList();
+        return s.blockedMembers(uid(a));
     }
 }

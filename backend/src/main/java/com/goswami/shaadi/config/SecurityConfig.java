@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -25,8 +27,11 @@ public class SecurityConfig {
             .cors(cors -> {})
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(a -> a
-                .requestMatchers("/api/auth/**", "/uploads/**", "/ws/**").permitAll()
+                .requestMatchers("/api/auth/heartbeat").authenticated()
+                .requestMatchers("/api/auth/**", "/api/public/**", "/uploads/**", "/ws/**").permitAll()
                 .anyRequest().authenticated())
+            // A missing or expired token gets 401, so the apps know to sign the member in again.
+            .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -43,7 +48,11 @@ public class SecurityConfig {
         c.setAllowedOrigins(List.of(
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "http://172.20.10.2:5173"
+            "https://goswamijodi.com",
+            "https://www.goswamijodi.com",
+            // Expo web preview of the mobile app (the native app sends no Origin header).
+            "http://localhost:8081",
+            "http://127.0.0.1:8081"
         ));
 
         c.setAllowedMethods(List.of(
@@ -61,6 +70,16 @@ public class SecurityConfig {
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
+
+        // The phone apps' websocket sends the server's own public address as its Origin, which the
+        // list above would refuse. Any origin may open the socket: it is useless without a valid
+        // login token in the STOMP CONNECT frame (see WebSocketConfig).
+        CorsConfiguration websocket = new CorsConfiguration();
+        websocket.setAllowedOriginPatterns(List.of("*"));
+        websocket.setAllowedMethods(List.of("GET", "OPTIONS"));
+        websocket.setAllowedHeaders(List.of("*"));
+        source.registerCorsConfiguration("/ws", websocket);
+        source.registerCorsConfiguration("/ws/**", websocket);
 
         source.registerCorsConfiguration("/**", c);
 

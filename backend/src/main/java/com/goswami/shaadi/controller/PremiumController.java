@@ -20,6 +20,11 @@ public class PremiumController {
         return (Long) authentication.getPrincipal();
     }
 
+    @GetMapping("/plans")
+    public PremiumService.PlansResponse plans() {
+        return premium.plans();
+    }
+
     @GetMapping("/status")
     public PremiumService.StatusResponse status(Authentication authentication) {
         return premium.status(uid(authentication));

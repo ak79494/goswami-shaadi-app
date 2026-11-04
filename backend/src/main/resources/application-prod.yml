@@ -1,0 +1,20 @@
+# The live server (SPRING_PROFILES_ACTIVE=prod). Every secret must come from the environment:
+# with no defaults here, the server refuses to start rather than run on a test password.
+server:
+  # Only Caddy, on the same machine, talks to it. Caddy handles HTTPS.
+  address: 127.0.0.1
+  forward-headers-strategy: framework
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  mail:
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+  upload-dir: ${UPLOAD_DIR}

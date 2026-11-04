@@ -7,6 +7,7 @@ import { Client } from "@stomp/stompjs";
 import {Routes,Route,Navigate,Link,useNavigate,useLocation,useParams} from "react-router-dom";
 
 import api,{API} from "./api";
+import { ChildSafetyPage, DeleteAccountPage, PrivacyPolicyPage, TermsPage } from "./LegalPages";
 
 import About from "./About";
 
@@ -70,7 +71,7 @@ function AstroLegalPage({ type }) {
 
           <strong>AstroChat</strong>
 
-          <span>GoswamiShaadi</span>
+          <span>GoswamiJodi</span>
 
         </div>
 
@@ -88,7 +89,7 @@ function AstroLegalPage({ type }) {
 
             <h2>Privacy</h2>
 
-            <p>GoswamiShaadi respects your privacy. Information provided while using AstroChat is handled securely and used to provide astrology consultation services.</p>
+            <p>GoswamiJodi respects your privacy. Information provided while using AstroChat is handled securely and used to provide astrology consultation services.</p>
 
             <h2>Information We Collect</h2>
 
@@ -100,7 +101,7 @@ function AstroLegalPage({ type }) {
 
             <h2>Contact</h2>
 
-            <p>For privacy-related questions, please contact GoswamiShaadi support through the application's Help &amp; Support section.</p>
+            <p>For privacy-related questions, please contact GoswamiJodi support through the application's Help &amp; Support section.</p>
 
           </>
 
@@ -127,106 +128,6 @@ function AstroLegalPage({ type }) {
           </>
 
         )}
-
-      </main>
-
-    </div>
-
-  );
-
-}
-
-function WebsiteLegalPage({ type }) {
-
-  const nav = useNavigate();
-
-  const isPrivacy = type === "privacy";
-
-  return (
-
-    <div className="site-legal-page">
-
-      <header className="site-legal-header">
-
-        <button type="button" className="site-legal-back" onClick={() => nav(-1)} aria-label="Go back">←</button>
-
-        <div className="site-legal-brand"><strong><span>Goswami</span>Shaadi</strong><small>Trusted Matrimonial Platform</small></div>
-
-      </header>
-
-      <main className="site-legal-content">
-
-        <div className="site-legal-badge">GoswamiShaadi</div>
-
-        <h1>{isPrivacy ? "Privacy Policy" : "Terms & Conditions"}</h1>
-
-        <p className="site-legal-updated">Last updated: September 2026</p>
-
-        {isPrivacy ? <>
-
-          <p className="site-legal-intro">Your privacy matters to GoswamiShaadi. This policy explains how information is collected, used, protected and shared when you use our matrimonial website, web application and related services.</p>
-
-          <h2>1. About GoswamiShaadi</h2><p>GoswamiShaadi is a matrimonial platform that helps individuals and families discover profiles, set partner preferences, send and receive requests, communicate with other members and use related matrimonial services.</p>
-
-          <h2>2. Information We Collect</h2><p>Depending on the features you use, we may collect your name, gender, date of birth, photos, contact details, location, education, occupation, family information, lifestyle details, partner preferences and other profile information that you choose to provide.</p><p>We may also collect account activity, searches, requests, chats, device/browser information, IP address, technical logs and information needed to keep the service secure and reliable.</p>
-
-          <h2>3. Profile Visibility</h2><p>Information you add to your matrimonial profile may be displayed to other registered members according to the platform features and your privacy settings. Please share only information you are comfortable making available to other members.</p>
-
-          <h2>4. How We Use Information</h2><p>We use information to create and manage accounts, display profiles, provide partner recommendations, process requests and communication, operate premium features, provide support, generate profile/biodata services, maintain security, prevent fraud and improve the platform.</p>
-
-          <h2>5. Communication</h2><p>We may send email, SMS, WhatsApp or in-app communications for verification, OTPs, security alerts, account activity, requests, transactions, support and other service-related purposes. Promotional communication, where applicable, can be managed through available preferences.</p>
-
-          <h2>6. Information Sharing</h2><p>Information may be shared with other members when required for matrimonial functionality and with trusted service providers involved in hosting, storage, payments, communications, analytics, security or technical support. We may disclose information when required by law, court order, government authority or to protect users and the platform.</p>
-
-          <h2>7. Payments &amp; Premium</h2><p>Paid services may involve a third-party payment provider. GoswamiShaadi does not ask users to share UPI PINs, card PINs, passwords or OTPs with support staff or other members.</p>
-
-          <h2>8. Cookies &amp; Technical Storage</h2><p>We may use cookies, local storage and similar technologies for login sessions, preferences, security, performance and usage measurement. Disabling essential storage may affect some features.</p>
-
-          <h2>9. Security</h2><p>Reasonable technical and organizational safeguards are used to protect information. However, no internet-based system can guarantee absolute security.</p>
-
-          <h2>10. Your Choices</h2><p>You can update eligible profile information and available privacy/communication settings. Where available, you can hide or delete your profile. Some records may be retained when necessary for legal, security, fraud-prevention, transaction or operational purposes.</p>
-
-          <h2>11. Third-Party Services</h2><p>Some features may use third-party payment, hosting, messaging or other services. Their own terms and privacy policies may apply to information they process.</p>
-
-          <h2>12. Changes &amp; Contact</h2><p>We may update this policy when our services, technology or legal requirements change. For privacy, account or data questions, please use GoswamiShaadi Help &amp; Support.</p>
-
-        </> : <>
-
-          <p className="site-legal-intro">These Terms &amp; Conditions govern your use of GoswamiShaadi, including its website, web application and matrimonial services. By registering or using the platform, you agree to these terms and applicable law.</p>
-
-          <h2>1. Purpose of the Platform</h2><p>GoswamiShaadi is intended for genuine matrimonial matchmaking. It is not a general dating, advertising, recruitment, lead-generation or commercial-solicitation platform.</p>
-
-          <h2>2. Eligibility</h2><p>You must be legally eligible to use a matrimonial service and must provide truthful information. If a profile is managed by a family member or another person, that person should have appropriate authorization.</p>
-
-          <h2>3. Account &amp; Profile Accuracy</h2><p>You are responsible for your account credentials and the accuracy of your profile. Impersonation, fake identities, materially false information and unauthorized duplicate profiles are prohibited.</p>
-
-          <h2>4. User Conduct</h2><p>Users must not harass, threaten, stalk, abuse, deceive, impersonate, spam, exploit or defraud other members. Unauthorized advertising, bulk messaging, data harvesting and unlawful activities are prohibited.</p>
-
-          <h2>5. Profile Content</h2><p>Upload only photos, text and other content that you have the right to use. Content that is unlawful, hateful, threatening, sexually explicit, defamatory, misleading or invasive of another person's rights may be removed and may lead to account restriction.</p>
-
-          <h2>6. Privacy &amp; Personal Information</h2><p>Your use is also governed by the GoswamiShaadi Privacy Policy. Do not publish or share passwords, OTPs, UPI PINs, card PINs or other highly sensitive credentials. Exercise caution before sharing phone numbers, addresses, email addresses or social media details.</p>
-
-          <h2>7. Requests, Matches &amp; Chats</h2><p>Requests, matches and chats are communication tools. GoswamiShaadi does not guarantee that another member is genuine, compatible, available or suitable for marriage. Users should independently verify identity, background, family, employment and other important claims.</p>
-
-          <h2>8. Safety &amp; Fraud Prevention</h2><p>Never send money merely because another member asks you to. Be cautious about urgent financial requests, investments, OTP requests or attempts to move communication away from the platform immediately. Report suspicious activity through Help &amp; Support.</p>
-
-          <h2>9. Premium &amp; Paid Services</h2><p>Some features may require payment or premium membership. Applicable pricing, plan details and conditions are shown before purchase. Availability can depend on the selected plan and technical conditions.</p>
-
-          <h2>10. Transactions &amp; Refunds</h2><p>Any refund is subject to the applicable service, transaction status and published purchase/refund rules. Payment failures should be reported through support with transaction details. Never share payment credentials with anyone claiming to represent GoswamiShaadi.</p>
-
-          <h2>11. Intellectual Property</h2><p>The GoswamiShaadi name, branding, interface, software, design and platform content are protected by applicable rights. You may not copy, scrape, resell, reverse engineer or commercially exploit the platform without permission.</p>
-
-          <h2>12. Service Availability</h2><p>We aim to provide reliable service, but uninterrupted availability cannot be guaranteed. Maintenance, network problems, device/browser issues, security events or third-party services may affect access.</p>
-
-          <h2>13. Suspension &amp; Termination</h2><p>We may restrict, suspend or terminate accounts for suspected fraud, misuse, security risks, violation of these terms, unlawful conduct or activity that may harm users or the platform.</p>
-
-          <h2>14. Matchmaking Disclaimer</h2><p>GoswamiShaadi facilitates discovery and communication. We do not guarantee marriage, compatibility, the truth of another user's claims or the outcome of any interaction. Members are responsible for their own decisions and verification.</p>
-
-          <h2>15. Changes to Terms</h2><p>These terms may be updated as the platform, services or legal requirements change. Continued use after an updated version is published means you accept the revised terms to the extent permitted by law.</p>
-
-          <h2>16. Governing Law &amp; Contact</h2><p>These terms are intended to operate under applicable Indian law. For account, safety, payment, privacy or other concerns, please contact GoswamiShaadi through Help &amp; Support.</p>
-
-        </>}
 
       </main>
 
@@ -470,7 +371,7 @@ function Header() {
 
         <Link className="brand" to="/">
 
-          Goswami<span>Shaadi</span>
+          Goswami<span>Jodi</span>
 
         </Link>
 
@@ -964,19 +865,13 @@ function Header() {
 
           }`.trim() || "My Profile"}
 
-          <span className="mobile-drawer-verified">
-
-            ✓
-
-          </span>
-
         </div>
 
         <div className="mobile-drawer-profile-id">
 
           {loggedInProfile?.goswamiId ||
 
-            `GS${String(
+            `GJ${String(
 
               loggedInProfile?.user?.id ||
 
@@ -996,7 +891,7 @@ function Header() {
 
     <div className="drawer-logo">
 
-      Goswami<span>Shaadi</span>
+      Goswami<span>Jodi</span>
 
     </div>
 
@@ -1070,19 +965,13 @@ function Header() {
 
           }`.trim() || "My Profile"}
 
-          <span className="drawer-profile-verified">
-
-            ✓
-
-          </span>
-
         </div>
 
         <div className="drawer-profile-id">
 
           {loggedInProfile?.goswamiId ||
 
-            `GS${String(
+            `GJ${String(
 
               loggedInProfile?.user?.id ||
 
@@ -1212,7 +1101,7 @@ function Header() {
 
         {/* MY SHAADI / SETTINGS */}
 
-        {/* MY GOSWAMISHAADI / SETTINGS */}
+        {/* MY GOSWAMIJODI / SETTINGS */}
 
 {isLoggedIn && (
 
@@ -1220,7 +1109,7 @@ function Header() {
 
     <div className="drawer-section-title">
 
-      My GoswamiShaadi
+      My GoswamiJodi
 
     </div>
 
@@ -1324,7 +1213,7 @@ function Header() {
 
     <button
 
-      onClick={() => go("/shaadi-live")}
+      onClick={() => go("/jodi-live")}
 
       className="drawer-menu-item"
 
@@ -1334,7 +1223,7 @@ function Header() {
 
       <span>
 
-        Shaadi Live
+        Jodi Live
 
         <b className="drawer-new-badge">NEW</b>
 
@@ -1480,13 +1369,13 @@ function Header() {
 
           <div className="drawer-legal-copyright">
 
-            Copyright © 1996-2026 Shaadi.com
+            Copyright © 2026 GoswamiJodi
 
           </div>
 
           <div className="drawer-legal-version">
 
-            Version 9.16.0
+            Version 1.6.0
 
           </div>
 
@@ -1531,6 +1420,7 @@ function Auth({mode}){
   });
 
   const [showPassword,setShowPassword] = useState(false);
+  const [agreed,setAgreed] = useState(false);
 
   const [error,setError] = useState("");
 
@@ -1590,7 +1480,7 @@ function Auth({mode}){
 
           <div className="premium-brand-logo">
 
-            Goswami<span>Shaadi</span>
+            Goswami<span>Jodi</span>
 
           </div>
 
@@ -1600,7 +1490,7 @@ function Auth({mode}){
 
           <div className="premium-brand-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -1638,7 +1528,7 @@ function Auth({mode}){
 
               <span>✓</span>
 
-              <strong>Verified Profiles</strong>
+              <strong>Community Profiles</strong>
 
             </div>
 
@@ -1660,7 +1550,7 @@ function Auth({mode}){
 
             <div>
 
-              <span>��</span>
+              <span>🔒</span>
 
               <strong>Privacy Protected</strong>
 
@@ -1694,7 +1584,7 @@ function Auth({mode}){
 
           <div className="premium-login-icon">
 
-            S
+            J
 
           </div>
 
@@ -1708,7 +1598,7 @@ function Auth({mode}){
 
             <div className="premium-small-title">
 
-              WELCOME TO GOSWAMISHAADI
+              WELCOME TO GOSWAMIJODI
 
             </div>
 
@@ -2012,6 +1902,23 @@ function Auth({mode}){
 
 
 
+            {mode === "register" && (
+              <label style={{ display: "flex", gap: 10, alignItems: "flex-start", margin: "4px 0 14px", fontSize: 13, lineHeight: 1.5 }}>
+                <input
+                  type="checkbox"
+                  required
+                  checked={agreed}
+                  onChange={e => setAgreed(e.target.checked)}
+                  style={{ marginTop: 3 }}
+                />
+                <span>
+                  I am at least 18 years old and looking for a marriage partner. I agree to the{" "}
+                  <a href="/terms-conditions" target="_blank" rel="noreferrer">Terms &amp; Conditions</a> and{" "}
+                  <a href="/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a>.
+                </span>
+              </label>
+            )}
+
             {/* =====================================
 
                 MAIN BUTTON
@@ -2084,7 +1991,7 @@ function Auth({mode}){
 
                 <span>
 
-                  New to GoswamiShaadi?
+                  New to GoswamiJodi?
 
                 </span>
 
@@ -2278,13 +2185,13 @@ function ForgotPassword() {
 
           <div className="forgot-brand">
 
-            Goswami<span>Shaadi</span>
+            Goswami<span>Jodi</span>
 
           </div>
 
           <div className="forgot-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -2326,11 +2233,11 @@ function ForgotPassword() {
 
               <div>
 
-                <strong>Verified Profiles</strong>
+                <strong>Community Profiles</strong>
 
                 <small>
 
-                  Connect with genuine members
+                  Connect with Goswami community members
 
                 </small>
 
@@ -2412,7 +2319,7 @@ function ForgotPassword() {
 
           <div className="forgot-card-logo">
 
-            S
+            J
 
           </div>
 
@@ -2428,7 +2335,7 @@ function ForgotPassword() {
 
               <div className="forgot-card-badge">
 
-                GOSWAMISHAADI ACCOUNT
+                GOSWAMIJODI ACCOUNT
 
               </div>
 
@@ -2750,7 +2657,7 @@ function ForgotPassword() {
 
                 successfully. You can now login
 
-                securely to GoswamiShaadi.
+                securely to GoswamiJodi.
 
               </p>
 
@@ -2804,7 +2711,7 @@ function ForgotPassword() {
 
               <small>
 
-                GoswamiShaadi protects your account information.
+                GoswamiJodi protects your account information.
 
               </small>
 
@@ -2844,7 +2751,7 @@ function Home() {
 
           <div className="premium-badge">
 
-            ✦ TRUSTED MATRIMONIAL PLATFORM
+            ✦ GOSWAMI COMMUNITY MATRIMONY
 
           </div>
 
@@ -2900,7 +2807,7 @@ function Home() {
 
               <strong>✓</strong>
 
-              <span>Verified Profiles</span>
+              <span>Community Profiles</span>
 
             </div>
 
@@ -2914,7 +2821,7 @@ function Home() {
 
             <div>
 
-              <strong>��</strong>
+              <strong>🔒</strong>
 
               <span>Privacy Protected</span>
 
@@ -2940,9 +2847,9 @@ function Home() {
 
           <div>
 
-            <strong>10,000+</strong>
+            <strong>Free</strong>
 
-            <span>Registered Members</span>
+            <span>To Create Your Profile</span>
 
           </div>
 
@@ -2954,9 +2861,9 @@ function Home() {
 
           <div>
 
-            <strong>Verified</strong>
+            <strong>Goswami</strong>
 
-            <span>Genuine Profiles</span>
+            <span>Community Profiles</span>
 
           </div>
 
@@ -2964,7 +2871,7 @@ function Home() {
 
         <div className="premium-stat">
 
-          <div className="premium-stat-icon">��</div>
+          <div className="premium-stat-icon">💞</div>
 
           <div>
 
@@ -2978,13 +2885,13 @@ function Home() {
 
         <div className="premium-stat">
 
-          <div className="premium-stat-icon">��</div>
+          <div className="premium-stat-icon">✅</div>
 
           <div>
 
-            <strong>100%</strong>
+            <strong>Your Choice</strong>
 
-            <span>Privacy First</span>
+            <span>Who Sees Your Details</span>
 
           </div>
 
@@ -2996,13 +2903,13 @@ function Home() {
 
 
 
-      {/* WHY GOSWAMISHAADI */}
+      {/* WHY GOSWAMIJODI */}
 
       <section className="premium-features">
 
         <div className="premium-section-heading">
 
-          <span>WHY GOSWAMISHAADI</span>
+          <span>WHY GOSWAMIJODI</span>
 
           <h2>
 
@@ -3032,7 +2939,7 @@ function Home() {
 
           <div className="premium-feature-card">
 
-            <div className="premium-feature-icon">��</div>
+            <div className="premium-feature-icon">💑</div>
 
             <h3>Compatibility First</h3>
 
@@ -3050,13 +2957,13 @@ function Home() {
 
             <div className="premium-feature-icon">🛡️</div>
 
-            <h3>Trusted & Secure</h3>
+            <h3>Privacy Controls</h3>
 
             <p>
 
-              Your privacy matters. Connect confidently
+              You choose who can see your photos
 
-              in a safe matrimonial environment.
+              and contact details.
 
             </p>
 
@@ -3064,7 +2971,7 @@ function Home() {
 
           <div className="premium-feature-card">
 
-            <div className="premium-feature-icon">👨‍👩‍��</div>
+            <div className="premium-feature-icon">👨‍👩‍👧</div>
 
             <h3>Family Values</h3>
 
@@ -4238,7 +4145,7 @@ const selectField = (
 
     "4.8",
 
-    "4.9",
+    "4.9","4.10","4.11",
 
     "5.0",
 
@@ -4258,7 +4165,7 @@ const selectField = (
 
     "5.8",
 
-    "5.9",
+    "5.9","5.10","5.11",
 
     "6.0",
 
@@ -4278,7 +4185,7 @@ const selectField = (
 
     "6.8",
 
-    "6.9",
+    "6.9","6.10","6.11",
 
     "7.0"
 
@@ -5374,7 +5281,7 @@ function Search() {
 
       }}
 
-      placeholder="Enter Goswami ID e.g. GS0001"
+      placeholder="Enter Goswami ID e.g. GJ0001"
 
       autoFocus
 
@@ -7887,7 +7794,7 @@ function Notifications() {
 
                     <span className="notification-dot"></span>
 
-                    GoswamiShaadi
+                    GoswamiJodi
 
                   </div>
 
@@ -8805,7 +8712,7 @@ function MyProfileView(){
 
   <div className="mini-highlight">
 
-    <span className="mini-icon">��</span>
+    <span className="mini-icon">🔒</span>
 
     <div>
 
@@ -9094,38 +9001,6 @@ function MyProfileView(){
           </main>
 
           <aside className="profile-sidebar">
-
-            <div className="profile-sidebar-card verification-sidebar-card">
-
-              <div className="verification-sidebar-title">
-
-                <span className="verification-check">✓</span>
-
-                <div>
-
-                  <h3>Verification</h3>
-
-                  <p>Verified details build trust</p>
-
-                </div>
-
-              </div>
-
-              <div className="verification-sidebar-list">
-
-                <div><span>Mobile Verified</span><strong>✓</strong></div>
-
-                <div><span>Email Verified</span><strong>✓</strong></div>
-
-                <div><span>Identity Verified</span><strong>✓</strong></div>
-
-                <div><span>Photo Verified</span><strong>✓</strong></div>
-
-                <div><span>Profile Verified</span><strong>✓</strong></div>
-
-              </div>
-
-            </div>
 
             <div className="profile-sidebar-card">
 
@@ -9801,15 +9676,15 @@ function BasicDetails() {
 
               {[
 
-                "4.5","4.6","4.7","4.8","4.9",
+                "4.5","4.6","4.7","4.8","4.9","4.10","4.11",
 
                 "5.0","5.1","5.2","5.3","5.4",
 
-                "5.5","5.6","5.7","5.8","5.9",
+                "5.5","5.6","5.7","5.8","5.9","5.10","5.11",
 
                 "6.0","6.1","6.2","6.3","6.4",
 
-                "6.5","6.6","6.7","6.8","6.9",
+                "6.5","6.6","6.7","6.8","6.9","6.10","6.11",
 
                 "7.0"
 
@@ -10089,7 +9964,7 @@ function BasicDetails() {
 
         <div className="basic-footer-note">
 
-          <span>��</span>
+          <span>🔒</span>
 
           <div>
 
@@ -11956,7 +11831,7 @@ const addShortlist = async () => {
 
                 <h1>{fullName}</h1>
 
-                <p className="premium-id">Profile ID: <strong>{goswamiId || `GS${String(p.user?.id || p.id).padStart(4, "0")}`}</strong></p>
+                <p className="premium-id">Profile ID: <strong>{goswamiId || `GJ${String(p.user?.id || p.id).padStart(4, "0")}`}</strong></p>
 
               </div>
 
@@ -12318,7 +12193,7 @@ const addShortlist = async () => {
 
                 <div className="premium-upgrade-note">
 
-                  <span>��</span>
+                  <span>🔒</span>
 
                   <div><strong>Contact details are protected</strong><small>Upgrade to Premium to view full contact details.</small></div>
 
@@ -12358,7 +12233,7 @@ const addShortlist = async () => {
 
       href={`https://wa.me/91${String(p.mobileNumber).replace(/\D/g, "")}?text=${encodeURIComponent(
 
-        `Hi, I viewed your profile on GoswamiShaadi. I would like to connect with you regarding the matrimonial profile.`
+        `Hi, I viewed your profile on GoswamiJodi. I would like to connect with you regarding the matrimonial profile.`
 
       )}`}
 
@@ -12582,17 +12457,17 @@ const addShortlist = async () => {
 
               <h3>Profile Highlights</h3>
 
-              <div className="side-stat"><span>��</span><div><small>Lives in</small><strong>{location}</strong></div></div>
+              <div className="side-stat"><span>📍</span><div><small>Lives in</small><strong>{location}</strong></div></div>
 
-              <div className="side-stat"><span>��</span><div><small>Works as</small><strong>{p.profession || "Professional"}</strong></div></div>
+              <div className="side-stat"><span>💼</span><div><small>Works as</small><strong>{p.profession || "Professional"}</strong></div></div>
 
-              <div className="side-stat"><span>��</span><div><small>Education</small><strong>{p.education || "Not specified"}</strong></div></div>
+              <div className="side-stat"><span>🎓</span><div><small>Education</small><strong>{p.education || "Not specified"}</strong></div></div>
 
             </div>
 
             <div className="premium-side-card premium-privacy-card">
 
-              <div className="privacy-shield">��</div>
+              <div className="privacy-shield">🛡️</div>
 
               <h3>Your Privacy Matters</h3>
 
@@ -12727,6 +12602,9 @@ function Chat({ id }) {
     const ws = new Client({
 
       brokerURL: `${API.replace(/^http/, "ws")}/ws`,
+
+      // The server only accepts signed-in websocket connections.
+      connectHeaders: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 
       reconnectDelay: 5000,
 
@@ -13326,7 +13204,7 @@ function Chat({ id }) {
 
               <div className="chat-empty">
 
-                <div>��</div>
+                <div>💬</div>
 
                 <p>
 
@@ -13382,7 +13260,7 @@ function Chat({ id }) {
 
                     <div className="chat-voice-message">
 
-                      <span className="chat-voice-icon" aria-hidden="true">��</span>
+                      <span className="chat-voice-icon" aria-hidden="true">🎤</span>
 
                       <audio controls preload="metadata" src={`${API}${m.audioUrl}`} />
 
@@ -13851,7 +13729,7 @@ function EmailSmsAlertsPage() {
 
           <div className="alerts-eyebrow">
 
-            GOSWAMI SHAADI
+            GOSWAMIJODI
 
           </div>
 
@@ -14175,7 +14053,7 @@ function EmailSmsAlertsPage() {
 
 }
 
-function ShaadiLivePage() {
+function JodiLivePage() {
 
   const defaultSettings = {
 
@@ -14211,7 +14089,7 @@ function ShaadiLivePage() {
 
       } catch (error) {
 
-        console.error("Unable to load Shaadi Live settings");
+        console.error("Unable to load Jodi Live settings");
 
       }
 
@@ -14425,7 +14303,7 @@ function ShaadiLivePage() {
 
             >
 
-              Shaadi Live
+              Jodi Live
 
             </h1>
 
@@ -14557,7 +14435,7 @@ function ShaadiLivePage() {
 
                 Please select the communication channels on which
 
-                you would want to receive updates about Shaadi Live
+                you would want to receive updates about Jodi Live
 
                 events.
 
@@ -14767,7 +14645,7 @@ function ShaadiLivePage() {
 
             >
 
-              Your Shaadi Live settings have been successfully updated.
+              Your Jodi Live settings have been successfully updated.
 
             </div>
 
@@ -14890,6 +14768,8 @@ function App() {
   const location = useLocation();
 
   const isAstroRoute = location.pathname.startsWith("/astro-chat") || location.pathname === "/astro-privacy-policy" || location.pathname === "/astro-terms";
+  // The pages the app links to must not lead on to the membership page, so they have no site menu.
+  const noSiteMenu = isAstroRoute || ["/privacy-policy", "/terms-conditions", "/child-safety", "/delete-account"].includes(location.pathname);
 
   useEffect(() => {
 
@@ -14925,7 +14805,7 @@ function App() {
 
     <>
 
-      {!isAstroRoute && <Header />}
+      {!noSiteMenu && <Header />}
 
       <Routes>
 
@@ -14993,7 +14873,7 @@ function App() {
 
   path="/privacy-policy"
 
-  element={<WebsiteLegalPage type="privacy" />}
+  element={<PrivacyPolicyPage />}
 
 />
 
@@ -15001,10 +14881,18 @@ function App() {
 
   path="/terms-conditions"
 
-  element={<WebsiteLegalPage type="terms" />}
+  element={<TermsPage />}
 
 />
 
+<Route
+  path="/child-safety"
+  element={<ChildSafetyPage />}
+/>
+<Route
+  path="/delete-account"
+  element={<DeleteAccountPage />}
+/>
 <Route
 
   path="/astro-privacy-policy"
@@ -15095,9 +14983,9 @@ function App() {
 
 <Route
 
-  path="/shaadi-live"
+  path="/jodi-live"
 
-  element={protectedRoute(<ShaadiLivePage />)}
+  element={protectedRoute(<JodiLivePage />)}
 
 />
 
@@ -15369,7 +15257,7 @@ function App() {
 
       </Routes>
 
-      {!isAstroRoute && <MobileBottomNav />}
+      {!noSiteMenu && <MobileBottomNav />}
 
     </>
 
@@ -15392,6 +15280,7 @@ function HideDeleteProfilePage() {
   const [hideDuration, setHideDuration] = useState("1 week");
 
   const [deleteReason, setDeleteReason] = useState("");
+  const [deletePassword, setDeletePassword] = useState("");
 
   const [message, setMessage] = useState("");
 
@@ -15511,14 +15400,9 @@ function HideDeleteProfilePage() {
 
     try {
 
-      await api.delete("/profiles/me", {
-
-        data: {
-
-          reason: deleteReason
-
-        }
-
+      await api.post("/account/delete", {
+        password: deletePassword,
+        reason: deleteReason
       });
 
       localStorage.clear();
@@ -15577,7 +15461,7 @@ function HideDeleteProfilePage() {
 
             Manage your profile visibility or permanently
 
-            remove your GoswamiShaadi profile.
+            remove your GoswamiJodi profile.
 
           </p>
 
@@ -15687,7 +15571,7 @@ function HideDeleteProfilePage() {
 
             <p className="hd-status">
 
-              Permanently remove your GoswamiShaadi profile
+              Permanently remove your GoswamiJodi profile
 
             </p>
 
@@ -15929,9 +15813,19 @@ function HideDeleteProfilePage() {
 
             </div>
 
+            <input
+              className="hd-delete-password"
+              type="password"
+              placeholder="Enter your password to confirm"
+              autoComplete="current-password"
+              value={deletePassword}
+              onChange={e => setDeletePassword(e.target.value)}
+              style={{ width: "100%", boxSizing: "border-box", padding: "11px 12px", border: "1px solid #d8dbe3", borderRadius: 10, marginBottom: 10 }}
+            />
+            {error && <p className="delete-help" style={{ color: "#c0263f" }}>{error}</p>}
             <p className="delete-help">
 
-              Having trouble using GoswamiShaadi?
+              Having trouble using GoswamiJodi?
 
             </p>
 
@@ -15939,7 +15833,7 @@ function HideDeleteProfilePage() {
 
               className="hd-confirm-delete"
 
-              disabled={!deleteReason}
+              disabled={!deleteReason || !deletePassword}
 
               onClick={deleteProfile}
 
@@ -15968,14 +15862,6 @@ function AccountSettingsPage() {
   const [email, setEmail] = useState("");
 
   const [loading, setLoading] = useState(true);
-
-  const [showEmailModal, setShowEmailModal] = useState(false);
-
-  const [editEmail, setEditEmail] = useState("");
-
-  const [emailSaving, setEmailSaving] = useState(false);
-
-  const [emailMessage, setEmailMessage] = useState("");
 
   useEffect(() => {
 
@@ -16063,7 +15949,7 @@ function AccountSettingsPage() {
 
             <div className="account-settings-eyebrow">
 
-              MY GOSWAMISHAADI
+              MY GOSWAMIJODI
 
             </div>
 
@@ -16071,7 +15957,7 @@ function AccountSettingsPage() {
 
             <p>
 
-              Manage your GoswamiShaadi account settings
+              Manage your GoswamiJodi account settings
 
               and registered email address.
 
@@ -16097,7 +15983,7 @@ function AccountSettingsPage() {
 
                   Manage the email address associated with
 
-                  your GoswamiShaadi account.
+                  your GoswamiJodi account.
 
                 </p>
 
@@ -16121,7 +16007,7 @@ function AccountSettingsPage() {
 
               <div className="account-email-label">
 
-                Update Email Id:
+                Login email:
 
               </div>
 
@@ -16131,27 +16017,8 @@ function AccountSettingsPage() {
 
               </div>
 
-              <button
+              <p className="account-email-note">To change your login email, contact support.</p>
 
-                type="button"
-
-                className="account-email-edit"
-
-                onClick={() => {
-
-                  setEditEmail(email);
-
-                  setEmailMessage("");
-
-                  setShowEmailModal(true);
-
-                }}
-
-              >
-
-                Edit
-
-              </button>
 
             </div>
 
@@ -16237,13 +16104,13 @@ function AccountSettingsPage() {
 
             className="account-settings-row"
 
-            onClick={() => nav("/shaadi-live")}
+            onClick={() => nav("/jodi-live")}
 
           >
 
             <span>
 
-              Shaadi Live
+              Jodi Live
 
               <b className="account-new-badge">NEW</b>
 
@@ -16257,249 +16124,7 @@ function AccountSettingsPage() {
 
       </div>
 
-
-
-
-
-      {/* =====================================================
-
-          EDIT EMAIL MODAL
-
-          IMPORTANT: THIS MUST BE INSIDE THE RETURN
-
-         \\===================================================== */}
-
-      {showEmailModal && (
-
-        <div
-
-          className="email-edit-overlay"
-
-          onClick={() => setShowEmailModal(false)}
-
-        >
-
-          <div
-
-            className="email-edit-modal"
-
-            onClick={(e) => e.stopPropagation()}
-
-          >
-
-            {/* CLOSE */}
-
-            <button
-
-              type="button"
-
-              className="email-modal-close"
-
-              onClick={() => setShowEmailModal(false)}
-
-            >
-
-              ×
-
-            </button>
-
-
-
-
-
-            {/* EMAIL ICON */}
-
-            <div className="email-modal-icon">
-
-              ✉
-
-            </div>
-
-
-
-
-
-            {/* TITLE */}
-
-            <h2>
-
-              Edit your Email ID
-
-            </h2>
-
-
-
-
-
-            {/* SUBTITLE */}
-
-            <p className="email-modal-subtitle">
-
-              Confirm and verify your email to avoid losing
-
-              access to your account &amp; Matches
-
-            </p>
-
-
-
-
-
-            {/* EMAIL INPUT */}
-
-            <div className="email-input-wrapper">
-
-              <label>
-
-                Email ID
-
-              </label>
-
-              <input
-
-                type="email"
-
-                value={editEmail}
-
-                onChange={(e) => {
-
-                  setEditEmail(e.target.value);
-
-                  setEmailMessage("");
-
-                }}
-
-                placeholder="Enter your email address"
-
-              />
-
-            </div>
-
-
-
-
-
-            {/* MESSAGE */}
-
-            {emailMessage && (
-
-              <div className="email-modal-message">
-
-                {emailMessage}
-
-              </div>
-
-            )}
-
-
-
-
-
-            {/* CONFIRM BUTTON */}
-
-            <button
-
-              type="button"
-
-              className="email-confirm-button"
-
-              disabled={
-
-                !editEmail.trim() ||
-
-                editEmail === email ||
-
-                emailSaving
-
-              }
-
-              onClick={async () => {
-
-                if (!editEmail.trim()) {
-
-                  setEmailMessage(
-
-                    "Please enter your email address."
-
-                  );
-
-                  return;
-
-                }
-
-                setEmailSaving(true);
-
-                setEmailMessage("");
-
-                try {
-
-                  /*
-
-                   * Temporary frontend update.
-
-                   * Backend email verification can be
-
-                   * connected here later.
-
-                   */
-
-                  setEmail(editEmail);
-
-                  localStorage.setItem(
-
-                    "userEmail",
-
-                    editEmail
-
-                  );
-
-                  setEmailMessage(
-
-                    "Email ID updated successfully."
-
-                  );
-
-                  setTimeout(() => {
-
-                    setShowEmailModal(false);
-
-                    setEmailMessage("");
-
-                  }, 1200);
-
-                } catch (err) {
-
-                  setEmailMessage(
-
-                    "Unable to update email. Please try again."
-
-                  );
-
-                } finally {
-
-                  setEmailSaving(false);
-
-                }
-
-              }}
-
-            >
-
-              {emailSaving
-
-                ? "Saving..."
-
-                : "Confirm Email"}
-
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
-
-    </>
+</>
 
   );
 
@@ -16613,7 +16238,7 @@ useEffect(() => {
 
           <div className="astro-eyebrow">
 
-            MY GOSWAMISHAADI
+            MY GOSWAMIJODI
 
           </div>
 
@@ -17799,7 +17424,7 @@ function SafetyTips() {
 
             <div className="gst-hero-body">
 
-              <span className="gst-brand">GoswamiShaadi.com</span>
+              <span className="gst-brand">GoswamiJodi.com</span>
 
               <h2>Stay Safe. Connect with Confidence.</h2>
 
@@ -17813,23 +17438,23 @@ function SafetyTips() {
 
           <div className="gst-tip"><div className="gst-icon">🛡️</div><div><h3>Take Your Time</h3><p>Build trust gradually. Learn about a person before moving conversations offline or making important decisions.</p><span className="gst-do">Stay comfortable at every step</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Protect Personal Information</h3><p>Never share passwords, OTPs, UPI PINs, card PINs or sensitive account information with another member.</p><span className="gst-do">Keep private details private</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🔐</div><div><h3>Protect Personal Information</h3><p>Never share passwords, OTPs, UPI PINs, card PINs or sensitive account information with another member.</p><span className="gst-do">Keep private details private</span></div></div>
 
           <div className="gst-tip"><div className="gst-icon">⚠️</div><div><h3>Be Alert About Money Requests</h3><p>Be cautious if someone asks for money, investments, urgent financial help or payment outside normal platform processes.</p><span className="gst-do">Never send money under pressure</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Verify Before Meeting</h3><p>Use reasonable verification and choose a public place for an initial meeting. Tell someone you trust about your plans.</p><span className="gst-do">Meet safely and thoughtfully</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🤝</div><div><h3>Verify Before Meeting</h3><p>Use reasonable verification and choose a public place for an initial meeting. Tell someone you trust about your plans.</p><span className="gst-do">Meet safely and thoughtfully</span></div></div>
 
-          <div className="gst-tip"><div className="gst-icon">��</div><div><h3>Report Suspicious Behaviour</h3><p>If a profile behaves abusively, deceptively or suspiciously, use the platform's reporting and support options.</p><span className="gst-do">Your report can help protect others</span></div></div>
+          <div className="gst-tip"><div className="gst-icon">🚩</div><div><h3>Report Suspicious Behaviour</h3><p>If a profile behaves abusively, deceptively or suspiciously, use the platform's reporting and support options.</p><span className="gst-do">Your report can help protect others</span></div></div>
 
           <section className="gst-support">
 
             <h2>We're Here For You</h2>
 
-            <p>If you need assistance, contact GoswamiShaadi support.</p>
+            <p>If you need assistance, contact GoswamiJodi support.</p>
 
-            <a className="gst-contact" href="tel:9142764834"><span className="gst-contact-icon">☎</span><span><small>Helpline</small><strong>9142764834</strong></span></a>
+            <a className="gst-contact" href="tel:9973776162"><span className="gst-contact-icon">☎</span><span><small>Helpline</small><strong>9973776162</strong></span></a>
 
-            <a className="gst-contact" href="mailto:akgoswami0143@gmail.com"><span className="gst-contact-icon">✉</span><span><small>Email</small><strong>akgoswami0143@gmail.com</strong></span></a>
+            <a className="gst-contact" href="mailto:support@goswamijodi.com"><span className="gst-contact-icon">✉</span><span><small>Email</small><strong>support@goswamijodi.com</strong></span></a>
 
             <a className="gst-contact" href="https://cybercrime.gov.in" target="_blank" rel="noreferrer"><span className="gst-contact-icon">◎</span><span><small>Cyber Crime Portal</small><strong>cybercrime.gov.in</strong></span></a>
 
@@ -17837,7 +17462,7 @@ function SafetyTips() {
 
           </section>
 
-          <div className="gst-footer"><div className="gst-footer-badge">✓</div><div><strong>Stay Safe, Connect with Trust</strong><span>GoswamiShaadi.com</span></div></div>
+          <div className="gst-footer"><div className="gst-footer-badge">✓</div><div><strong>Stay Safe, Connect with Trust</strong><span>GoswamiJodi.com</span></div></div>
 
         </main>
 
@@ -17889,7 +17514,7 @@ function SafetyCentre() {
 
           <span className="sc-brand">
 
-            GoswamiShaadi.com
+            GoswamiJodi.com
 
           </span>
 
@@ -17937,7 +17562,7 @@ function SafetyCentre() {
 
           <strong>
 
-            Find out how GoswamiShaadi.com
+            Find out how GoswamiJodi.com
 
             builds a safer space for love.
 
@@ -18127,9 +17752,9 @@ function SafetyCentre() {
 
         <div className="sc-support-card">
 
-          <h3>GoswamiShaadi.com Support</h3>
+          <h3>GoswamiJodi.com Support</h3>
 
-          <a href="tel:9142764834">
+          <a href="tel:9973776162">
 
             <span>☎</span>
 
@@ -18137,13 +17762,13 @@ function SafetyCentre() {
 
               <small>Helpline</small>
 
-              <strong>9142764834</strong>
+              <strong>9973776162</strong>
 
             </div>
 
           </a>
 
-          <a href="mailto:akgoswami0143@gmail.com">
+          <a href="mailto:support@goswamijodi.com">
 
             <span>✉</span>
 
@@ -18151,7 +17776,7 @@ function SafetyCentre() {
 
               <small>Email</small>
 
-              <strong>akgoswami0143@gmail.com</strong>
+              <strong>support@goswamijodi.com</strong>
 
             </div>
 
@@ -18245,7 +17870,7 @@ function SafetyCentre() {
 
           <span>
 
-            GoswamiShaadi.com
+            GoswamiJodi.com
 
           </span>
 
@@ -18357,7 +17982,7 @@ function SafetyDetailPage({
 
         <div>
 
-          <span>GoswamiShaadi.com</span>
+          <span>GoswamiJodi.com</span>
 
           <h1>{title}</h1>
 
@@ -18385,7 +18010,7 @@ function SafetyDetailPage({
 
             Your safety, privacy and peace of mind
 
-            matter to GoswamiShaadi.com.
+            matter to GoswamiJodi.com.
 
           </p>
 
@@ -18511,13 +18136,13 @@ function SafetyDetailPage({
 
           <div className="detail-support-actions">
 
-            <a href="tel:9142764834">
+            <a href="tel:9973776162">
 
-              ☎ 9142764834
+              ☎ 9973776162
 
             </a>
 
-            <a href="mailto:akgoswami0143@gmail.com">
+            <a href="mailto:support@goswamijodi.com">
 
               ✉ Email Support
 
@@ -18541,7 +18166,7 @@ function SafetyDetailPage({
 
           <strong>
 
-            Stay Safe with GoswamiShaadi.com
+            Stay Safe with GoswamiJodi.com
 
           </strong>
 
@@ -18587,7 +18212,7 @@ function SafetyDetailHeader({ title, subtitle, onBack }) {
 
         <div className="safety-detail-brand">
 
-          GoswamiShaadi.com
+          GoswamiJodi.com
 
         </div>
 
@@ -18665,7 +18290,7 @@ function ReportProfile() {
 
         title="Report a Profile"
 
-        subtitle="Help us keep GoswamiShaadi.com safe and trustworthy."
+        subtitle="Help us keep GoswamiJodi.com safe and trustworthy."
 
         onBack={() => nav("/safe-online")}
 
@@ -18927,7 +18552,7 @@ function ReportProfile() {
 
         <section className="safety-bottom-note">
 
-          <span>��</span>
+          <span>🚩</span>
 
           <div>
 
@@ -18955,21 +18580,21 @@ function ReportProfile() {
 
           <p>
 
-            Contact GoswamiShaadi.com support if you need
+            Contact GoswamiJodi.com support if you need
 
             assistance with a safety concern.
 
           </p>
 
-          <a href="tel:9142764834">
+          <a href="tel:9973776162">
 
-            ☎ <strong>9142764834</strong>
+            ☎ <strong>9973776162</strong>
 
           </a>
 
-          <a href="mailto:akgoswami0143@gmail.com">
+          <a href="mailto:support@goswamijodi.com">
 
-            ✉ <strong>akgoswami0143@gmail.com</strong>
+            ✉ <strong>support@goswamijodi.com</strong>
 
           </a>
 
@@ -19093,7 +18718,7 @@ function PrivacySettings() {
 
             <div>
 
-              <span>GOSWAMISHAADI</span>
+              <span>GOSWAMIJODI</span>
 
               <h2>Profile Privacy</h2>
 
@@ -19329,7 +18954,7 @@ function PrivacySettings() {
 
         <section className="safety-bottom-note">
 
-          <span>��</span>
+          <span>🔒</span>
 
           <div>
 
@@ -19451,7 +19076,7 @@ function MentalWellbeing() {
 
           <div className="mw-brand">
 
-            <span>Goswami</span>Shaadi.com
+            <span>Goswami</span>Jodi.com
 
           </div>
 
@@ -19593,7 +19218,7 @@ function MentalWellbeing() {
 
             <p>
 
-              Finding your perfect match on GoswamiShaadi.com
+              Finding your perfect match on GoswamiJodi.com
 
               takes effort, but here’s how you can improve
 
@@ -19621,7 +19246,7 @@ function MentalWellbeing() {
 
                 <p>
 
-                  Get verified to show you are a genuine member
+                  Add clear, recent photos so families can get to know you
 
                 </p>
 
@@ -19693,19 +19318,19 @@ function MentalWellbeing() {
 
           <div className="mw-support-actions">
 
-            <a href="tel:9142764834">
+            <a href="tel:9973776162">
 
               <span>☎</span>
 
-              9142764834
+              9973776162
 
             </a>
 
-            <a href="mailto:akgoswami0143@gmail.com">
+            <a href="mailto:support@goswamijodi.com">
 
               <span>✉</span>
 
-              akgoswami0143@gmail.com
+              support@goswamijodi.com
 
             </a>
 

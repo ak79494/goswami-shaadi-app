@@ -4,6 +4,7 @@ import com.goswami.shaadi.model.Notification;
 import com.goswami.shaadi.model.Profile;
 import com.goswami.shaadi.model.ProfileVisit;
 import com.goswami.shaadi.model.User;
+import com.goswami.shaadi.repository.BlockRepository;
 import com.goswami.shaadi.repository.NotificationRepository;
 import com.goswami.shaadi.repository.ProfileRepository;
 import com.goswami.shaadi.repository.ProfileVisitRepository;
@@ -20,17 +21,20 @@ public class ProfileVisitService {
     private final UserRepository users;
     private final ProfileRepository profiles;
     private final NotificationRepository notifications;
+    private final BlockRepository blocks;
 
     public ProfileVisitService(
             ProfileVisitRepository visits,
             UserRepository users,
             ProfileRepository profiles,
-            NotificationRepository notifications
+            NotificationRepository notifications,
+            BlockRepository blocks
     ) {
         this.visits = visits;
         this.users = users;
         this.profiles = profiles;
         this.notifications = notifications;
+        this.blocks = blocks;
     }
 
     /**
@@ -46,6 +50,12 @@ public class ProfileVisitService {
 
         // Never create a notification when someone opens their own profile.
         if (visitorUserId.equals(profileUserId)) {
+            return null;
+        }
+
+        // Nor when one of the two has blocked the other.
+        if (blocks.findByUserIdAndBlockedUserId(visitorUserId, profileUserId).isPresent()
+                || blocks.findByUserIdAndBlockedUserId(profileUserId, visitorUserId).isPresent()) {
             return null;
         }
 

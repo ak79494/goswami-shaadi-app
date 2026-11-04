@@ -13,6 +13,13 @@ public class ProfileReport {
     @Column(length=2000) private String details;
     @Column(length=500) private String evidencePath;
     @Column(nullable=false) private LocalDateTime createdAt = LocalDateTime.now();
+    // Empty on reports made before the team could review them: those count as open.
+    @Column(length=20) private String status = "OPEN";
+    private LocalDateTime reviewedAt;
+    public String getStatus(){return status;}
+    public void setStatus(String status){this.status=status;}
+    public LocalDateTime getReviewedAt(){return reviewedAt;}
+    public void setReviewedAt(LocalDateTime reviewedAt){this.reviewedAt=reviewedAt;}
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
     public User getReporter(){return reporter;}

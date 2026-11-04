@@ -2,7 +2,9 @@ package com.goswami.shaadi.controller;
 
 import com.goswami.shaadi.dto.ProfileDtos.*;
 import com.goswami.shaadi.model.*;
+import com.goswami.shaadi.service.ContactService;
 import com.goswami.shaadi.service.ProfileService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import jakarta.validation.Valid;
 
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
 
     private final ProfileService s;
+    private final ContactService contacts;
 
-    public ProfileController(ProfileService s) {
+    public ProfileController(ProfileService s, ContactService contacts) {
         this.s = s;
+        this.contacts = contacts;
     }
 
 
@@ -32,9 +36,9 @@ public class ProfileController {
     // =========================================
 
     @GetMapping("/me")
-    public Profile me(Authentication a) {
+    public ObjectNode me(Authentication a) {
 
-        return s.get(uid(a));
+        return s.ownerView(s.get(uid(a)));
     }
 
 
@@ -43,12 +47,12 @@ public class ProfileController {
     // =========================================
 
     @PutMapping("/me")
-    public Profile save(
+    public ObjectNode save(
             Authentication a,
             @Valid @RequestBody ProfileRequest r
     ) {
 
-        return s.save(uid(a), r);
+        return s.ownerView(s.save(uid(a), r));
     }
 
 
@@ -117,19 +121,37 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public Profile byId(
+            Authentication a,
             @PathVariable Long id
     ) {
 
+        s.checkNotBlockedBy(id, uid(a));
         return s.get(id);
     }
 
 
     @GetMapping("/user/{userId}")
     public Profile byUser(
+            Authentication a,
             @PathVariable Long userId
     ) {
 
+        s.checkNotBlockedBy(userId, uid(a));
         return s.get(userId);
+    }
+
+
+    // =========================================
+    // CONTACT NUMBERS (premium members only)
+    // =========================================
+
+    @GetMapping("/user/{userId}/contact")
+    public ContactResponse contact(
+            Authentication a,
+            @PathVariable Long userId
+    ) {
+
+        return contacts.contact(uid(a), userId);
     }
     
     
@@ -139,8 +161,11 @@ public class ProfileController {
 
  @GetMapping("/goswami/{goswamiId}")
  public Profile getByGoswamiId(
+         Authentication a,
          @PathVariable String goswamiId
  ) {
-     return s.getByGoswamiId(goswamiId);
+     Profile profile = s.getByGoswamiId(goswamiId);
+     s.checkNotBlockedBy(profile.getUser().getId(), uid(a));
+     return profile;
  }
 }
