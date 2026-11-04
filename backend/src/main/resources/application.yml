@@ -50,8 +50,8 @@ app:
   company:
     name: GoswamiJodi
     founder: Arun Goswami
-    phone: ${SUPPORT_PHONE:7903508584}
-    whatsapp: ${SUPPORT_WHATSAPP:7903508584}
+    phone: ${SUPPORT_PHONE:9973776162}
+    whatsapp: ${SUPPORT_WHATSAPP:9973776162}
     email: ${SUPPORT_EMAIL:support@goswamijodi.com}
     astro-whatsapp: ${ASTRO_WHATSAPP:7903508584}
 

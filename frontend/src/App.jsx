@@ -17452,7 +17452,7 @@ function SafetyTips() {
 
             <p>If you need assistance, contact GoswamiJodi support.</p>
 
-            <a className="gst-contact" href="tel:9142764834"><span className="gst-contact-icon">☎</span><span><small>Helpline</small><strong>9142764834</strong></span></a>
+            <a className="gst-contact" href="tel:9973776162"><span className="gst-contact-icon">☎</span><span><small>Helpline</small><strong>9973776162</strong></span></a>
 
             <a className="gst-contact" href="mailto:support@goswamijodi.com"><span className="gst-contact-icon">✉</span><span><small>Email</small><strong>support@goswamijodi.com</strong></span></a>
 
@@ -17754,7 +17754,7 @@ function SafetyCentre() {
 
           <h3>GoswamiJodi.com Support</h3>
 
-          <a href="tel:9142764834">
+          <a href="tel:9973776162">
 
             <span>☎</span>
 
@@ -17762,7 +17762,7 @@ function SafetyCentre() {
 
               <small>Helpline</small>
 
-              <strong>9142764834</strong>
+              <strong>9973776162</strong>
 
             </div>
 
@@ -18136,9 +18136,9 @@ function SafetyDetailPage({
 
           <div className="detail-support-actions">
 
-            <a href="tel:9142764834">
+            <a href="tel:9973776162">
 
-              ☎ 9142764834
+              ☎ 9973776162
 
             </a>
 
@@ -18586,9 +18586,9 @@ function ReportProfile() {
 
           </p>
 
-          <a href="tel:9142764834">
+          <a href="tel:9973776162">
 
-            ☎ <strong>9142764834</strong>
+            ☎ <strong>9973776162</strong>
 
           </a>
 
@@ -19318,11 +19318,11 @@ function MentalWellbeing() {
 
           <div className="mw-support-actions">
 
-            <a href="tel:9142764834">
+            <a href="tel:9973776162">
 
               <span>☎</span>
 
-              9142764834
+              9973776162
 
             </a>
 

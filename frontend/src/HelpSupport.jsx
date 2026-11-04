@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 
-const SUPPORT_PHONE = "9142764834";
-const SUPPORT_WHATSAPP = "919142764834";
+const SUPPORT_PHONE = "9973776162";
+const SUPPORT_WHATSAPP = "919973776162";
 const SUPPORT_MESSAGE = "Hello GoswamiJodi Support, I need help with my account.";
 const SUPPORT_WHATSAPP_URL = `https://wa.me/${SUPPORT_WHATSAPP}?text=${encodeURIComponent(SUPPORT_MESSAGE)}`;
 

@@ -7,8 +7,8 @@ import type { AppInfo } from './types';
 export const DEFAULT_APP_INFO: AppInfo = {
   companyName: 'GoswamiJodi',
   founderName: 'Arun Goswami',
-  supportPhone: '7903508584',
-  supportWhatsapp: '7903508584',
+  supportPhone: '9973776162',
+  supportWhatsapp: '9973776162',
   supportEmail: 'support@goswamijodi.com',
   astroWhatsapp: '7903508584',
 };

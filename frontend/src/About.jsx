@@ -53,7 +53,7 @@ export default function About() {
 
           <div className="hero-stat-row">
             <div>
-              <strong>2024</strong>
+              <strong>2026</strong>
               <span>Founded</span>
             </div>
 
@@ -309,14 +309,14 @@ export default function About() {
       <section className="founder-section">
 
         <div className="founder-avatar">
-          AK
+          AG
         </div>
 
         <div className="founder-content">
 
           <span>FOUNDER & CEO</span>
 
-          <h2>Arun Kumar</h2>
+          <h2>Arun Goswami</h2>
 
           <p>
             "I believe finding a life partner should be a journey
@@ -363,8 +363,8 @@ export default function About() {
           <div>
             <small>CALL US</small>
 
-            <a href="tel:9142564834">
-              9142764834
+            <a href="tel:9973776162">
+              9973776162
             </a>
 
             <p>

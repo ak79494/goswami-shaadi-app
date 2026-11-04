@@ -59,7 +59,7 @@ You can delete your account and your data at any time, in the app or at goswamij
 |---|---|
 | Category | Dating |
 | Email address | support@goswamijodi.com |
-| Phone | +91 79035 08584 |
+| Phone | +91 99737 76162 |
 | Website | https://goswamijodi.com |
 
 ## App content

@@ -7,7 +7,7 @@ import api from "./api";
 // so they have no site menu or links to the rest of the website.
 
 const SUPPORT_EMAIL = "support@goswamijodi.com";
-const SUPPORT_PHONE = "+91 79035 08584";
+const SUPPORT_PHONE = "+91 99737 76162";
 
 function LegalShell({ title, updated, children }) {
   const nav = useNavigate();
