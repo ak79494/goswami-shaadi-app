@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Puts GoswamiShaadi online from this Mac so the Android app works on any phone, on any network:
+# Puts GoswamiJodi online from this Mac so the Android app works on any phone, on any network:
 #   MySQL (Docker) -> Spring Boot backend -> ngrok tunnel on your free, permanent ngrok domain.
 # Everything stops when you press Ctrl+C or close the terminal. While it runs, the Mac is kept awake.
 #
@@ -25,7 +25,7 @@ esac
 
 cleanup() {
   echo
-  echo "Stopping GoswamiShaadi..."
+  echo "Stopping GoswamiJodi..."
   [[ -n "${BACKEND_PID:-}" ]] && kill "$BACKEND_PID" 2>/dev/null || true
   # spring-boot:run starts the app in a separate Java process; stop that too.
   pkill -f "com.goswami.shaadi.GoswamiShaadiApplication" 2>/dev/null || true

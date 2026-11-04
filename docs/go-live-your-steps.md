@@ -1,4 +1,4 @@
-# GoswamiJodi: your steps for today
+# GoswamiJodi: what the owner sets up
 
 These need your ID, card or account login, so you have to do them yourself. Do them in this order.
 
@@ -72,7 +72,7 @@ This sends the app's emails and becomes your support address. Links: https://acc
 1. Create a Gmail address, for example `goswamijodi.help@gmail.com`.
 2. Turn on 2-Step Verification.
 3. Create an app password and keep it private. I'll tell you where it goes.
-4. On the old Google account, change the password and delete the old app password, because both are still in your Git history.
+4. On the old Google account, change the password and delete the old app password.
 
 ## 6. Line up 12 testers
 

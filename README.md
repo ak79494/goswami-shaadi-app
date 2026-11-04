@@ -89,7 +89,8 @@ It starts MySQL, the backend and the tunnel, keeps the Mac awake, and stops ever
 The app only works while this is running and the Mac is online.
 
 ### Premium payments, admin and calls
-- **Premium**: members pay by UPI (the QR and UPI ID shown in the app) and enter the UPI reference (UTR).
+- **Premium**: memberships are sold on the website, not in the app, as Google Play requires. Members pay by UPI (the QR and
+  UPI ID on the Premium page) and enter the UPI reference (UTR).
   Nothing is activated until an admin approves it. UPI ID, payee name and optional bank details are under
   `app.payment` in `application.yml` — override them in `application-local.yml`.
 - **Admin panel**: give your own account admin rights, then log out and back in. The app's ☰ menu then shows
@@ -117,7 +118,7 @@ The app only works while this is running and the Mac is online.
   app whose connection dropped catches up (`GET /api/calls/signals?after=`) instead of losing an "accept" or "answer".
 - **Incoming calls** ring while the app is open or in the background (a notification is shown). A call that rang while
   the phone was briefly offline is picked up when the app reconnects, and unanswered calls leave a "Missed call"
-  notification. Ringing a phone whose app is fully closed would need push notifications (Firebase), not set up yet.
+  notification. Ringing a phone whose app is fully closed uses push notifications, which stay off until Firebase is set up.
 - Company details on the About/Help screens (founder, phone, WhatsApp) are under `app.company`.
 
 ### Demo data
